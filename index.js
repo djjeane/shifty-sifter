@@ -105,14 +105,15 @@ function sortMembers(message)
 
 function createVoiceChannel(gameName,message)
 {
-    message.guild.createChannel(gameName,'voice');
-    const channels = message.guild.channels.filter(c =>  c.type === 'voice');
-    for (const [channelID, channel] of channels) 
-    {
-        if(channel.name == gameName){
-            return channelID;
-        }
-    }
+    var ch = message.guild.createChannel(gameName,'voice');
+    return ch;
+    //const channels = message.guild.channels.filter(c =>  c.type === 'voice');
+   // for (const [channelID, channel] of channels) 
+  //  {
+        //if(channel.name == gameName){
+          //  return channelID;
+        //}
+    //}
 }
 
 
