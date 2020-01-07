@@ -4,7 +4,7 @@ const client = new Discord.Client();
 //const { EmojiFilter, UserHelpers } = require('./modules/index.js');
 //const emojiFilter = new EmojiFilter(client);
 //const notify = require('./modules/notify.js');
-
+var tempChannels = [];
 client.once('ready', () => {
     console.log('Ready!');
     //emojiFilter.start();
@@ -30,23 +30,22 @@ client.on('message', message => {
 });
 client.on('voiceStateUpdate', (oldMember, newMember) =>
 {
-    if(temporary.length >= 0) for(let i = 0; i < temporary.length; i++) 
+    if(tempChannels.length >= 0) for(let i = 0; i < tempChannels.length; i++) 
     {
         // Finding...
-        let ch = temporary[i].guild.channels.find(x => x.id == temporary[i].newID)
+        let ch = tempChannels[i].guild.channels.find(x => x.id == tempChannels[i].newID)
         // Channel Found!         
         if(ch.members.size <= 0){
 
             ch.delete()
             // Channel has been deleted!
-            return temporary.splice(i, 1)
+            return tempChannels.splice(i, 1)
         }
     }
 
 });
 
 client.login(token);
-var tempChannels
 function sortMembers(message) 
 {
     var games = [];
