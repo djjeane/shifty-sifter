@@ -38,6 +38,7 @@ function sortMembers(message) {
     //var games = [];
     message.channel.send('SORTING UNTIL DEATH.')
     for(var user in onlineMembers){
+        message.channel.send(`user: ${user}`);
         if(user.voiceChannel != null){
             message.channel.send(user.username);
         }
