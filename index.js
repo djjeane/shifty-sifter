@@ -38,7 +38,7 @@ function sortMembers(message) {
     //var games = [];
     //console.log(client.users);
     message.channel.send('SORTING UNTIL DEATH.')
-    var onlineMembers = client.users.filter(member => member.voiceChannel != "null");
+    var onlineMembers = client.users.filter((key,member) => member.voiceChannel != "null");
     console.log(onlineMembers);
     //onlineMembers.forEach((member, key) => message.channel.send(`user: ${member.username} is in ${member.voice.voice_channel }`));
     //for(var user in onlineMembers){
