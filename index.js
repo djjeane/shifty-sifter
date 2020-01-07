@@ -64,8 +64,7 @@ function sortMembers(message)
             
             if(games.includes(member.user.presence.game))
             {
-                console.log('if');
-                const channels = message.guild.channels.filter(c =>  c.type === 'voice');
+                console.log('xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx');
                 for (const [channelID, channel] of channels) 
                 {
                     if(channel.name == member.user.presence.game.name)
@@ -78,7 +77,6 @@ function sortMembers(message)
             {
                 console.log('else');
                 games.push(member.user.presence.game);
-                console.log(games);
                 var chID = createVoiceChannel(member.user.presence.game, message);
                 tempChannels.push({ newID: chID, guild: channel.guild })
                 member.setVoiceChannel(chID).catch(console.error);
