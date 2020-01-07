@@ -37,7 +37,7 @@ function sortMembers(message) {
     const channels = message.guild.channels.filter(c =>  c.type === 'voice');
     for (const [channelID, channel] of channels) {
         for (const [memberID, member] of channel.members) {
-            message.channel.send(`${member.user.tag} is playing ${member.user.game}`)
+            message.channel.send(`${member.user.tag} is playing ${member.user.presence.game}`)
                 .then(() => console.log(`Moved ${member.user.tag}.`))
                 .catch(console.error);
             
