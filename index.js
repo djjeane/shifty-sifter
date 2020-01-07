@@ -39,20 +39,23 @@ function sortMembers(message) {
         for (const [memberID, member] of channel.members) {
             //if(member.user.presence.game != null)
             //{
-                message.channel.send(member.user.presence.game);
-                if(games.includes(member.user.presence.game)){
-                    member.setVoiceChannel(member.user.presence.game);
-                }
-                else
-                {
-                    games.push(user.presence.game);
-                    createVoiceChannel(member.user.presence.game, message);
-                    member.user.setVoiceChannel(member.user.presence.game);
-                }
-           // }
             message.channel.send(`${member.user.tag} is playing ${member.user.presence.game}`)
-                .then(() => console.log(`Moved ${member.user.tag}.`))
-                .catch(console.error);
+            .then(() => console.log(`Moved ${member.user.tag}.`))
+            .catch(console.error);
+            if(games.includes(member.user.presence.game))
+            {
+                console.log('if');
+                member.user.setVoiceChannel(member.user.presence.game);
+            }
+            else
+            {
+                console.log('else');
+                games.push(user.presence.game);
+                createVoiceChannel(member.user.presence.game, message);
+                member.user.setVoiceChannel(member.user.presence.game);
+            }
+           // }
+
             
         }
     }
