@@ -184,7 +184,7 @@ function sortMembers(message)
         for (const [memberID, member] of channel.members) 
         {
             var game = member.user.presence.game;
-            if( game != null)
+            if( game != null || game.name != "Custom Status")
             {
                 message.channel.send(`${member.user.tag} is playing ${game.name}`)
                 .then(() => console.log(`Moved ${member.user.tag}.`))
@@ -203,14 +203,17 @@ function sortMembers(message)
                 }
                 else
                 {
-                    console.log(`Game name not found in ${games}`);
-                    games.push(game.name);
-                    message.guild.createChannel(game.name, 'voice')
-                        .then(async channel => {
-                            tempChannels.push({ newID: channel.id, guild: channel.guild })
-                            // A new element has been added to temporary array!
-                            await member.setVoiceChannel(channel.id)
-                        });
+                    console.log(`${game.name} not found in ${games}`);
+                    if(channel.name != game.name)
+                    {
+                        message.guild.createChannel(game.name, 'voice')
+                            .then(async channel => {
+                                games.push(game.name);
+                                tempChannels.push({ newID: channel.id, guild: channel.guild })
+                                // A new element has been added to temporary array!
+                                await member.setVoiceChannel(channel.id)
+                            });
+                    }
 
                     //var chID = createVoiceChannel(game.name, message);
                     //console.log(message.guild.channels.filter(c =>  c.type === 'voice'))
