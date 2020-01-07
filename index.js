@@ -34,12 +34,20 @@ client.login(token);
 
 function sortMembers(message) {
 
+    const channels = message.guild.channels.filter(c =>  c.type === 'voice');
+    for (const [channelID, channel] of channels) {
+        for (const [memberID, member] of channel.members) {
+            message.channel.send(`${member.username} is in ${member.voiceChannel}`)
+                .then(() => console.log(`Moved ${member.user.tag}.`))
+                .catch(console.error);
+        }
+    }
     //const onlineMembers = client.users;
     //var games = [];
     //console.log(client.users);
-    message.channel.send('SORTING UNTIL DEATH.')
-    var onlineMembers = client.users.filter((key,member) => client.users[member].voiceChannel != "null");
-    console.log(onlineMembers);
+    //message.channel.send('SORTING UNTIL DEATH.')
+    //var onlineMembers = client.users.filter((key,member) => client.users[member].voiceChannel != "null");
+    //console.log(onlineMembers);
     //onlineMembers.forEach((member, key) => message.channel.send(`user: ${member.username} is in ${member.voice.voice_channel }`));
     //for(var user in onlineMembers){
        // message.channel.send(`user: ${user}`);
