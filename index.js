@@ -36,7 +36,6 @@ client.on('voiceStateUpdate', (oldMember, newMember) =>
     if(tempChannels.length >= 0) for(let i = 0; i < tempChannels.length; i++) 
     {
         // Finding...
-        console.log(tempChannels);
         let ch = tempChannels[i].guild.channels.find(x => x.id == tempChannels[i].newID);
         
         // Channel Found!
@@ -103,7 +102,7 @@ function sortMembers(message)
                             tempChannels.push({ newID: channel.id, guild: channel.guild })
                             // A new element has been added to temporary array!
                             await member.setVoiceChannel(channel.id)
-                        })
+                        });
 
                     //var chID = createVoiceChannel(game.name, message);
                     //console.log(message.guild.channels.filter(c =>  c.type === 'voice'))
@@ -113,7 +112,7 @@ function sortMembers(message)
                    // {
                        // if(channel.name == game.name)
                        // {
-                            member.setVoiceChannel(channelID);
+                            //member.setVoiceChannel(channelID);
                        //}
                   // }
                 }
