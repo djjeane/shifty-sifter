@@ -59,12 +59,11 @@ function flush(message)
                 
             }
         }
-        else{
+        else
+        {
             console.log(channel.name);
         }
-
-    }
-    
+    } 
 }
 function deleteEmptyTempChannels(){
     if(tempChannels.length >= 0) for(let i = 0; i < tempChannels.length; i++) 
