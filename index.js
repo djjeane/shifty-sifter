@@ -25,25 +25,19 @@ client.on('message', message => {
     }
     if (command === 'sort') {
         message.channel.send('I have heard your message and will reply shortly my son.');
-        sortMembers();
+        sortMembers(message);
     }
 
 });
-    //emojiFilter.checkForMessage(message);
-
-    //Sets the users nickname if they type !name First Last
-    //if (message.content.startsWith(`${prefix}name`)) {
-       // const helper = new UserHelpers(client);
-        //helper.setNickName(message);
-    //} else if (message.content.startsWith(`${prefix}poke`)) {
-       // message.author.send('Poke!');
-    //}
 
 
-function sortMembers() {
-    const onlineMembers = guild.members;
+client.login(token);
+
+function sortMembers(message) {
+
+    const onlineMembers = client.server.members;
     //var games = [];
-
+    message.channel.send('SORTING UNTIL DEATH.')
     onlineMembers.forEach(user => {
         if (user.voiceChannel != null) {
             var channelName = user.voiceChannel;
@@ -51,8 +45,4 @@ function sortMembers() {
         }
     });
 }
-
-client.login(token);
-
-
 
