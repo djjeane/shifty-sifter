@@ -32,11 +32,14 @@ client.on('message', message => {
 
 client.login(token);
 
-function sortMembers(message) {
+function sortMembers(message) 
+{
     var games = [];
     const channels = message.guild.channels.filter(c =>  c.type === 'voice');
-    for (const [channelID, channel] of channels) {
-        for (const [memberID, member] of channel.members) {
+    for (const [channelID, channel] of channels) 
+    {
+        for (const [memberID, member] of channel.members) 
+        {
             //if(member.user.presence.game != null)
             //{
             message.channel.send(`${member.user.tag} is playing ${member.user.presence.game}`)
@@ -63,28 +66,8 @@ function sortMembers(message) {
 
 function createVoiceChannel(game,message)
 {
-    message.guild.createChannel(game,'voice')
+    message.guild.createChannel(game,'voice');
+}
 
-}
-    //const onlineMembers = client.users;
-    //var games = [];
-    //console.log(client.users);
-    //message.channel.send('SORTING UNTIL DEATH.')
-    //var onlineMembers = client.users.filter((key,member) => client.users[member].voiceChannel != "null");
-    //console.log(onlineMembers);
-    //onlineMembers.forEach((member, key) => message.channel.send(`user: ${member.username} is in ${member.voice.voice_channel }`));
-    //for(var user in onlineMembers){
-       // message.channel.send(`user: ${user}`);
-        //if(user.voiceChannel != null){
-            //message.channel.send(user.username);
-        //}
-    //}
-    //onlineMembers.forEach(user => {
-        //console.log(user.)
-        //if (user.voiceChannel != null) {
-            //var channelName = user.voiceChannel;
-            //message.channel.send(`User: ${user.username} is in Voice Channel: ${channelName}`);
-        //}
-//});
-}
+
 
