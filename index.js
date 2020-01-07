@@ -36,12 +36,21 @@ client.on('voiceStateUpdate', (oldMember, newMember) =>
         // Finding...
         console.log(tempChannels);
         let ch = tempChannels[i].guild.channels.find(x => x.id == tempChannels[i].newID);
+        
         // Channel Found!
         if(ch != null){
             if(ch.members.size <= 0)
             {
+                var gameName = ch.name;
+                for( var i = 0; i < games.length; i++){ 
+                    if ( games[i] === gameName) {
+                      arr.splice(i, 1); 
+                      console.log(`${gameName} was removed from the list.`)
+                    }
+                 }
                 ch.delete();
                 // Channel has been deleted!
+                
                 return tempChannels.splice(i, 1);
             }  
         }   
