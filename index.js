@@ -209,6 +209,15 @@ function sortMembers(message)
                         console.log(`${game.name} not found in ${games}`);
                         if(channel.name != game.name)
                         {
+                            for (const [channelID, channel] of channels) 
+                            {
+                                if(channel.name == game.name)
+                                {
+                                    member.setVoiceChannel(channelID);
+                                    games.push(game.name);
+                                    return;
+                                }
+                            }
                             message.guild.createChannel(game.name, 'voice')
                                 .then(async channel => {
                                     games.push(game.name);
