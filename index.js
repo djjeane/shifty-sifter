@@ -18,6 +18,7 @@ client.on('message', message => {
 
     const args = message.content.slice(prefix.length).split(/ +/);
     const command = args.shift().toLowerCase();
+
     if (command === 'ping') {
         message.channel.send('Pong.');
     }
@@ -28,7 +29,6 @@ client.on('message', message => {
         message.channel.send('I have heard your message and will reply shortly my son.');
         if(validateCommand(message)){
             sortMembers(message);
-
         }
         else{
             message.channel.send('You must be in an active voice channel to use this command');
@@ -47,7 +47,7 @@ client.on('message', message => {
 
 //Moves everyone in a voice channel to the clogged channel
 
-//BUG - doesnt work at all - refer to logs for details
+//BUG - doesn't work at all - refer to logs for details
 function flush(message)
 {
     const channels = message.guild.channels.filter(c =>  c.type === 'voice');
@@ -66,7 +66,6 @@ function flush(message)
 }
 
 //Deletes the temporary channels which we created by the sort method
-
 //BUG - only deletes one channel per run, not the entire list of empty channels
 function deleteEmptyTempChannels()
 {
