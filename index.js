@@ -28,10 +28,25 @@ client.on('message', message => {
     }
 
 });
+client.on('voiceStateUpdate', (oldMember, newMember) =>
+{
+    if(temporary.length >= 0) for(let i = 0; i < temporary.length; i++) 
+    {
+        // Finding...
+        let ch = temporary[i].guild.channels.find(x => x.id == temporary[i].newID)
+        // Channel Found!         
+        if(ch.members.size <= 0){
 
+            await ch.delete()
+            // Channel has been deleted!
+            return temporary.splice(i, 1)
+        }
+    }
+
+});
 
 client.login(token);
-
+var tempChannels
 function sortMembers(message) 
 {
     var games = [];
@@ -57,6 +72,7 @@ function sortMembers(message)
                 games.push(member.user.presence.game);
                 console.log(games);
                 var chID = createVoiceChannel(member.user.presence.game, message);
+                temporary.push({ newID: chID, guild: channel.guild })
                 member.setVoiceChannel(chID).catch(console.error);
             }
            // }
