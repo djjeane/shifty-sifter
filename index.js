@@ -184,54 +184,43 @@ function sortMembers(message)
         for (const [memberID, member] of channel.members) 
         {
             var game = member.user.presence.game;
-            if( game != null || game.name != "Custom Status")
+            if( game != null )
             {
-                message.channel.send(`${member.user.tag} is playing ${game.name}`)
-                .then(() => console.log(`Moved ${member.user.tag}.`))
-                .catch(console.error);
-                
-                if(games.includes(game.name))
+                if(game.name != "Custom Status")
                 {
-                    console.log('xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx');
-                    for (const [channelID, channel] of channels) 
+                    message.channel.send(`${member.user.tag} is playing ${game.name}`)
+                    .then(() => console.log(`Moved ${member.user.tag}.`))
+                    .catch(console.error);
+                    
+                    if(games.includes(game.name))
                     {
-                        if(channel.name == game.name)
+                        console.log('xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx');
+                        for (const [channelID, channel] of channels) 
                         {
-                            member.setVoiceChannel(channelID);
+                            if(channel.name == game.name)
+                            {
+                                member.setVoiceChannel(channelID);
+                            }
                         }
                     }
-                }
-                else
-                {
-                    console.log(`${game.name} not found in ${games}`);
-                    if(channel.name != game.name)
+                    else
                     {
-                        message.guild.createChannel(game.name, 'voice')
-                            .then(async channel => {
-                                games.push(game.name);
-                                tempChannels.push({ newID: channel.id, guild: channel.guild })
-                                // A new element has been added to temporary array!
-                                await member.setVoiceChannel(channel.id)
-                            });
+                        console.log(`${game.name} not found in ${games}`);
+                        if(channel.name != game.name)
+                        {
+                            message.guild.createChannel(game.name, 'voice')
+                                .then(async channel => {
+                                    games.push(game.name);
+                                    tempChannels.push({ newID: channel.id, guild: channel.guild })
+                                    // A new element has been added to temporary array!
+                                    await member.setVoiceChannel(channel.id)
+                                });
+                        }
+
                     }
-
-                    //var chID = createVoiceChannel(game.name, message);
-                    //console.log(message.guild.channels.filter(c =>  c.type === 'voice'))
-    
-                    //tempChannels.push({ newID: chID, guild: channel.guild })
-                   // for (const [channelID, channel] of channels) 
-                   // {
-                       // if(channel.name == game.name)
-                       // {
-                            //member.setVoiceChannel(channelID);
-                       //}
-                  // }
                 }
-            }
-           
-
-
-            
+                
+            }     
         }
     }
 }
