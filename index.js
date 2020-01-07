@@ -5,6 +5,7 @@ const client = new Discord.Client();
 //const emojiFilter = new EmojiFilter(client);
 //const notify = require('./modules/notify.js');
 var tempChannels = [];
+var games = [];
 client.once('ready', () => {
     console.log('Ready!');
     //emojiFilter.start();
@@ -42,7 +43,10 @@ client.on('voiceStateUpdate', (oldMember, newMember) =>
                 // Channel has been deleted!
                 return tempChannels.splice(i, 1);
             }  
-        }         
+        }   
+        else{
+            console.log('Channel was null');
+        }      
         
     }
 
@@ -51,23 +55,22 @@ client.on('voiceStateUpdate', (oldMember, newMember) =>
 client.login(token);
 function sortMembers(message) 
 {
-    var games = [];
     const channels = message.guild.channels.filter(c =>  c.type === 'voice');
     for (const [channelID, channel] of channels) 
     {
         for (const [memberID, member] of channel.members) 
         {
-
-            message.channel.send(`${member.user.tag} is playing ${member.user.presence.game}`)
+            var game = member.user.presence.game;
+            message.channel.send(`${member.user.tag} is playing ${game.name}`)
             .then(() => console.log(`Moved ${member.user.tag}.`))
             .catch(console.error);
             
-            if(games.includes(member.user.presence.game))
+            if(games.includes(game.name))
             {
                 console.log('xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx');
                 for (const [channelID, channel] of channels) 
                 {
-                    if(channel.name == member.user.presence.game.name)
+                    if(channel.name == game.name)
                     {
                         member.setVoiceChannel(channelID);
                     }
@@ -76,8 +79,8 @@ function sortMembers(message)
             else
             {
                 console.log('else');
-                games.push(member.user.presence.game);
-                var chID = createVoiceChannel(member.user.presence.game, message);
+                games.push(game.name);
+                var chID = createVoiceChannel(game.name, message);
                 tempChannels.push({ newID: chID, guild: channel.guild })
                 member.setVoiceChannel(chID).catch(console.error);
             }
@@ -88,13 +91,13 @@ function sortMembers(message)
     }
 }
 
-function createVoiceChannel(game,message)
+function createVoiceChannel(gameName,message)
 {
-    message.guild.createChannel(game.name,'voice');
+    message.guild.createChannel(gameName,'voice');
     const channels = message.guild.channels.filter(c =>  c.type === 'voice');
     for (const [channelID, channel] of channels) 
     {
-        if(channel.name == game.name){
+        if(channel.name == gameName){
             return channelID;
         }
     }
