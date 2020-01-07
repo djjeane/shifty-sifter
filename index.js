@@ -48,21 +48,16 @@ function flush(message)
     const channels = message.guild.channels.filter(c =>  c.type === 'voice');
     for (const [channelID, channel] of channels) 
     {
-        if(channel.name == "Clogged")
+
+        for (const [memberID, member] of channel.members) 
         {
-            for (const [memberID, member] of channel.members) 
-            {
-                console.log(member);
-                if(member!= message.author){
-                    member.setVoiceChannel(channelID);
-                }
-                
+            console.log(member);
+            if(member!= message.author){
+                member.setVoiceChannel(messge.guild.afk_channel_id);
             }
+            
         }
-        else
-        {
-            console.log(channel.name);
-        }
+        
     } 
 }
 function deleteEmptyTempChannels(){
