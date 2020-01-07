@@ -25,7 +25,13 @@ client.on('message', message => {
     }
     if (command === 'sort') {
         message.channel.send('I have heard your message and will reply shortly my son.');
-        sortMembers(message);
+        if(validateCommand(message)){
+            sortMembers(message);
+
+        }
+        else{
+            message.channel.send('You must be in an active voice channel to use this command');
+        }
     }
 
 });
@@ -68,6 +74,24 @@ client.on('voiceStateUpdate', (oldMember, newMember) =>
 });
 
 client.login(token);
+function validateCommand(message)
+{
+    var valid = false
+    var user = message.author;
+    for (const [channelID, channel] of channels) 
+    {
+        for (const [memberID, member] of channel.members) 
+        {
+            if(memberID == user.id){
+                valid = true;
+            }
+        }
+
+    }
+    return valid;
+    
+
+}
 function sortMembers(message) 
 {
     const channels = message.guild.channels.filter(c =>  c.type === 'voice');
