@@ -62,6 +62,7 @@ function flush(message)
 function deleteEmptyTempChannels(){
     if(tempChannels.length >= 0) 
     {
+        console.log(tempChannels);
         for(let i = 0; i < tempChannels.length; i++)
         {
             let ch = tempChannels[i].guild.channels.find(x => x.id == tempChannels[i].newID);
