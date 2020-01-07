@@ -97,7 +97,7 @@ function sortMembers(message)
                         .then(async channel => {
                             tempChannels.push({ newID: channel.id, guild: channel.guild })
                             // A new element has been added to temporary array!
-                            member.setVoiceChannel(channel.id)
+                            await member.setVoiceChannel(channel.id)
                         })
 
                     //var chID = createVoiceChannel(game.name, message);
