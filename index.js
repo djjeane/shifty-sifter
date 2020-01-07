@@ -7,7 +7,7 @@ const notify = require('./modules/notify.js');
 
 client.once('ready', () => {
     console.log('Ready!');
-    emojiFilter.start();
+    //emojiFilter.start();
 });
 
 client.on('message', message => {
@@ -52,7 +52,7 @@ function sortMembers() {
 
     onlineMembers.forEach(user => {
         if (user.voiceChannel != null) {
-            var channelName = user.voiceChannel
+            var channelName = user.voiceChannel;
             message.channel.send(`User: ${user.username} is in Voice Channel: ${channelName}`);
         }
     });
