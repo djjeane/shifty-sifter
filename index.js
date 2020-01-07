@@ -98,7 +98,13 @@ function sortMembers(message)
                     console.log(message.guild.channels.filter(c =>  c.type === 'voice'))
     
                     tempChannels.push({ newID: chID, guild: channel.guild })
-                    member.setVoiceChannel(chID);
+                    for (const [channelID, channel] of channels) 
+                    {
+                        if(channel.name == game.name)
+                        {
+                            member.setVoiceChannel(channelID);
+                        }
+                    }
                 }
             }
            
