@@ -33,14 +33,17 @@ client.on('voiceStateUpdate', (oldMember, newMember) =>
     if(tempChannels.length >= 0) for(let i = 0; i < tempChannels.length; i++) 
     {
         // Finding...
-        let ch = tempChannels[i].guild.channels.find(x => x.id == tempChannels[i].newID)
-        // Channel Found!         
-        if(ch.members.size <= 0){
-
-            ch.delete()
-            // Channel has been deleted!
-            return tempChannels.splice(i, 1)
-        }
+        let ch = tempChannels[i].guild.channels.find(x => x.id == tempChannels[i].newID);
+        // Channel Found!
+        if(ch != null){
+            if(ch.members.size <= 0)
+            {
+                ch.delete();
+                // Channel has been deleted!
+                return tempChannels.splice(i, 1);
+            }  
+        }         
+        
     }
 
 });
