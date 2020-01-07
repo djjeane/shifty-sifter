@@ -93,18 +93,24 @@ function sortMembers(message)
                 {
                     console.log(`Game name not found in ${games}`);
                     games.push(game.name);
-                    console.log(channels);
-                    var chID = createVoiceChannel(game.name, message);
-                    console.log(message.guild.channels.filter(c =>  c.type === 'voice'))
+                    await message.guild.createChannel(game.name, 'voice')
+                        .then(async channel => {
+                            tempChannels.push({ newID: channel.id, guild: channel.guild })
+                            // A new element has been added to temporary array!
+                            await member.setVoiceChannel(channel.id)
+                        })
+
+                    //var chID = createVoiceChannel(game.name, message);
+                    //console.log(message.guild.channels.filter(c =>  c.type === 'voice'))
     
-                    tempChannels.push({ newID: chID, guild: channel.guild })
-                    for (const [channelID, channel] of channels) 
-                    {
-                        if(channel.name == game.name)
-                        {
+                    //tempChannels.push({ newID: chID, guild: channel.guild })
+                   // for (const [channelID, channel] of channels) 
+                   // {
+                       // if(channel.name == game.name)
+                       // {
                             member.setVoiceChannel(channelID);
-                        }
-                    }
+                       //}
+                  // }
                 }
             }
            
