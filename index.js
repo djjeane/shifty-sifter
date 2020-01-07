@@ -76,6 +76,8 @@ client.on('voiceStateUpdate', (oldMember, newMember) =>
 client.login(token);
 function validateCommand(message)
 {
+    const channels = message.guild.channels.filter(c =>  c.type === 'voice');
+
     var valid = false
     var user = message.author;
     for (const [channelID, channel] of channels) 
