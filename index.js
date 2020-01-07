@@ -53,7 +53,7 @@ function flush(message)
         {
             console.log(member);
             if(member!= message.author){
-                member.setVoiceChannel(messge.guild.afk_channel_id);
+                member.setVoiceChannel(message.guild.afk_channel_id);
             }
             
         }
