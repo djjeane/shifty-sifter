@@ -70,6 +70,7 @@ function deleteEmptyTempChannels(){
         }      
         
 //     }
+    }
 }
 // client.on('voiceStateUpdate', (oldMember, newMember) =>
 // {
