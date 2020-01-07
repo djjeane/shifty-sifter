@@ -56,8 +56,9 @@ function flush(message)
         for (const [memberID, member] of channel.members) 
         {
             console.log(member);
+            console.log(message.guild.AfkChannel);
             if(member!= message.author){
-                member.setVoiceChannel(message.guild.afk_channel_id);
+                member.setVoiceChannel(message.guild.AfkChannel.id);
             }
             
         }
