@@ -59,11 +59,12 @@ function flush(message)
         
     } 
 }
-function deleteEmptyTempChannels(){
+function deleteEmptyTempChannels()
+{
     if(tempChannels.length >= 0) 
     {
         console.log(tempChannels);
-        for(let i = 0; i < tempChannels.length; i++)
+        for(let i = 0; i <= tempChannels.length; i++)
         {
             let ch = tempChannels[i].guild.channels.find(x => x.id == tempChannels[i].newID);
             
@@ -213,19 +214,7 @@ function sortMembers(message)
     }
 }
 
-function createVoiceChannel(gameName,message)
-{
-    var ch = message.guild.createChannel(gameName,'voice');
-    console.log(ch);
-    return ch.id;
-    //const channels = message.guild.channels.filter(c =>  c.type === 'voice');
-   // for (const [channelID, channel] of channels) 
-  //  {
-        //if(channel.name == gameName){
-          //  return channelID;
-        //}
-    //}
-}
+
 
 
 
