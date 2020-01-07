@@ -33,16 +33,34 @@ client.on('message', message => {
 client.login(token);
 
 function sortMembers(message) {
-
+    var games = []
     const channels = message.guild.channels.filter(c =>  c.type === 'voice');
     for (const [channelID, channel] of channels) {
         for (const [memberID, member] of channel.members) {
+            if(member.user.presence.game != null)
+            {
+                if(games.includes(member.user.presence.game)){
+                    member.setVoiceChannel(member.user.presence.game)
+                }
+                else
+                {
+                    games.push(user.presence.game);
+                    createVoiceChannel(member.user.presence.game, message)
+                    member.user.setVoiceChannel(member.user.presence.game)
+                }
+            }
             message.channel.send(`${member.user.tag} is playing ${member.user.presence.game}`)
                 .then(() => console.log(`Moved ${member.user.tag}.`))
                 .catch(console.error);
             
         }
     }
+
+function createVoiceChannel(game,message)
+{
+    message.guild.createChannel(game,'voice')
+
+}
     //const onlineMembers = client.users;
     //var games = [];
     //console.log(client.users);
