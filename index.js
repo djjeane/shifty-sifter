@@ -42,10 +42,11 @@ client.on('voiceStateUpdate', (oldMember, newMember) =>
             if(ch.members.size <= 0)
             {
                 var gameName = ch.name;
-                for( var i = 0; i < games.length; i++){ 
-                    if ( games[i] === gameName) {
-                      arr.splice(i, 1); 
+                for( var j = 0; j < games.length; j++){ 
+                    if ( games[j] === gameName) {
+                        games.splice(j, 1); 
                       console.log(`${gameName} was removed from the list.`)
+                      console.log(games);
                     }
                  }
                 ch.delete();
