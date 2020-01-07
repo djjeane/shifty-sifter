@@ -13,6 +13,10 @@ client.once('ready', () => {
 client.on('message', message => {
     if (message.author.bot) return; //Excludes the bot from reading its own messages
 
+    if(message.content == '!sort')
+    {
+        message.channel.send('I have heard your message and will reply shortly my son.')
+    }
     emojiFilter.checkForMessage(message);
 
     //Sets the users nickname if they type !name First Last
@@ -33,6 +37,7 @@ client.on('guildMemberAdd', member => {
         getUserNickName(member);
     });
 });
+
 
 client.login(token);
 
