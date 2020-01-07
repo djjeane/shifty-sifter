@@ -45,6 +45,7 @@ function sortMembers(message)
             message.channel.send(`${member.user.tag} is playing ${member.user.presence.game}`)
             .then(() => console.log(`Moved ${member.user.tag}.`))
             .catch(console.error);
+            
             if(games.includes(member.user.presence.game))
             {
                 console.log('if');
@@ -53,7 +54,7 @@ function sortMembers(message)
             else
             {
                 console.log('else');
-                games.push(user.presence.game);
+                games.push(member.user.presence.game);
                 createVoiceChannel(member.user.presence.game, message);
                 member.user.setVoiceChannel(member.user.presence.game);
             }
