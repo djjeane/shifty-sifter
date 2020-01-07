@@ -54,8 +54,7 @@ function sortMembers(message)
     {
         for (const [memberID, member] of channel.members) 
         {
-            //if(member.user.presence.game != null)
-            //{
+
             message.channel.send(`${member.user.tag} is playing ${member.user.presence.game}`)
             .then(() => console.log(`Moved ${member.user.tag}.`))
             .catch(console.error);
@@ -63,7 +62,13 @@ function sortMembers(message)
             if(games.includes(member.user.presence.game))
             {
                 console.log('if');
-                member.user.setVoiceChannel(member.user.presence.game);
+                const channels = message.guild.channels.filter(c =>  c.type === 'voice');
+                for (const [channelID, channel] of channels) 
+                {
+                    if(channel.name == member.user.presence.game.name){
+                        member.user.setVoiceChannel(channelID);
+                    }
+                }
             }
             else
             {
@@ -74,7 +79,7 @@ function sortMembers(message)
                 tempChannels.push({ newID: chID, guild: channel.guild })
                 member.setVoiceChannel(chID).catch(console.error);
             }
-           // }
+
 
             
         }
