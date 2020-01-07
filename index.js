@@ -33,45 +33,81 @@ client.on('message', message => {
             message.channel.send('You must be in an active voice channel to use this command');
         }
     }
-
-});
-client.on('voiceStateUpdate', (oldMember, newMember) =>
-{
-    console.log(`oldMember ${oldMember}`);
-    console.log(`newMember ${newMember}`);
-    if(tempChannels.length >= 0) for(let i = 0; i < tempChannels.length; i++) 
-    {
-        // Finding...
-        let ch = tempChannels[i].guild.channels.find(x => x.id == tempChannels[i].newID);
-        
-        // Channel Found!
-        if(ch != null){
-            if(ch.members.size <= 0)
-            {
-                var gameName = ch.name;
-                for( var j = 0; j < games.length; j++){ 
-                    if ( games[j] === gameName) {
-                        games.splice(j, 1); 
-                      console.log(`${gameName} was removed from the list.`)
-                      console.log(games);
-                    }
-                 }
-                ch.delete();
-                // Channel has been deleted!
-                
-                return tempChannels.splice(i, 1);
-            } 
-            else{
-                console.log('Channel still has members');
-            } 
-        }   
-        else{
-            console.log('Channel was null');
-        }      
-        
+    if (command === 'clear') {
+        message.channel.send('I am working to fix your problem.');
+        deleteEmptyTempChannels();
     }
 
 });
+function deleteEmptyTempChannels(){
+    if(tempChannels.length >= 0) for(let i = 0; i < tempChannels.length; i++) 
+    {
+         let ch = tempChannels[i].guild.channels.find(x => x.id == tempChannels[i].newID);
+        
+         // Channel Found!
+         if(ch != null){
+             if(ch.members.size <= 0)
+             {
+                 var gameName = ch.name;
+                 for( var j = 0; j < games.length; j++){ 
+                     if ( games[j] === gameName) {
+                         games.splice(j, 1); 
+                       console.log(`${gameName} was removed from the list.`)
+                       console.log(games);
+                     }
+                  }
+                 ch.delete();
+                 // Channel has been deleted!
+                
+                 return tempChannels.splice(i, 1);
+             } 
+             else{
+                 console.log('Channel still has members');
+             } 
+        }   
+         else{
+            console.log('Channel was null');
+        }      
+        
+//     }
+}
+// client.on('voiceStateUpdate', (oldMember, newMember) =>
+// {
+//     console.log(`oldMember ${oldMember}`);
+//     console.log(`newMember ${newMember}`);
+//     if(tempChannels.length >= 0) for(let i = 0; i < tempChannels.length; i++) 
+//     {
+//         // Finding...
+//         let ch = tempChannels[i].guild.channels.find(x => x.id == tempChannels[i].newID);
+        
+//         // Channel Found!
+//         if(ch != null){
+//             if(ch.members.size <= 0)
+//             {
+//                 var gameName = ch.name;
+//                 for( var j = 0; j < games.length; j++){ 
+//                     if ( games[j] === gameName) {
+//                         games.splice(j, 1); 
+//                       console.log(`${gameName} was removed from the list.`)
+//                       console.log(games);
+//                     }
+//                  }
+//                 ch.delete();
+//                 // Channel has been deleted!
+                
+//                 return tempChannels.splice(i, 1);
+//             } 
+//             else{
+//                 console.log('Channel still has members');
+//             } 
+//         }   
+//         else{
+//             console.log('Channel was null');
+//         }      
+        
+//     }
+
+// });
 
 client.login(token);
 function validateCommand(message)
