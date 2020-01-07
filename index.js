@@ -72,32 +72,36 @@ function sortMembers(message)
         for (const [memberID, member] of channel.members) 
         {
             var game = member.user.presence.game;
-            message.channel.send(`${member.user.tag} is playing ${game.name}`)
-            .then(() => console.log(`Moved ${member.user.tag}.`))
-            .catch(console.error);
-            
-            if(games.includes(game.name))
+            if( game != null)
             {
-                console.log('xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx');
-                for (const [channelID, channel] of channels) 
+                message.channel.send(`${member.user.tag} is playing ${game.name}`)
+                .then(() => console.log(`Moved ${member.user.tag}.`))
+                .catch(console.error);
+                
+                if(games.includes(game.name))
                 {
-                    if(channel.name == game.name)
+                    console.log('xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx');
+                    for (const [channelID, channel] of channels) 
                     {
-                        member.setVoiceChannel(channelID);
+                        if(channel.name == game.name)
+                        {
+                            member.setVoiceChannel(channelID);
+                        }
                     }
                 }
+                else
+                {
+                    console.log(`Game name not found in ${games}`);
+                    games.push(game.name);
+                    console.log(channels);
+                    var chID = createVoiceChannel(game.name, message);
+                    console.log(message.guild.channels.filter(c =>  c.type === 'voice'))
+    
+                    tempChannels.push({ newID: chID, guild: channel.guild })
+                    member.setVoiceChannel(chID);
+                }
             }
-            else
-            {
-                console.log(`Game name not found in ${games}`);
-                games.push(game.name);
-                console.log(channels);
-                var chID = createVoiceChannel(game.name, message);
-                console.log(message.guild.channels.filter(c =>  c.type === 'voice'))
-
-                tempChannels.push({ newID: chID, guild: channel.guild })
-                member.setVoiceChannel(chID);
-            }
+           
 
 
             
