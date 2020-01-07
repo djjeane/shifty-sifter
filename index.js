@@ -19,8 +19,8 @@ client.on('message', message => {
     if (command === 'ping') {
         message.channel.send('Pong.');
     }
-    if (command === 'ping') {
-        message.channel.send('Pong.');
+    if (command === 'pong') {
+        message.channel.send('Ping.');
     }
     if (command === 'sort') {
         message.channel.send('I have heard your message and will reply shortly my son.');
@@ -55,8 +55,9 @@ function sortMembers(message)
             {
                 console.log('else');
                 games.push(member.user.presence.game);
-                createVoiceChannel(member.user.presence.game, message);
-                member.user.setVoiceChannel(member.user.presence.game);
+                console.log(games);
+                createVoiceChannel(member.user.presence.game, message).catch(console.error);
+                member.setVoiceChannel(member.user.presence.game).catch(console.error);
             }
            // }
 
