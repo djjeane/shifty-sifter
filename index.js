@@ -35,7 +35,7 @@ client.login(token);
 
 function sortMembers(message) {
 
-    const onlineMembers = client.server.members;
+    const onlineMembers = client.users;
     //var games = [];
     message.channel.send('SORTING UNTIL DEATH.')
     onlineMembers.forEach(user => {
