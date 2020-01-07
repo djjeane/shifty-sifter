@@ -48,7 +48,6 @@ function flush(message)
     const channels = message.guild.channels.filter(c =>  c.type === 'voice');
     for (const [channelID, channel] of channels) 
     {
-
         for (const [memberID, member] of channel.members) 
         {
             console.log(member);
@@ -80,7 +79,7 @@ function deleteEmptyTempChannels(){
                  ch.delete();
                  // Channel has been deleted!
                 
-                 return tempChannels.splice(i, 1);
+                 tempChannels.splice(i, 1);
              } 
              else{
                  console.log('Channel still has members');
