@@ -31,6 +31,8 @@ client.on('message', message => {
 });
 client.on('voiceStateUpdate', (oldMember, newMember) =>
 {
+    console.log(`oldMember ${oldMember}`);
+    console.log(`newMember ${newMember}`);
     if(tempChannels.length >= 0) for(let i = 0; i < tempChannels.length; i++) 
     {
         // Finding...
@@ -53,7 +55,10 @@ client.on('voiceStateUpdate', (oldMember, newMember) =>
                 // Channel has been deleted!
                 
                 return tempChannels.splice(i, 1);
-            }  
+            } 
+            else{
+                console.log('Channel still has members');
+            } 
         }   
         else{
             console.log('Channel was null');
