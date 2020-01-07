@@ -36,10 +36,10 @@ function sortMembers(message) {
 
     //const onlineMembers = client.users;
     //var games = [];
-    console.log(client.users);
+    //console.log(client.users);
     message.channel.send('SORTING UNTIL DEATH.')
-    var onlineMembers = client.members.filter(member => member.presence.status !== "online"); //green, yellow, red, but not invisible or offline
-    onlineMembers.forEach((member, key) => message.channel.send(`user: ${member}`));
+    var onlineMembers = client.users.filter(member => member.voiceChannel != "null");
+    onlineMembers.forEach((member, key) => message.channel.send(`user: ${member.username} is in ${member.voiceChannel}`));
     //for(var user in onlineMembers){
        // message.channel.send(`user: ${user}`);
         //if(user.voiceChannel != null){
