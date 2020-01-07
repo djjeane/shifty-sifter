@@ -37,8 +37,8 @@ function sortMembers(message) {
     const channels = message.guild.channels.filter(c =>  c.type === 'voice');
     for (const [channelID, channel] of channels) {
         for (const [memberID, member] of channel.members) {
-            if(member.user.presence.game != null)
-            {
+            //if(member.user.presence.game != null)
+            //{
                 message.channel.send(member.user.presence.game);
                 if(games.includes(member.user.presence.game)){
                     member.setVoiceChannel(member.user.presence.game);
@@ -49,7 +49,7 @@ function sortMembers(message) {
                     createVoiceChannel(member.user.presence.game, message);
                     member.user.setVoiceChannel(member.user.presence.game);
                 }
-            }
+           // }
             message.channel.send(`${member.user.tag} is playing ${member.user.presence.game}`)
                 .then(() => console.log(`Moved ${member.user.tag}.`))
                 .catch(console.error);
