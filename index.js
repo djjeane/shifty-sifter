@@ -52,10 +52,15 @@ function flush(message)
         {
             for (const [memberID, member] of channel.members) 
             {
+                console.log(member);
                 if(member!= message.author){
-                    member.setVoiceChannel(channel.id);
+                    member.setVoiceChannel(channelID);
                 }
+                
             }
+        }
+        else{
+            console.log(channel.name);
         }
 
     }
