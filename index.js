@@ -37,7 +37,7 @@ client.on('voiceStateUpdate', (oldMember, newMember) =>
         // Channel Found!         
         if(ch.members.size <= 0){
 
-            await ch.delete()
+            ch.delete()
             // Channel has been deleted!
             return temporary.splice(i, 1)
         }
