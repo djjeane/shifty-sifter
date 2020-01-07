@@ -56,8 +56,8 @@ function sortMembers(message)
                 console.log('else');
                 games.push(member.user.presence.game);
                 console.log(games);
-                createVoiceChannel(member.user.presence.game, message).catch(console.error);
-                member.setVoiceChannel(member.user.presence.game).catch(console.error);
+                var channelID = createVoiceChannel(member.user.presence.game, message);
+                member.setVoiceChannel(channelID).catch(console.error);
             }
            // }
 
@@ -68,7 +68,14 @@ function sortMembers(message)
 
 function createVoiceChannel(game,message)
 {
-    message.guild.createChannel(game,'voice');
+    message.guild.createChannel(game.name,'voice');
+    const channels = message.guild.channels.filter(c =>  c.type === 'voice');
+    for (const [channelID, channel] of channels) 
+    {
+        if(channel.name == game.name){
+            return channelID;
+        }
+    }
 }
 
 
