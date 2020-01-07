@@ -22,11 +22,14 @@ client.on('message', message => {
         const command = args.shift().toLowerCase();
         if (command === 'ping') {
             message.channel.send('Pong.');
+        }
         if (command === 'ping') {
             message.channel.send('Pong.');
+        }
         if (command === 'sort') {
             message.channel.send('I have heard your message and will reply shortly my son.');
             sortMembers();
+        }
     }
 });
     //emojiFilter.checkForMessage(message);
