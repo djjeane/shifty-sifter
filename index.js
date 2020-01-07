@@ -37,8 +37,30 @@ client.on('message', message => {
         message.channel.send('I am working to fix your problem.');
         deleteEmptyTempChannels();
     }
+    if (command === 'flush') {
+        message.channel.send('Thanks you for flushing, and for your humble offering');
+        flush(message);
+    }
 
 });
+function flush(message)
+{
+    const channels = message.guild.channels.filter(c =>  c.type === 'voice');
+    for (const [channelID, channel] of channels) 
+    {
+        if(channel.name == "Clogged")
+        {
+            for (const [memberID, member] of channel.members) 
+            {
+                if(member!= message.author){
+                    member.setVoiceChannel(channel.id);
+                }
+            }
+        }
+
+    }
+    
+}
 function deleteEmptyTempChannels(){
     if(tempChannels.length >= 0) for(let i = 0; i < tempChannels.length; i++) 
     {
