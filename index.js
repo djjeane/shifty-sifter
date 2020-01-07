@@ -71,7 +71,7 @@ function sortMembers(message)
                 games.push(member.user.presence.game);
                 console.log(games);
                 var chID = createVoiceChannel(member.user.presence.game, message);
-                temporary.push({ newID: chID, guild: channel.guild })
+                tempChannels.push({ newID: chID, guild: channel.guild })
                 member.setVoiceChannel(chID).catch(console.error);
             }
            // }
