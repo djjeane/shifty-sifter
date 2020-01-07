@@ -34,6 +34,7 @@ client.on('voiceStateUpdate', (oldMember, newMember) =>
     if(tempChannels.length >= 0) for(let i = 0; i < tempChannels.length; i++) 
     {
         // Finding...
+        console.log(tempChannels);
         let ch = tempChannels[i].guild.channels.find(x => x.id == tempChannels[i].newID);
         // Channel Found!
         if(ch != null){
@@ -80,9 +81,10 @@ function sortMembers(message)
             {
                 console.log('else');
                 games.push(game.name);
+                console.log(games);
                 var chID = createVoiceChannel(game.name, message);
                 tempChannels.push({ newID: chID, guild: channel.guild })
-                member.setVoiceChannel(chID).catch(console.error);
+                member.setVoiceChannel(chID);
             }
 
 
