@@ -93,11 +93,11 @@ function sortMembers(message)
                 {
                     console.log(`Game name not found in ${games}`);
                     games.push(game.name);
-                    await message.guild.createChannel(game.name, 'voice')
+                    message.guild.createChannel(game.name, 'voice')
                         .then(async channel => {
                             tempChannels.push({ newID: channel.id, guild: channel.guild })
                             // A new element has been added to temporary array!
-                            await member.setVoiceChannel(channel.id)
+                            member.setVoiceChannel(channel.id)
                         })
 
                     //var chID = createVoiceChannel(game.name, message);
