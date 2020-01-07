@@ -222,7 +222,6 @@ function sortMembers(message)
                                 .then(async channel => {
                                     games.push(game.name);
                                     tempChannels.push({ newID: channel.id, guild: channel.guild })
-                                    // A new element has been added to temporary array!
                                     await member.setVoiceChannel(channel.id)
                                 });
                         }
