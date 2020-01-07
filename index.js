@@ -107,6 +107,7 @@ function sortMembers(message)
 function createVoiceChannel(gameName,message)
 {
     var ch = message.guild.createChannel(gameName,'voice');
+    console.log(ch);
     return ch.id;
     //const channels = message.guild.channels.filter(c =>  c.type === 'voice');
    // for (const [channelID, channel] of channels) 
