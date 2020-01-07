@@ -13,20 +13,32 @@ client.once('ready', () => {
 client.on('message', message => {
     if (message.author.bot) return; //Excludes the bot from reading its own messages
 
-    if(message.content == '!sort')
+    if(message.content == `${prefix}sort`)
     {
-        message.channel.send('I have heard your message and will reply shortly my son.')
-    }
-    emojiFilter.checkForMessage(message);
+        if (!message.content.startsWith(prefix) || message.author.bot) return;
 
-    //Sets the users nickname if they type !name First Last
-    if (message.content.startsWith(`${prefix}name`)) {
-        const helper = new UserHelpers(client);
-        helper.setNickName(message);
-    } else if (message.content.startsWith(`${prefix}poke`)) {
-        message.author.send('Poke!');
+
+        const args = message.content.slice(prefix.length).split(/ +/);
+        const command = args.shift().toLowerCase();
+        if (command === 'ping') {
+            message.channel.send('Pong.');
+        if (command === 'ping') {
+            message.channel.send('Pong.');
+        if (command === 'sort') {
+            message.channel.send('I have heard your message and will reply shortly my son.');
+            sortMembers();
     }
 });
+    //emojiFilter.checkForMessage(message);
+
+    //Sets the users nickname if they type !name First Last
+    //if (message.content.startsWith(`${prefix}name`)) {
+       // const helper = new UserHelpers(client);
+        //helper.setNickName(message);
+    //} else if (message.content.startsWith(`${prefix}poke`)) {
+       // message.author.send('Poke!');
+    //}
+
 
 //When a member joins the server add the default role and send the admins an embed telling them to assign the user the correct role
 client.on('guildMemberAdd', member => {
@@ -41,9 +53,16 @@ client.on('guildMemberAdd', member => {
 
 client.login(token);
 
-//Dm's the passed user and asks them to respond with !name Jacob Drury so the bot can set it for them
-function getUserNickName(member) {
-    member.user.send(
-        `Welcome to the server! Please respond to this message with !name FirstName LastName so I can set your nickname!`
-    );
+function sortMembers(){
+    const onlineMembers = guild.members;
+    //var games = [];
+
+    onlineMembers.forEach(user => {
+        if (user.voiceChannel != null) {
+            var channelName = user.voiceChannel
+            
+            message.author.send(`User: ${user.username} is in Voice Channel: ${channelName}`);
+        }
+    });
 }
+
