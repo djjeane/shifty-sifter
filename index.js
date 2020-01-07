@@ -93,6 +93,7 @@ function sortMembers(message)
                 games.push(game.name);
                 console.log(games);
                 var chID = createVoiceChannel(game.name, message);
+                console.log(chID);
                 tempChannels.push({ newID: chID, guild: channel.guild })
                 member.setVoiceChannel(chID);
             }
@@ -106,7 +107,7 @@ function sortMembers(message)
 function createVoiceChannel(gameName,message)
 {
     var ch = message.guild.createChannel(gameName,'voice');
-    return ch;
+    return ch.id;
     //const channels = message.guild.channels.filter(c =>  c.type === 'voice');
    // for (const [channelID, channel] of channels) 
   //  {
