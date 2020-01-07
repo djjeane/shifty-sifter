@@ -36,9 +36,9 @@ function sortMembers(message) {
 
     //const onlineMembers = client.users;
     //var games = [];
-    console.log(client);
+    console.log(client.servers.random());
     message.channel.send('SORTING UNTIL DEATH.')
-    var onlineMembers = guild.members.filter(member => member.presence.status !== "online"); //green, yellow, red, but not invisible or offline
+    var onlineMembers = client.members.filter(member => member.presence.status !== "online"); //green, yellow, red, but not invisible or offline
     onlineMembers.forEach((member, key) => message.channel.send(`user: ${member}`));
     //for(var user in onlineMembers){
        // message.channel.send(`user: ${user}`);
