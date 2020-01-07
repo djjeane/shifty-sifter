@@ -65,8 +65,9 @@ function sortMembers(message)
                 const channels = message.guild.channels.filter(c =>  c.type === 'voice');
                 for (const [channelID, channel] of channels) 
                 {
-                    if(channel.name == member.user.presence.game.name){
-                        member.user.setVoiceChannel(channelID);
+                    if(channel.name == member.user.presence.game.name)
+                    {
+                        member.setVoiceChannel(channelID);
                     }
                 }
             }
