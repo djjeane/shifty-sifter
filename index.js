@@ -56,8 +56,8 @@ function sortMembers(message)
                 console.log('else');
                 games.push(member.user.presence.game);
                 console.log(games);
-                var channelID = createVoiceChannel(member.user.presence.game, message);
-                member.setVoiceChannel(channelID).catch(console.error);
+                var chID = createVoiceChannel(member.user.presence.game, message);
+                member.setVoiceChannel(chID).catch(console.error);
             }
            // }
 
