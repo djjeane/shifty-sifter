@@ -181,13 +181,16 @@ function validateCommand(message)
 function sortMembers(message) 
 {
     const channels = message.guild.channels.filter(c =>  c.type === 'voice');
+    //Loop through each voice channel and then every user in a channel
     for (const [channelID, channel] of channels) 
     {
         for (const [memberID, member] of channel.members) 
         {
             var game = member.user.presence.game;
+            //ensure you dont move someone who isnt playing a game
             if( game != null )
             {
+                //check for a custom status
                 if(game.name != "Custom Status")
                 {
                     message.channel.send(`${member.user.tag} is playing ${game.name}`)
