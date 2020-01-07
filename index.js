@@ -11,6 +11,7 @@ client.once('ready', () => {
     //emojiFilter.start();
 });
 
+//Handles messages and commands 
 client.on('message', message => {
 
     if (!message.content.startsWith(prefix) || message.author.bot) return;
@@ -43,6 +44,10 @@ client.on('message', message => {
     }
 
 });
+
+//Moves everyone in a voice channel to the clogged channel
+
+//BUG - doesnt work at all - refer to logs for details
 function flush(message)
 {
     const channels = message.guild.channels.filter(c =>  c.type === 'voice');
@@ -59,6 +64,10 @@ function flush(message)
         
     } 
 }
+
+//Deletes the temporary channels which we created by the sort method
+
+//BUG - only deletes one channel per run, not the entire list of empty channels
 function deleteEmptyTempChannels()
 {
     if(tempChannels.length >= 0) 
@@ -98,6 +107,11 @@ function deleteEmptyTempChannels()
         }    
     }
 }
+
+//Takes out the channels once everyone leaves them
+
+//BUG - When 2 different games are active the player being moved to the temp channel will trigger the deletion of the second channel, so for now it must be triggered manually
+
 // client.on('voiceStateUpdate', (oldMember, newMember) =>
 // {
 //     console.log(`oldMember ${oldMember}`);
@@ -137,6 +151,10 @@ function deleteEmptyTempChannels()
 // });
 
 client.login(token);
+
+
+//If the user is in a voice channel, then the command is valid
+        //ToDo - Restrict by roles which can be set via a config file
 function validateCommand(message)
 {
     const channels = message.guild.channels.filter(c =>  c.type === 'voice');
@@ -157,6 +175,8 @@ function validateCommand(message)
     
 
 }
+
+//Sorts members into different voice channels based on what game they are playing
 function sortMembers(message) 
 {
     const channels = message.guild.channels.filter(c =>  c.type === 'voice');
