@@ -3,7 +3,7 @@ const { prefix, token } = require('./config.json');
 const client = new Discord.Client();
 //const { EmojiFilter, UserHelpers } = require('./modules/index.js');
 //const emojiFilter = new EmojiFilter(client);
-const notify = require('./modules/notify.js');
+//const notify = require('./modules/notify.js');
 
 client.once('ready', () => {
     console.log('Ready!');
