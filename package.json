@@ -1,7 +1,7 @@
 {
-  "name": "lcabot",
+  "name": "sifty-sifter",
   "version": "1.0.0",
-  "description": "Discord Bot for Lambda Chi Alpha server",
+  "description": "Discord Bot for Mercy Flush",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"

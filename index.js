@@ -38,11 +38,17 @@ function sortMembers(message) {
     const onlineMembers = client.users;
     //var games = [];
     message.channel.send('SORTING UNTIL DEATH.')
-    onlineMembers.forEach(user => {
-        if (user.voiceChannel != null) {
-            var channelName = user.voiceChannel;
-            message.channel.send(`User: ${user.username} is in Voice Channel: ${channelName}`);
+    for(var user in onlineMembers){
+        if(user.voiceChannel != null){
+            message.channel.send(user.username);
         }
-    });
+    }
+    //onlineMembers.forEach(user => {
+        //console.log(user.)
+        //if (user.voiceChannel != null) {
+            //var channelName = user.voiceChannel;
+            //message.channel.send(`User: ${user.username} is in Voice Channel: ${channelName}`);
+        //}
+//});
 }
 
