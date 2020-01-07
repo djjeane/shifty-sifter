@@ -36,6 +36,7 @@ client.on('message', message => {
     }
     if (command === 'clear') {
         message.channel.send('I am working to fix your problem.');
+        console.log(tempChannels);
         deleteEmptyTempChannels();
     }
     if (command === 'flush') {
@@ -193,9 +194,9 @@ function sortMembers(message)
                     .then(() => console.log(`Moved ${member.user.tag}.`))
                     .catch(console.error);
                     
+                    //If you have already created the channel for the game
                     if(games.includes(game.name))
                     {
-                        console.log('xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx');
                         for (const [channelID, channel] of channels) 
                         {
                             if(channel.name == game.name)
@@ -206,18 +207,18 @@ function sortMembers(message)
                     }
                     else
                     {
-                        console.log(`${game.name} not found in ${games}`);
                         if(channel.name != game.name)
                         {
+                            //make sure a channel doesnt already exist
                             for (const [channelID, channel] of channels) 
                             {
                                 if(channel.name == game.name)
                                 {
                                     member.setVoiceChannel(channelID);
-                                    games.push(game.name);
                                     return;
                                 }
                             }
+                            //if the channel doesnt exist create one, log the game and log the temp channel
                             message.guild.createChannel(game.name, 'voice')
                                 .then(async channel => {
                                     games.push(game.name);
