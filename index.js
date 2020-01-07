@@ -12,7 +12,10 @@ client.once('ready', () => {
 
 client.on('message', message => {
     if (message.author.bot) return; //Excludes the bot from reading its own messages
-
+    if(message.content == '!sort'){
+        message.channel.send('I have heard your message and will reply shortly my son.');
+        sortMembers();
+    }
     if(message.content == `${prefix}sort`)
     {
         if (!message.content.startsWith(prefix) || message.author.bot) return;
@@ -43,29 +46,19 @@ client.on('message', message => {
     //}
 
 
-//When a member joins the server add the default role and send the admins an embed telling them to assign the user the correct role
-client.on('guildMemberAdd', member => {
-    const role = member.guild.roles.find(role => role.name === 'verified');
-    member.addRole(role).then(member => {
-        notify.notifyAdmins(member);
-        //Prompts the user to set their nickname
-        getUserNickName(member);
-    });
-});
-
-
-client.login(token);
-
-function sortMembers(){
+function sortMembers() {
     const onlineMembers = guild.members;
     //var games = [];
 
     onlineMembers.forEach(user => {
         if (user.voiceChannel != null) {
             var channelName = user.voiceChannel
-            
-            message.author.send(`User: ${user.username} is in Voice Channel: ${channelName}`);
+            message.channel.send(`User: ${user.username} is in Voice Channel: ${channelName}`);
         }
     });
 }
+
+client.login(token);
+
+
 
