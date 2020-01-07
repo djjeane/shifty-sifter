@@ -59,6 +59,7 @@ function sortMembers(message) {
             
         }
     }
+}
 
 function createVoiceChannel(game,message)
 {
