@@ -89,11 +89,12 @@ function sortMembers(message)
             }
             else
             {
-                console.log('else');
+                console.log(`Game name not found in ${games}`);
                 games.push(game.name);
-                console.log(games);
+                console.log(channels);
                 var chID = createVoiceChannel(game.name, message);
-                console.log(chID);
+                console.log(message.guild.channels.filter(c =>  c.type === 'voice'))
+
                 tempChannels.push({ newID: chID, guild: channel.guild })
                 member.setVoiceChannel(chID);
             }
