@@ -7,7 +7,17 @@ const config = {
 
   // Bot Support, level 8 by default. Array of user ID strings
   "support": [],
-
+  
+  defaultSettings : {
+      "prefix": "!",
+      "modLogChannel": "lvaatory",
+      "modRole": "Porcelain",
+      "adminRole": "Ceramic",
+      "systemNotice": "true",
+      "welcomeChannel": "welcome",
+      "welcomeMessage": "Flush after using.",
+      "welcomeEnabled": "True"
+    },
   // Your Bot's Token. Available on https://discordapp.com/developers/applications/me
 
   // PERMISSION LEVEL DEFINITIONS.
