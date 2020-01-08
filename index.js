@@ -64,11 +64,10 @@ function flush(message)
     {
         for (const [memberID, member] of channel.members) 
         {
-            console.log(member);
-            console.log(message.author.id)
-            console.log(memberID);
-            if(memberID!= message.author){
-                //member.setVoiceChannel(message.guild.afkChannelID);
+            console.log(`Flushed by ${message.author}`)
+            console.log();
+            if (memberID != message.author.id) {
+                member.setVoiceChannel(message.guild.afkChannelID);
             }
             
         }
