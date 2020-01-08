@@ -113,7 +113,7 @@ function deleteEmptyTempChannels()
 //     }
 // }
 
-        for(let i = 0; i <= tempChannels.length; i++)
+        for(let i = 0; i < tempChannels.length; i++)
         {
             console.log(`List of Channels is ${tempChannels}`);
             console.log(`${i} out of ${tempChannels.length}`);
@@ -234,7 +234,7 @@ function sortMembers(message)
             if( game != null )
             {
                 //check for a custom status
-                if (game.name != "Custom Status" || game.name != "Spotify")
+                if (game.name != "Custom Status" && game.name != "Spotify")
                 {
                     message.channel.send(`${member.user.tag} is playing ${game.name}`)
                     .then(() => console.log(`Moved ${member.user.tag}.`))
