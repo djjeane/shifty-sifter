@@ -19,6 +19,9 @@ client.on('message', message => {
     const args = message.content.slice(prefix.length).split(/ +/);
     const command = args.shift().toLowerCase();
 
+    console.log(`Command: ${command}`)
+    console.log(`args: ${args}`)
+   
     if (command === 'ping') {
         message.channel.send('Pong.');
     }
@@ -27,26 +30,30 @@ client.on('message', message => {
     }
     if (command === 'sort') {
         message.channel.send('I have heard your message and will reply shortly my son.');
-        if(validateCommand(message)){
+        if(validateCommand(message))
+        {
             sortMembers(message);
         }
-        else{
+        else
+        {
             message.channel.send('You must be in an active voice channel to use this command');
         }
     }
-    if (command === 'clear') {
+    if (command === 'clear') 
+    {
         message.channel.send('I am working to fix your problem.');
         console.log(tempChannels);
         deleteEmptyTempChannels();
     }
-    if (command === 'flush') {
+    if (command === 'flush') 
+    {
         message.channel.send('Thanks you for flushing, and for your humble offering');
         flush(message);
     }
-    if (command === 'splitusup') {
+    if (command === 'splitusup') 
+    {
         message.channel.send('A civil war... nice!');
         split(message);
-
     }
 
 });
@@ -96,23 +103,19 @@ function split(message)
 //BUG - doesn't work at all - refer to logs for details
 function flush(message)
 {
-    //const channels = message.guild.channels.filter(c =>  c.type === 'voice');
     const authorID = message.guild.author.voiceChannel;
-    console.log(authorID);
 
-    // const author = message.guild.members.find(x => x.id == authorID);
-    // console.log(author);
-    // const channel = author.voiceChannel;
-    // console.log(channel);
+    console.log(authorID);
     console.log(`Flushed by ${message.author}`)
 
-     for (const [channelID, channel] of channels)
-     {
+    for (const [channelID, channel] of channels)
+    {
         for (const [memberID, member] of channel.members) 
         {
             if(message.author.voiceChannel == channelID)
             {
-                if (memberID != message.author.id) {
+                if (memberID != message.author.id) 
+                {
                     member.setVoiceChannel(message.guild.afkChannelID);
                 }
             }
