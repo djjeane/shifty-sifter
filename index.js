@@ -60,13 +60,12 @@ client.on('message', message => {
         message.author.send('No Bitch.');
         message.channel.send('I have answered the call.');
     }
-    if(command === '')
     if (command === 'hesgonnasayit') {
         let adminRole = message.guild.roles.find("name", "Ceramic");
-
+        console.log(adminRole);
         if(!message.member.roles.has(adminRole))
         {
-            message.channel.send(`NIGGER NIGGER NIGGER`);
+            //message.channel.send(`NIGGER NIGGER NIGGER`);
 
             return;
         } 
