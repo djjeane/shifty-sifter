@@ -61,6 +61,7 @@ function flush(message)
 {
     //const channels = message.guild.channels.filter(c =>  c.type === 'voice');
     const channel = message.author.voiceChannel;
+    console.log(channel);
     console.log(`Flushed by ${message.author}`)
 
     // for (const [channelID, channel] of channels) 
