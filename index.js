@@ -230,6 +230,7 @@ function sortMembers(message)
                             message.guild.createChannel(game.name, 'voice')
                                 .then(async channel => {
                                     console.log(game)
+                                    var game = member.user.presence.game;
                                     games.push(game.name);
                                     tempChannels.push({ newID: channel.id, guild: channel.guild })
                                     await member.setVoiceChannel(channel.id)
