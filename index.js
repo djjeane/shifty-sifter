@@ -106,15 +106,18 @@ function flush(message)
     // console.log(channel);
     console.log(`Flushed by ${message.author}`)
 
-    // for (const [channelID, channel] of channels) 
-    // {
+     for (const [channelID, channel] of channels)
+     {
         for (const [memberID, member] of channel.members) 
         {
-            if (memberID != message.author.id) {
-                //member.setVoiceChannel(message.guild.afkChannelID);
+            if(message.author.voiceChannel == channelID)
+            {
+                if (memberID != message.author.id) {
+                    member.setVoiceChannel(message.guild.afkChannelID);
+                }
             }
         }
-    // } 
+    } 
 }
 
 //Deletes the temporary channels which we created by the sort method
