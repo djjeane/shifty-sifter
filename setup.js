@@ -49,17 +49,11 @@ let prompts = [
     console.log("First Start! Inserting default guild settings in the database...");
     await settings.set("default", defaultSettings);
   }
-
-  const answers = await inquirer.prompt(prompts);
-
-  if (answers.resetDefaults && answers.resetDefaults === "Yes") {
-    console.log("Resetting default guild settings...");
-    await settings.set("default", defaultSettings);
-  }
+  console.log("Got Here");
 
   baseConfig = baseConfig
-    .replace("{{ownerID}}", answers.ownerID)
-    .replace("{{token}}", `"${answers.token}"`);
+    .replace("{{ownerID}}", "212993630233690113")
+    .replace("{{token}}", "NjYzOTU1MzI0NjU0MzIxNjc0.XhZaeg.C8NubaxuOmkEokm3bWfVIkA1nYE");
 
   fs.writeFileSync("./config.js", baseConfig);
   console.log("REMEMBER TO NEVER SHARE YOUR TOKEN WITH ANYONE!");
