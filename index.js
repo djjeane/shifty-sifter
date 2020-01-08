@@ -59,16 +59,16 @@ function split(message)
 //BUG - doesn't work at all - refer to logs for details
 function flush(message)
 {
-    const channels = message.guild.channels.filter(c =>  c.type === 'voice');
-    const channel = message.channel;
+    //const channels = message.guild.channels.filter(c =>  c.type === 'voice');
+    const channel = message.author.voiceChannel;
+    console.log(`Flushed by ${message.author}`)
+
     // for (const [channelID, channel] of channels) 
     // {
         for (const [memberID, member] of channel.members) 
         {
-            console.log(`Flushed by ${message.author}`)
-            console.log();
             if (memberID != message.author.id) {
-                member.setVoiceChannel(message.guild.afkChannelID);
+                //member.setVoiceChannel(message.guild.afkChannelID);
             }
         }
     // } 
