@@ -66,7 +66,7 @@ function flush(message)
             console.log(member);
             console.log(message.guild.AfkChannel);
             if(member!= message.author){
-                member.setVoiceChannel(message.guild.afk_channel_id);
+                member.setVoiceChannel(message.guild.afkChannel);
             }
             
         }
@@ -80,39 +80,6 @@ function deleteEmptyTempChannels()
 {
     if(tempChannels.length >= 0) 
     {
-        // for (const [newId, guild] of tempChannels)
-        // {
-        //     console.log(`List of Channels is ${tempChannels}`);
-        //     let currentChannel = guild.channels.find(x => x.id == newID);
-
-        //     if(currentChannel != null)
-        //     {
-        //         if(currentChannel.members.size <= 0)
-        //         {
-        //             var gameName = currentChannel.name;
-        //             for (var j = 0; j < games.length; j++) {
-        //                 if (games[j] === gameName) {
-        //                     games.splice(j, 1);
-        //                     console.log(`${gameName} was removed from the list.`)
-        //                     console.log(games);
-        //                 }
-        //             }
-        //             currentChannel.delete();
-        //             tempChannels.splice(i, 1);
-
-        //         }
-        //         else {
-        //             console.log('Channel still has members');
-        //         }
-        //     }
-        //     else {
-        //         console.log('Channel was null');
-        //     }
-
-        // }
-//     }
-// }
-
         for(let i = 0; i < tempChannels.length; i++)
         {
             console.log(`List of Channels is ${tempChannels}`);
@@ -151,48 +118,6 @@ function deleteEmptyTempChannels()
         }    
     }
 }
-
-//Takes out the channels once everyone leaves them
-
-//BUG - When 2 different games are active the player being moved to the temp channel will trigger the deletion of the second channel, so for now it must be triggered manually
-
-// client.on('voiceStateUpdate', (oldMember, newMember) =>
-// {
-//     console.log(`oldMember ${oldMember}`);
-//     console.log(`newMember ${newMember}`);
-//     if(tempChannels.length >= 0) for(let i = 0; i < tempChannels.length; i++) 
-//     {
-//         // Finding...
-//         let ch = tempChannels[i].guild.channels.find(x => x.id == tempChannels[i].newID);
-        
-//         // Channel Found!
-//         if(ch != null){
-//             if(ch.members.size <= 0)
-//             {
-//                 var gameName = ch.name;
-//                 for( var j = 0; j < games.length; j++){ 
-//                     if ( games[j] === gameName) {
-//                         games.splice(j, 1); 
-//                       console.log(`${gameName} was removed from the list.`)
-//                       console.log(games);
-//                     }
-//                  }
-//                 ch.delete();
-//                 // Channel has been deleted!
-                
-//                 return tempChannels.splice(i, 1);
-//             } 
-//             else{
-//                 console.log('Channel still has members');
-//             } 
-//         }   
-//         else{
-//             console.log('Channel was null');
-//         }      
-        
-//     }
-
-// });
 
 client.login(token);
 
