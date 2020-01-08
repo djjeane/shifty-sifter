@@ -191,6 +191,9 @@ function sortMembers(message)
             if( game != null )
             {
                 //check for a custom status
+                console.log(game);
+                console.log(member.username);
+                console.log(games);
                 if(game.name != "Custom Status")
                 {
                     message.channel.send(`${member.user.tag} is playing ${game.name}`)
@@ -212,18 +215,21 @@ function sortMembers(message)
                     {
                         if(channel.name != game.name)
                         {
+                            console.log(channel);
                             //make sure a channel doesnt already exist
-                            for (const [channelID, channel] of channels) 
-                            {
-                                if(channel.name == game.name)
-                                {
-                                    member.setVoiceChannel(channelID);
-                                    return;
-                                }
-                            }
+                            // for (const [channelID, channel] of channels) 
+                            // {
+                            //     console.log(channel.name);
+                            //     if(channel.name == game.name)
+                            //     {
+                            //         member.setVoiceChannel(channelID);
+                            //         return;
+                            //     }
+                            // }
                             //if the channel doesnt exist create one, log the game and log the temp channel
                             message.guild.createChannel(game.name, 'voice')
                                 .then(async channel => {
+                                    console.log(game)
                                     games.push(game.name);
                                     tempChannels.push({ newID: channel.id, guild: channel.guild })
                                     await member.setVoiceChannel(channel.id)
@@ -237,8 +243,5 @@ function sortMembers(message)
         }
     }
 }
-
-
-
 
 
