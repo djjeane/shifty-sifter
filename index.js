@@ -63,6 +63,7 @@ client.on('message', message => {
     if (command === 'hesgonnasayit') {
         let adminRole = message.guild.roles.find("name", "Ceramic");
         console.log(adminRole);
+        console.log(message.member.roles);
         if(!message.member.roles.has(adminRole))
         {
             message.author.send(`NIGGER NIGGER NIGGER`);
