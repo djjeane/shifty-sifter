@@ -54,7 +54,7 @@ client.on('message', message => {
     {
         message.channel.send('A civil war... nice!');
         split(message);
-    }if(command === 'plzDawson')
+    }if(command === 'plzdawson')
     {
         message.author.send('No Bitch.');
         message.channel.send('I have answered the call.');
@@ -234,15 +234,15 @@ function sortMembers(message)
                         if(channel.name != game.name)
                         {
                             //make sure a channel doesnt already exist
-                            // for (const [channelID, channel] of channels) 
-                            // {
-                            //     console.log(channel.name);
-                            //     if(channel.name == game.name)
-                            //     {
-                            //         member.setVoiceChannel(channelID);
-                            //         return;
-                            //     }
-                            // }
+                            for (const [channelID, channel] of channels) 
+                            {
+                                console.log(channel.name);
+                                if(channel.name == game.name)
+                                {
+                                    member.setVoiceChannel(channelID);
+                                    return;
+                                }
+                            }
                             //if the channel doesnt exist create one, log the game and log the temp channel
                             message.guild.createChannel(game.name, 'voice')
                                 .then(async channel => {
