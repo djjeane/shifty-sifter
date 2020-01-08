@@ -66,6 +66,7 @@ client.on('message', message => {
             nWordUser = message.author;
             message.channel.send('Dont say it.');
             nWordCount = nWordCount +1 ;
+            break;
         }
         if (nWordCount == 1)
         {
@@ -73,6 +74,7 @@ client.on('message', message => {
             {
                 message.channel.send('Dont say it.');
                 nWordCount = nWordCount + 1;
+                break;
             }
             else
             {
@@ -89,6 +91,7 @@ client.on('message', message => {
                 message.channel.send('He shouldnt have said it.');
                 nWordCount =0;
                 nWordUser = "";
+                break;
             }
             else
             {
