@@ -88,7 +88,7 @@ client.on('message', message => {
         {
             if (nWordUser == taggedUser)
             {
-                nWordUser.member.ban();
+                nWordUser.ban();
                 message.channel.send(`${nWordUser} shouldnt have said it.`);
                 nWordCount =0;
                 nWordUser = "";
