@@ -86,7 +86,7 @@ const init = async () => {
     // Here we login the client.
     console.log(CLIENT_TOKEN);
     //client.login(BotToken);
-    client.login(CLIENT_TOKEN);
+    client.login();
 
     // End top-level async/await function.
 };
