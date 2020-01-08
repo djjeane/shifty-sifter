@@ -50,7 +50,8 @@ client.on('message', message => {
     }
 
 });
-function split(message){
+function split(message)
+{
 
 }
 //Moves everyone in a voice channel to the clogged channel
@@ -64,7 +65,7 @@ function flush(message)
         for (const [memberID, member] of channel.members) 
         {
             console.log(member);
-            console.log(message.author)
+            console.log(message.author.id)
             console.log(memberID);
             if(memberID!= message.author){
                 //member.setVoiceChannel(message.guild.afkChannelID);
