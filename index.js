@@ -60,13 +60,13 @@ function split(message)
 function flush(message)
 {
     //const channels = message.guild.channels.filter(c =>  c.type === 'voice');
-    const authorID = message.author;
+    const authorID = message.author.voiceChannel;
     console.log(authorID);
 
-    const author = message.guild.members.find(x => x.id == authorID);
-    console.log(author);
-    const channel = author.voiceChannel;
-    console.log(channel);
+    // const author = message.guild.members.find(x => x.id == authorID);
+    // console.log(author);
+    // const channel = author.voiceChannel;
+    // console.log(channel);
     console.log(`Flushed by ${message.author}`)
 
     // for (const [channelID, channel] of channels) 
