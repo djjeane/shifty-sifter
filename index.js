@@ -50,6 +50,43 @@ client.on('message', message => {
     }
 
 });
+
+client.on('messageUpdate', (oldMessage, newMessage) => {
+     if (!message.content.startsWith(prefix) || message.author.bot) return;
+
+     const args = message.content.slice(prefix.length).split(/ +/);
+     const command = args.shift().toLowerCase();
+
+     if (command === 'ping') {
+         message.channel.send('Pong.');
+     }
+     if (command === 'pong') {
+         message.channel.send('Ping.');
+     }
+     if (command === 'sort') {
+         message.channel.send('I have heard your message and will reply shortly my son.');
+         if (validateCommand(message)) {
+             sortMembers(message);
+         } else {
+             message.channel.send('You must be in an active voice channel to use this command');
+         }
+     }
+     if (command === 'clear') {
+         message.channel.send('I am working to fix your problem.');
+         console.log(tempChannels);
+         deleteEmptyTempChannels();
+     }
+     if (command === 'flush') {
+         message.channel.send('Thanks you for flushing, and for your humble offering');
+         flush(message);
+     }
+     if (command === 'splitusup') {
+         message.channel.send('A civil war... nice!');
+         split(message);
+
+     }
+});
+
 function split(message)
 {
 
@@ -60,7 +97,7 @@ function split(message)
 function flush(message)
 {
     //const channels = message.guild.channels.filter(c =>  c.type === 'voice');
-    const authorID = message.author.voiceChannel;
+    const authorID = message.guild.author.voiceChannel;
     console.log(authorID);
 
     // const author = message.guild.members.find(x => x.id == authorID);
