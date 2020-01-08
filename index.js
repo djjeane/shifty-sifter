@@ -60,8 +60,9 @@ function split(message)
 function flush(message)
 {
     const channels = message.guild.channels.filter(c =>  c.type === 'voice');
-    for (const [channelID, channel] of channels) 
-    {
+    const channel = message.channel;
+    // for (const [channelID, channel] of channels) 
+    // {
         for (const [memberID, member] of channel.members) 
         {
             console.log(`Flushed by ${message.author}`)
@@ -69,10 +70,8 @@ function flush(message)
             if (memberID != message.author.id) {
                 member.setVoiceChannel(message.guild.afkChannelID);
             }
-            
         }
-        
-    } 
+    // } 
 }
 
 //Deletes the temporary channels which we created by the sort method
