@@ -60,7 +60,7 @@ client.on('message', message => {
         message.author.send('No Bitch.');
         message.channel.send('I have answered the call.');
     }
-    if (command === 'imgonnasayit') {
+    if (command === 'hesgonnasayit') {
         const taggedUser = message.mentions.users.first();
         if(nWordCount == 0)
         {
@@ -88,7 +88,7 @@ client.on('message', message => {
         {
             if (nWordUser == taggedUser)
             {
-                var author = message.member.ban()
+                nWordUser.member.ban();
                 message.channel.send(`${nWordUser} shouldnt have said it.`);
                 nWordCount =0;
                 nWordUser = "";
