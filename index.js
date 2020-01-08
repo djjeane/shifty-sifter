@@ -82,10 +82,10 @@ function deleteEmptyTempChannels()
     {
         for(let i = 0; i <= tempChannels.length; i++)
         {
-            console.log(tempChannels);
+            console.log(`List of Channels is ${tempChannels}`);
 
             let ch = tempChannels[i].guild.channels.find(x => x.id == tempChannels[i].newID);
-            
+            console.log(`Current Channel is ${ch}`);
             // Channel Found!
             if(ch != null){
                 if(ch.members.size <= 0)
@@ -103,6 +103,7 @@ function deleteEmptyTempChannels()
                     // Channel has been deleted!
                     
                     tempChannels.splice(i, 1);
+                    i = i-1;
                 } 
                 else
                 {
@@ -233,7 +234,6 @@ function sortMembers(message)
                             //if the channel doesnt exist create one, log the game and log the temp channel
                             message.guild.createChannel(game.name, 'voice')
                                 .then(async channel => {
-                                    console.log(game)
                                     var game = member.user.presence.game;
                                     games.push(game.name);
                                     tempChannels.push({ newID: channel.id, guild: channel.guild })
