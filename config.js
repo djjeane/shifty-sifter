@@ -9,27 +9,10 @@ const config = {
   "support": [],
 
   // Your Bot's Token. Available on https://discordapp.com/developers/applications/me
-  "token": "NjYzOTU1MzI0NjU0MzIxNjc0.XhZaeg.C8NubaxuOmkEokm3bWfVIkA1nYE",
-
-  // Default per-server settings. New guilds have these settings. 
-
-  // DO NOT LEAVE ANY OF THESE BLANK, AS YOU WILL NOT BE ABLE TO UPDATE THEM
-  // VIA COMMANDS IN THE GUILD.
-  
-  "defaultSettings" : {
-    "prefix": "!",
-    "modLogChannel": "lavatory",
-    "modRole": "Ceramic",
-    "adminRole": "Golden Q-Tip",
-    "systemNotice": "true", // This gives a notice when a user tries to run a command that they do not have permission to use.
-    "welcomeChannel": "welcome",
-    "welcomeMessage": "Please flush after using.",
-    "welcomeEnabled": "false"
-  },
+  "token": "NjYzOTU1MzI0NjU0MzIxNjc0.XhZeGQ.Kw3ep4rflWZ8YBzqfqDsIZeUcKU",
 
   // PERMISSION LEVEL DEFINITIONS.
-
-  permLevels: [
+    permLevels: [
     // This is the lowest permisison level, this is for non-roled users.
     { level: 0,
       name: "User", 
