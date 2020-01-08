@@ -7,7 +7,7 @@ module.exports = {
     var splitChan;
     execute(message, args) {
         if (module.exports.validateCommand(message)) {
-            message.channel.send('Soon my child.');
+            message.channel.send('Preparing for bloodshed.');
             module.exports.splitMembers(message);
         } else {
             message.channel.send('You must be in an active voice channel to use this command');
