@@ -54,6 +54,10 @@ client.on('message', message => {
     {
         message.channel.send('A civil war... nice!');
         split(message);
+    }if(command === 'plzDawson')
+    {
+        message.author.send('No Bitch.');
+        message.channel.send('I have answered the call.');
     }
 
 });
