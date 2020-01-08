@@ -61,20 +61,21 @@ client.on('message', message => {
         message.channel.send('I have answered the call.');
     }
     if (command === 'imgonnasayit') {
+        const taggedUser = message.mentions.users.first();
         if(nWordCount == 0)
         {
-            nWordUser = message.author;
-            message.channel.send('Dont say it.');
+            nWordUser = taggedUser;
+            message.channel.send(`Dont say it ${nWordUser}`);
             nWordCount = nWordCount +1 ;
-            break;
+            return;
         }
         if (nWordCount == 1)
         {
-            if (nWordUser == message.author)
+            if (nWordUser == taggedUser)
             {
-                message.channel.send('Dont say it.');
+                message.channel.send(`Dont say it ${nWordUser}`);
                 nWordCount = nWordCount + 1;
-                break;
+                return;
             }
             else
             {
@@ -85,13 +86,13 @@ client.on('message', message => {
         }
         if (nWordCount == 2)
         {
-            if (nWordUser == message.author)
+            if (nWordUser == taggedUser)
             {
                 var author = message.member.ban()
-                message.channel.send('He shouldnt have said it.');
+                message.channel.send(`${nWordUser} shouldnt have said it.`);
                 nWordCount =0;
                 nWordUser = "";
-                break;
+                return;
             }
             else
             {
