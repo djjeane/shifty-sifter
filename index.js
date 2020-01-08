@@ -90,14 +90,13 @@ client.on('message', message => {
                 nWordCount =0;
                 nWordUser = "";
             }
-            else {
+            else
+            {
                 nWordCount = 0;
                 nWordUser = "";
-
             }
+        }
     }
-
-
 });
 
 client.on('messageUpdate', (oldMessage, newMessage) => {
