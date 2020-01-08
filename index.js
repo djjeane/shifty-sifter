@@ -65,7 +65,7 @@ client.on('message', message => {
         console.log(adminRole);
         if(!message.member.roles.has(adminRole))
         {
-            //message.channel.send(`NIGGER NIGGER NIGGER`);
+            message.author.send(`NIGGER NIGGER NIGGER`);
 
             return;
         } 
