@@ -61,9 +61,11 @@ function flush(message)
 {
     //const channels = message.guild.channels.filter(c =>  c.type === 'voice');
     const authorID = message.author;
+    console.log(authorID);
+
     const author = message.guild.members.find(x => x.id == authorID);
-    const channel = author.voiceChannel;
     console.log(author);
+    const channel = author.voiceChannel;
     console.log(channel);
     console.log(`Flushed by ${message.author}`)
 
