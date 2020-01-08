@@ -43,9 +43,16 @@ client.on('message', message => {
         message.channel.send('Thanks you for flushing, and for your humble offering');
         flush(message);
     }
+    if (command === 'splitusup') {
+        message.channel.send('A civil war... nice!');
+        split(message);
+
+    }
 
 });
+function split(message){
 
+}
 //Moves everyone in a voice channel to the clogged channel
 
 //BUG - doesn't work at all - refer to logs for details
@@ -73,9 +80,10 @@ function deleteEmptyTempChannels()
 {
     if(tempChannels.length >= 0) 
     {
-        console.log(tempChannels);
         for(let i = 0; i <= tempChannels.length; i++)
         {
+            console.log(tempChannels);
+
             let ch = tempChannels[i].guild.channels.find(x => x.id == tempChannels[i].newID);
             
             // Channel Found!
