@@ -84,7 +84,6 @@ const init = async () => {
     }
 
     // Here we login the client.
-    console.log(CLIENT_TOKEN);
     //client.login(BotToken);
     client.login();
 
