@@ -80,43 +80,76 @@ function deleteEmptyTempChannels()
 {
     if(tempChannels.length >= 0) 
     {
-        for(let i = 0; i <= tempChannels.length; i++)
+        for (const [newId, guild] of tempChannels)
         {
             console.log(`List of Channels is ${tempChannels}`);
+            let currentChannel = guild.channels.find(x => x.id == newID);
 
-            let ch = tempChannels[i].guild.channels.find(x => x.id == tempChannels[i].newID);
-            console.log(`Current Channel is ${ch}`);
-            // Channel Found!
-            if(ch != null){
-                if(ch.members.size <= 0)
+            if(currentChannel != null)
+            {
+                if(currentChannel.members.size <= 0)
                 {
-                    var gameName = ch.name;
-                    for( var j = 0; j < games.length; j++){ 
-                        if ( games[j] === gameName) 
-                        {
-                            games.splice(j, 1); 
+                    var gameName = currentChannel.name;
+                    for (var j = 0; j < games.length; j++) {
+                        if (games[j] === gameName) {
+                            games.splice(j, 1);
                             console.log(`${gameName} was removed from the list.`)
                             console.log(games);
                         }
                     }
-                    ch.delete();
-                    // Channel has been deleted!
-                    
+                    currentChannel.delete();
                     tempChannels.splice(i, 1);
-                    i = i-1;
-                } 
-                else
-                {
+
+                }
+                else {
                     console.log('Channel still has members');
-                } 
-            }   
-            else
-            {
+                }
+            }
+            else {
                 console.log('Channel was null');
-            }  
-        }    
+            }
+
+        }
     }
 }
+
+//         for(let i = 0; i <= tempChannels.length; i++)
+//         {
+//             console.log(`List of Channels is ${tempChannels}`);
+            
+//             let ch = tempChannels[i].guild.channels.find(x => x.id == tempChannels[i].newID);
+//             console.log(`Current Channel is ${ch}`);
+//             // Channel Found!
+//             if(ch != null){
+//                 if(ch.members.size <= 0)
+//                 {
+//                     var gameName = ch.name;
+//                     for( var j = 0; j < games.length; j++){ 
+//                         if ( games[j] === gameName) 
+//                         {
+//                             games.splice(j, 1); 
+//                             console.log(`${gameName} was removed from the list.`)
+//                             console.log(games);
+//                         }
+//                     }
+//                     ch.delete();
+//                     // Channel has been deleted!
+                    
+//                     tempChannels.splice(i, 1);
+//                     i = i-1;
+//                 } 
+//                 else
+//                 {
+//                     console.log('Channel still has members');
+//                 } 
+//             }   
+//             else
+//             {
+//                 console.log('Channel was null');
+//             }  
+//         }    
+//     }
+// }
 
 //Takes out the channels once everyone leaves them
 
