@@ -191,9 +191,6 @@ function sortMembers(message)
             if( game != null )
             {
                 //check for a custom status
-                console.log(game);
-                console.log(member.username);
-                console.log(games);
                 if(game.name != "Custom Status")
                 {
                     message.channel.send(`${member.user.tag} is playing ${game.name}`)
@@ -215,7 +212,6 @@ function sortMembers(message)
                     {
                         if(channel.name != game.name)
                         {
-                            console.log(channel);
                             //make sure a channel doesnt already exist
                             // for (const [channelID, channel] of channels) 
                             // {
