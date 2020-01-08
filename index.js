@@ -6,11 +6,12 @@ const client = new Discord.Client();
 //const notify = require('./modules/notify.js');
 var tempChannels = [];
 var games = [];
+var nWordUser= ""
 client.once('ready', () => {
     console.log('Ready!');
     //emojiFilter.start();
 });
-
+var nWordCount = 0;
 //Handles messages and commands 
 client.on('message', message => {
 
@@ -59,6 +60,43 @@ client.on('message', message => {
         message.author.send('No Bitch.');
         message.channel.send('I have answered the call.');
     }
+    if (command === 'imgonnasayit') {
+        if(nWordCount == 0)
+        {
+            nWordUser = message.author;
+            message.channel.send('Dont say it.');
+            nWordCount = nWordCount +1 ;
+        }
+        if (nWordCount == 1)
+        {
+            if (nWordUser == message.author)
+            {
+                message.channel.send('Dont say it.');
+                nWordCount = nWordCount + 1;
+            }
+            else
+            {
+                nWordCount = 0;
+                nWordUser = "";
+
+            }  
+        }
+        if (nWordCount == 2)
+        {
+            if (nWordUser == message.author)
+            {
+                var author = message.member.ban()
+                message.channel.send('He shouldnt have said it.');
+                nWordCount =0;
+                nWordUser = "";
+            }
+            else {
+                nWordCount = 0;
+                nWordUser = "";
+
+            }
+    }
+
 
 });
 
