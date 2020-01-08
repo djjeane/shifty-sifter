@@ -63,8 +63,13 @@ client.on('message', message => {
     if(command === '')
     if (command === 'hesgonnasayit') {
         let adminRole = message.guild.roles.find("name", "Ceramic");
-        
-        if(!message.member.roles.has(adminRole)) return;
+
+        if(!message.member.roles.has(adminRole))
+        {
+            message.channel.send(`NIGGER NIGGER NIGGER`);
+
+            return;
+        } 
         const taggedUser = message.mentions.users.first();
         if(nWordCount == 0)
         {
