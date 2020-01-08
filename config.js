@@ -10,7 +10,16 @@ const config = {
 
   // Your Bot's Token. Available on https://discordapp.com/developers/applications/me
   "token": "NjYzOTU1MzI0NjU0MzIxNjc0.XhZeGQ.Kw3ep4rflWZ8YBzqfqDsIZeUcKU",
-
+  defaultSettings : {
+    "prefix": "!",
+    "modLogChannel": "lvaatory",
+    "modRole": "Porcelain",
+    "adminRole": "Ceramic",
+    "systemNotice": "true",
+    "welcomeChannel": "welcome",
+    "welcomeMessage": "Flush after using.",
+    "welcomeEnabled": "True"
+  },
   // PERMISSION LEVEL DEFINITIONS.
     permLevels: [
     // This is the lowest permisison level, this is for non-roled users.
