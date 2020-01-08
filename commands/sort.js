@@ -1,35 +1,22 @@
+const games = require('../index.js').games;
+const tempChannels = require('../index.js').tempChannels;
 
-import games from '../index';
-import tempChannels from '../index';
+exports.run = (client, message, args, level) => { // eslint-disable-line no-unused-vars
+    const channels = message.guild.channels.filter(c => c.type === 'voice');
 
-module.exports = {
-    name: 'clear',
-    description: 'Clears all the temporary channels.',
-    execute(message, args) {
-        if (module.exports.validateCommand(message)) {
-            message.channel.send('I have heard your message and will reply shortly my son.');
-            module.exports.sortMembers(message);
-        } else {
-            message.channel.send('You must be in an active voice channel to use this command');
-        }
-    },
-    validateCommand: function (message) {
-        const channels = message.guild.channels.filter(c => c.type === 'voice');
-
-        var valid = false
-        var user = message.author;
-        for (const [channelID, channel] of channels) {
-            for (const [memberID, member] of channel.members) {
-                if (memberID == user.id) {
-                    valid = true;
-                }
+    var valid = false
+    var user = message.author;
+    for (const [channelID, channel] of channels) {
+        for (const [memberID, member] of channel.members) {
+            if (memberID == user.id) {
+                valid = true;
             }
-
         }
-        return valid;
-    },
-    sortMembers: function (message)
+
+    }
+    if (valid) 
     {
+        message.channel.send('I have heard your message and will reply shortly my son.');
         const channels = message.guild.channels.filter(c => c.type === 'voice');
         //Loop through each voice channel and then every user in a channel
         for (const [channelID, channel] of channels) {
@@ -79,5 +66,23 @@ module.exports = {
                 }
             }
         }
+    } 
+    else 
+    {
+        message.channel.send('You must be in an active voice channel to use this command');
     }
+};
+
+exports.conf = {
+    enabled: true,
+    guildOnly: true,
+    aliases: [],
+    permLevel: "User",
+};
+
+exports.help = {
+    name: "sort",
+    category: "Ban",
+    description: "Take away all those loud pee sounds when the toilets are too close together.",
+    usage: "sort"
 };
