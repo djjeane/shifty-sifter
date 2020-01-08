@@ -66,7 +66,7 @@ function flush(message)
             console.log(member);
             console.log(message.guild.AfkChannel);
             if(member!= message.author){
-                member.setVoiceChannel(message.guild.afkChannel);
+                member.setVoiceChannel(message.guild.afkChannelID);
             }
             
         }
