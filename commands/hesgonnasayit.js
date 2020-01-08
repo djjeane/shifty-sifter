@@ -1,6 +1,6 @@
 
-const nWordCount = require('../index.js').nWordCount;
-const nWordUser = require('../index.js').nWordUser;
+let nWordCount = require('../index.js').nWordCount;
+let nWordUser = require('../index.js').nWordUser;
 
 exports.run = async (client, message, args, level) => { // eslint-disable-line no-unused-vars
 

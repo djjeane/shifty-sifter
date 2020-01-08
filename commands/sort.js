@@ -1,5 +1,5 @@
-const games = require('../index.js').games;
-const tempChannels = require('../index.js').tempChannels;
+let games = require('../index.js').games;
+let tempChannels = require('../index.js').tempChannels;
 
 exports.run = (client, message, args, level) => { // eslint-disable-line no-unused-vars
     const channels = message.guild.channels.filter(c => c.type === 'voice');

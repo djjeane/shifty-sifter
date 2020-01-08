@@ -65,6 +65,7 @@ module.exports = async (client, message) => {
     message.flags.push(args.shift().slice(1));
   }
   // If the command exists, **AND** the user has permission, run it.
+  console.log(`Commands: ${client.commands}`);
   client.logger.cmd(`[CMD] ${client.config.permLevels.find(l => l.level === level).name} ${message.author.username} (${message.author.id}) ran command ${cmd.help.name}`);
   cmd.run(client, message, args, level);
 };
