@@ -12,7 +12,16 @@ const {
 const readdir = promisify(require("fs").readdir);
 const Enmap = require("enmap");
 
-
+var nWordCount = 0;
+var tempChannels = [];
+var games = [];
+var nWordUser = ""
+module.exports = {
+    nWordCount: nWordCount,
+    tempChannels: tempChannels,
+    games: games,
+    nWordUser: nWordUser,
+};
 const client = new Discord.Client();
 
 // Here we load the config file that contains our token and our prefix values.
