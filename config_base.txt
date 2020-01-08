@@ -9,7 +9,6 @@ const config = {
   "support": [],
 
   // Your Bot's Token. Available on https://discordapp.com/developers/applications/me
-  "token": "NjYzOTU1MzI0NjU0MzIxNjc0.XhZeGQ.Kw3ep4rflWZ8YBzqfqDsIZeUcKU",
 
   // PERMISSION LEVEL DEFINITIONS.
     permLevels: [
