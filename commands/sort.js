@@ -22,6 +22,7 @@ exports.run = (client, message, args, level) => { // eslint-disable-line no-unus
         for (const [channelID, channel] of channels) {
             for (const [memberID, member] of channel.members) {
                 var game = member.user.presence.game;
+                console.log(game)
                 //ensure you dont move someone who isnt playing a game
                 if (game != null) {
                     //check for a custom status
@@ -40,13 +41,13 @@ exports.run = (client, message, args, level) => { // eslint-disable-line no-unus
                         } else {
                             if (channel.name != game.name) {
                                 //make sure a channel doesnt already exist
-                                for (const [channelID, channel] of channels) {
-                                    console.log(channel.name);
-                                    if (channel.name == game.name) {
-                                        member.setVoiceChannel(channelID);
-                                        return;
-                                    }
-                                }
+                                // for (const [channelID, channel] of channels) {
+                                //     console.log(channel.name);
+                                //     if (channel.name == game.name) {
+                                //         member.setVoiceChannel(channelID);
+                                //         return;
+                                //     }
+                                // }
                                 //if the channel doesnt exist create one, log the game and log the temp channel
                                 message.guild.createChannel(game.name, 'voice')
                                     .then(async channel => {
@@ -82,7 +83,7 @@ exports.conf = {
 
 exports.help = {
     name: "sort",
-    category: "Ban",
+    category: "Miscellaneous",
     description: "Take away all those loud pee sounds when the toilets are too close together.",
     usage: "sort"
 };

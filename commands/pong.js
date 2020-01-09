@@ -11,7 +11,7 @@ exports.conf = {
 
 exports.help = {
     name: "pong",
-    category: "Miscelaneous",
-    description: "Ping Ping Ping Ping Ping Ping Ping Ping Ping Ping Ping Ping Ping Ping Ping Ping Ping Ping Ping Ping Ping Ping Ping Ping Ping Ping Ping Ping Ping Ping Ping Ping Ping Ping Ping Ping Ping Ping Ping Ping Ping Ping Ping Ping Ping Ping Ping Ping Ping Ping Ping Ping Ping Ping ",
+    category: "Miscellaneous",
+    description: "Ping Ping Ping Ping Ping Ping Ping Ping Ping Ping Ping Ping Ping Ping Ping Ping Ping Ping Ping Ping Ping",
     usage: "ping"
 };

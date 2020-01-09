@@ -13,8 +13,8 @@ exports.conf = {
 };
 
 exports.help = {
-    name: "ping",
-    category: "Miscelaneous",
-    description: "It like... Pings. Then Pongs. And it's not Ping Pong.",
-    usage: "ping"
+    name: "plzdawson",
+    category: "Miscellaneous",
+    description: "Does Dawson want to play Divinity 2?",
+    usage: "plzdawson"
 };

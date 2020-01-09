@@ -26,7 +26,7 @@ exports.conf = {
 
 exports.help = {
     name: "flush",
-    category: "Miscelaneous",
+    category: "Miscellaneous",
     description: "Moves all the turds to the U bend.",
     usage: "flush"
 };
