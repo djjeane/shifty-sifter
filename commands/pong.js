@@ -1,5 +1,5 @@
 exports.run =  (client, message, args, level) => { // eslint-disable-line no-unused-vars
-    const msg = await message.channel.send("Ping!");
+    message.channel.send("Ping!");
 };
 
 exports.conf = {
