@@ -1,5 +1,5 @@
-import games from '../index';
-import tempChannels from '../index';
+let games = require('../index.js').games;
+let tempChannels = require('../index.js').tempChannels;
 
 exports.run = (client, message, args, level) => { 
 	const channels = message.guild.channels.filter(c => c.type === 'voice');
