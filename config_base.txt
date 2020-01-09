@@ -7,10 +7,10 @@ const config = {
 
   // Bot Support, level 8 by default. Array of user ID strings
   "support": [],
-  
+
   defaultSettings : {
       "prefix": "!",
-      "modLogChannel": "lvaatory",
+      "modLogChannel": "lavatory",
       "modRole": "Porcelain",
       "adminRole": "Ceramic",
       "systemNotice": "true",

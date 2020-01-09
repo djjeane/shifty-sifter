@@ -11,7 +11,7 @@ const config = {
   // Your Bot's Token. Available on https://discordapp.com/developers/applications/me
   defaultSettings : {
     "prefix": "!",
-    "modLogChannel": "lvaatory",
+    "modLogChannel": "lavatory",
     "modRole": "Porcelain",
     "adminRole": "Ceramic",
     "systemNotice": "true",
