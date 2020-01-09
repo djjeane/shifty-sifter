@@ -21,7 +21,7 @@ exports.run = (client, message, args, level) => {
 			var red = false;
 			var blue = true;
 			//Check to see if team channels already exist
-			console.log(channels);
+			client.logger.log(channels);
 			for(const [channelID, channel] of channels){
 				console.log(channel);
 				if(channel != null){
