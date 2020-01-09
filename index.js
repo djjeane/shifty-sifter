@@ -6,9 +6,7 @@ require('dotenv').config();
 // Load up the discord.js library
 const Discord = require("discord.js");
 // We also load the rest of the things we need in this file:
-const {
-    promisify
-} = require("util");
+const {promisify} = require("util");
 const readdir = promisify(require("fs").readdir);
 const Enmap = require("enmap");
 
@@ -72,7 +70,6 @@ const init = async () => {
         const event = require(`./events/${file}`);
         // Bind the client to any event, before the existing arguments
         // provided by the discord.js event. 
-        // This line is awesome by the way. Just sayin'.
         client.on(eventName, event.bind(null, client));
     });
 
@@ -83,11 +80,8 @@ const init = async () => {
         client.levelCache[thisLevel.name] = thisLevel.level;
     }
 
-    // Here we login the client.
-    //client.login(BotToken);
     client.login();
 
-    // End top-level async/await function.
 };
 
 init();

@@ -5,8 +5,8 @@ exports.run = (client, message, args, level) => {
 	const channels = message.guild.channels.filter(c => c.type === 'voice');
 		var user = message.author;
 		var valid = false;
-        for (const [channelID, channel] of channels) {
-            for (const [memberID, member] of channel.members) {
+        for (var [channelID, channel] of channels) {
+            for (var [memberID, member] of channel.members) {
                 if (memberID == user.id) {
                 	splitChan = channel;
                     valid = true ;
@@ -21,7 +21,7 @@ exports.run = (client, message, args, level) => {
 			var blue = true;
 			//Check to see if team channels already exist
 			client.logger.log(channels);
-			for(const [channelID, channel] of channels){
+			for(var [channelID, channel] of channels){
 				console.log(channel);
 				if(channel != null){
 					if (channel.name == "Red Team") {

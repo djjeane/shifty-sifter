@@ -53,7 +53,7 @@ let prompts = [
 
   baseConfig = baseConfig
     .replace("{{ownerID}}", "212993630233690113")
-    .replace("{{token}}", "NjYzOTU1MzI0NjU0MzIxNjc0.XhZaeg.C8NubaxuOmkEokm3bWfVIkA1nYE");
+    .replace("{{token}}", "NjYzOTU1MzI0NjU0MzIxNjc0.XhZ_Tw.evTm2nD7ZZAe9_TasDzMl7vI0pM");
 
   fs.writeFileSync("./config.js", baseConfig);
   console.log("REMEMBER TO NEVER SHARE YOUR TOKEN WITH ANYONE!");
