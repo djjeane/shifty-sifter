@@ -63,7 +63,7 @@ exports.run = (client, message, args, level) => {
 			//Randomly assign teams
 			while(numMem > 0)
 			{
-				theChosen = module.exports.random(numMem);
+				theChosen = random(numMem);
 				if(redTurn){
 					channelMems[theChosen].setVoiceChannel(redID);
 				}
@@ -80,7 +80,7 @@ exports.run = (client, message, args, level) => {
 },
     
     //Thanks: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/random
-module.exports.random = (max) => { 
+function random(max) { 
 	console.log("hit")
 	return Math.floor(Math.random() * Math.floor(max));
 }
