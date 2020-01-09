@@ -1,4 +1,4 @@
-exports.run = async (client, message, args, level) => { // eslint-disable-line no-unused-vars
+exports.run = (client, message, args, level) => { // eslint-disable-line no-unused-vars
     
     message.author.send('No Bitch.');
     message.channel.send('I have answered the call.');

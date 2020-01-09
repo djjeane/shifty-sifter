@@ -2,7 +2,7 @@
 let nWordCount = require('../index.js').nWordCount;
 let nWordUser = require('../index.js').nWordUser;
 
-exports.run = async (client, message, args, level) => { // eslint-disable-line no-unused-vars
+exports.run = (client, message, args, level) => { // eslint-disable-line no-unused-vars
 
     const taggedUser = message.mentions.users.first();
     if (nWordCount == 0) 
