@@ -17,7 +17,6 @@ exports.run = (client, message, args, level) => {
 		if (valid) 
 		{
             message.channel.send('Preparing for bloodshed.');
-            const channels = message.guild.channels.filter(c => c.type === 'voice');
 			var red = false;
 			var blue = true;
 			//Check to see if team channels already exist
@@ -27,7 +26,8 @@ exports.run = (client, message, args, level) => {
 				if(channel != null){
 					if (channel.name == "Red Team") {
 						red = true;
-					} else if (channel.name == "Blue Team") {
+					}
+					else if (channel.name == "Blue Team") {
 						blue = true;
 					}
 				}
