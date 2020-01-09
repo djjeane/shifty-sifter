@@ -24,12 +24,12 @@ exports.run = (client, message, args, level) => {
 			console.log(channels);
 			for(const [channelID, channel] of channels){
 				console.log(channel);
-
-				if(channel.name == "Red Team"){
-					red = true;
-				}
-				else if (channel.name == "Blue Team"){
-					blue = true;
+				if(channel != null){
+					if (channel.name == "Red Team") {
+						red = true;
+					} else if (channel.name == "Blue Team") {
+						blue = true;
+					}
 				}
 			}
 			//If they don't create them\
