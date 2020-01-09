@@ -72,6 +72,11 @@ exports.run = (client, message, args, level) => { // eslint-disable-line no-unus
     {
         message.channel.send('You must be in an active voice channel to use this command');
     }
+    if(games == null)
+    {
+        message.channel.send('No one is playing any games!!!!!! Dont waste my time man.');
+
+    }
 };
 
 exports.conf = {
