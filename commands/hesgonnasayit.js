@@ -6,13 +6,17 @@ exports.run = (client, message, args, level) => { // eslint-disable-line no-unus
 
     const taggedUser = message.mentions.users.first();
     if (message.author.id == '196100655692120064') return;
-    console.log(nWordCount)
+    if(taggedUser == null)
+    {
+        taggedUser = message.author;
+        message.reply('Oh you think youre allowed to say it?');
+    }
     if (nWordCount == 0) 
     {
         nWordUser = taggedUser;
-        module.imports.nWordCount = nWordCount + 1;
+        nWordCount = nWordCount + 1;
         message.channel.send(`Dont say it ${nWordUser}: Count-${nWordCount}`);
-
+        console.log(`nWordCount = ${nWordCount} for ${nWordUser}`)
         return;
     }
     if (nWordCount == 1) 
@@ -21,6 +25,8 @@ exports.run = (client, message, args, level) => { // eslint-disable-line no-unus
         {
             nWordCount = nWordCount + 1;
             message.channel.send(`Dont say it ${nWordUser}: Count-${nWordCount}`);
+            console.log(`nWordCount = ${nWordCount} for ${nWordUser}`)
+
             return;
         } else 
         {
