@@ -6,7 +6,8 @@ exports.run = (client, message, args, level) => { // eslint-disable-line no-unus
         for (let i = 0; i < tempChannels.length; i++) {
             console.log(`List of Channels is ${tempChannels}`);
             console.log(`${i} out of ${tempChannels.length}`);
-            let ch = tempChannels[i].guild.channels.find(x => x.id == tempChannels[i].newID);
+            console.log(`Current Channel: ${tempChannels[i]}`);
+            let ch = message.guild.channels.find(x => x.id == tempChannels[i].newID);
             console.log(`Current Channel is ${ch}`);
             // Channel Found!
             if (ch != null) {
