@@ -43,7 +43,6 @@ exports.run = (client, message, args, level) => {
 						newID: channel.id,
 						guild: channel.guild
 					})
-					redID = channel.id;
 				});
 			}
 			if(!blue){
@@ -53,10 +52,20 @@ exports.run = (client, message, args, level) => {
 						newID: channel.id,
 						guild: channel.guild
 					});
-					blueID = channel.id;
 				});
 				
 
+			}
+			if(!red || !blue)
+			{
+				for (var [channelID, channel] of channels) {
+					if (channel.name == "Red Team") {
+						redID = channelID;
+					} else if (channel.name == "Blue Team") {
+						blueID = channelID;
+					}
+
+				}
 			}
 			console.log(redID)
 			console.log(blueID)
