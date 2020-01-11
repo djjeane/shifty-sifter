@@ -23,14 +23,14 @@ exports.run = (client, message, args, level) => {
 			client.logger.log(channels);
 			for(var [channelID, channel] of channels){
 				console.log(channel);
-				// if(channel != null || channel != undefined){
-				// 	if (channel.name == "Red Team") {
-				// 		red = true;
-				// 	}
-				// 	else if (channel.name == "Blue Team") {
-				// 		blue = true;
-				// 	}
-				// }
+				if(channel != null || channel != undefined){
+					if (channel.name == "Red Team") {
+						red = true;
+					}
+					else if (channel.name == "Blue Team") {
+						blue = true;
+					}
+				}
 			}
 			//If they don't create them\
 			var redID;
@@ -66,7 +66,7 @@ exports.run = (client, message, args, level) => {
 			//Randomly assign teams
 			while(numMem > 0)
 			{
-				theChosen = random(numMem);
+				theChosen = Math.floor(Math.random() * Math.floor(numMem));
 				if(redTurn){
 					channelMems[theChosen].setVoiceChannel(redID);
 				}
@@ -81,9 +81,17 @@ exports.run = (client, message, args, level) => {
 			message.channel.send('You must be in an active voice channel to use this command');
 	}
 },
-    
-    //Thanks: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/random
-function random(max) { 
-	console.log("hit")
-	return Math.floor(Math.random() * Math.floor(max));
-}
+
+exports.conf = {
+	enabled: true,
+	guildOnly: false,
+	aliases: [],
+	permLevel: "User"
+};
+
+exports.help = {
+	name: "split",
+	category: "Miscellaneous",
+	description: "Moves all the turds to the U bend.",
+	usage: "split"
+};
