@@ -27,8 +27,8 @@ exports.conf = {
 };
 
 exports.help = {
-    name: "whataretheyeating",
-    category: "Miscellaneous",
-    description: "Just for Jack, cool kids stay away",
-    usage: "whataretheyeating"
+    name: "temptthegods",
+    category: "I am dumb if i use this",
+    description: "Test Your Luck",
+    usage: "temptthegods"
 };
