@@ -31,10 +31,29 @@ exports.run = async (client, message, args, level) => { // eslint-disable-line n
                         console.log(`tempChannels ${index.getTempChannels()}`) //fails to see the correct array
 
                         //If you have already created the channel for the game
-                        if (index.getGames().includes(game.name)) {
-                            for (const [channelID, channel] of channels) {
-                                if (channel.name == game.name) {
-                                    member.setVoiceChannel(channelID);
+                        if(index.getGames() != undefined)
+                        {
+                            if (index.getGames().includes(game.name)) {
+                                for (const [channelID, channel] of channels) {
+                                    if (channel.name == game.name) {
+                                        member.setVoiceChannel(channelID);
+                                    }
+                                }
+                            }
+                            else{
+                                if (channel.name != game.name) {
+                                  var ch2 = await message.guild.createChannel(
+                                    game.name,
+                                    "voice"
+                                  );
+                                  console.log(ch2);
+                                  var game = member.user.presence.game;
+                                  index.addGame(game.name);
+                                  index.addTempChannel({
+                                    newID: ch2.id,
+                                    guild: ch2.guild
+                                  });
+                                  await member.setVoiceChannel(ch2.id);
                                 }
                             }
                         }
