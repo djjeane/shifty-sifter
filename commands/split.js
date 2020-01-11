@@ -22,8 +22,7 @@ exports.run = (client, message, args, level) => {
 			//Check to see if team channels already exist
 			client.logger.log(channels);
 			for(var [channelID, channel] of channels){
-				console.log(channel);
-				if(channel != null || channel != undefined){
+ 				if(channel != null || channel != undefined){
 					if (channel.name == "Red Team") {
 						red = true;
 					}
