@@ -5,7 +5,7 @@ let nWordUser = require('../index.js').nWordUser;
 exports.run = (client, message, args, level) => { // eslint-disable-line no-unused-vars
 
     const taggedUser = message.mentions.users.first();
-    if (member.author.id == '196100655692120064') return;
+    if (message.author.id == '196100655692120064') return;
     if (nWordCount == 0) 
     {
         nWordUser = taggedUser;
