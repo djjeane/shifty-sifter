@@ -34,7 +34,7 @@ exports.run = (client, message, args, level) => { // eslint-disable-line no-unus
 
                         //If you have already created the channel for the game
                         console.log(`Games ${games}`)
-                        onsole.log(`TempChannels ${tempChannels}`)
+                        console.log(`TempChannels ${tempChannels}`)
                         if (games.includes(game.name)) {
                             for (const [channelID, channel] of channels) {
                                 console.log(`Game Name: ${game.name} || ChannelName ${channel.name}`)
