@@ -38,7 +38,7 @@ exports.run =  (client, message, args, level) => { // eslint-disable-line no-unu
                         console.log(`tempChannels ${index.getTempChannels()}`)
 
                         //If you have already created the channel for the game
-                        if (games.includes(index.getGames()))
+                        if (index.getGames().includes(game.name))
                         {
                             let channels2 = message.guild.channels.filter(c => c.type === 'voice');
 
