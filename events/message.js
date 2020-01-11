@@ -70,10 +70,10 @@ module.exports = async (client, message) => {
   client.logger.cmd(`[CMD] ${client.config.permLevels.find(l => l.level === level).name} ${message.author.username} (${message.author.id}) ran command ${cmd.help.name}`);
 
   cmd.run(client, message, args, level);
-  if(cmd.help.name == 'split')
-  {
-      cmd.run(client, message, args, level);
-      message.channel.send("Preparing for bloodshed.");
-  }
+  // if(cmd.help.name == 'split')
+  // {
+  //     cmd.run(client, message, args, level);
+  //     message.channel.send("Preparing for bloodshed.");
+  // }
 
 };
