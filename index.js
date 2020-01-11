@@ -14,26 +14,20 @@ var nWordCount = 0;
 var tempChannels = [];
 var games = [];
 var nWordUser = "";
-module.exports = {
-    nWordCount: nWordCount,
-    tempChannels: tempChannels,
-    games: this.games,
-    nWordUser: nWordUser,
-};
 module.exports.getGames = function(){
     return games;
 }
 module.exports.getTempChannels = function(){
     return tempChannels;
 }
+module.exports.getTempChannel = function (index) {
+    return tempChannels[index];
+}
 module.exports.addGame = function(gameName){
     games.push(gameName);
 }
-module.exports.addTempChannel = function(newID2, guild2){
-    tempChannels.push({
-        newID: newID2,
-        guild: guild2
-    });
+module.exports.addTempChannel = function(newID2){
+    tempChannels.push(newID2);
 }
 
 const client = new Discord.Client();

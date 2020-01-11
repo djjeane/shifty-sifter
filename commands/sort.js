@@ -71,10 +71,8 @@ exports.run = async (client, message, args, level) => { // eslint-disable-line n
                                 var ch2 = await message.guild.createChannel(game.name, 'voice')
                                 var game = member.user.presence.game;
                                 index.addGame(game.name);
-                                index.addTempChannel({
-                                    newID: ch2.id,
-                                    guild: ch2.guild
-                                    })
+                                index.addTempChannel(ch2.id);
+  
                                 await member.setVoiceChannel(ch2.id)
                             }
                         }

@@ -1,7 +1,7 @@
 let games = require('../index.js').games;
 let tempChannels = require('../index.js').tempChannels;
 
-exports.run = (client, message, args, level) => {
+exports.run = async(client, message, args, level) => {
         var redChannel = message.guild.channels.find(ch=> ch.name == "Red Team");
         var blueChannel = message.guild.channels.find(ch => ch.name == "Blue Team");
 
@@ -13,11 +13,11 @@ exports.run = (client, message, args, level) => {
             message.channel.send('Kissing and making up.')
             for (const [memberID, member] of blueChannel.members)
             {
-                member.setVoiceChannel('433786053397184533');
+                var prom = await member.setVoiceChannel('433786053397184533');
             }
             for (const [memberID, member] of redChannel.members)
             {
-                member.setVoiceChannel('433786053397184533');
+                var prom2 = await member.setVoiceChannel('433786053397184533');
             }
             redChannel.delete();
             blueChannel.delete();

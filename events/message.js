@@ -14,7 +14,8 @@ module.exports = async (client, message) => {
   // Checks if the bot was mentioned, with no message after it, returns the prefix.
   const prefixMention = new RegExp(`^<@!?${client.user.id}>( |)$`);
   if (message.content.match(prefixMention)) {
-    return message.reply(`My prefix is \`${settings.prefix}\`. Please gamble responsibly. Also Flush. Please Flush.`);
+    //return message.reply(`My prefix is \`${settings.prefix}\`. Please gamble responsibly. Also Flush. Please Flush.`);
+    return;
   }
 
   // Also good practice to ignore any message that does not start with our prefix,
@@ -70,10 +71,5 @@ module.exports = async (client, message) => {
   client.logger.cmd(`[CMD] ${client.config.permLevels.find(l => l.level === level).name} ${message.author.username} (${message.author.id}) ran command ${cmd.help.name}`);
 
   cmd.run(client, message, args, level);
-  // if(cmd.help.name == 'split')
-  // {
-  //     cmd.run(client, message, args, level);
-  //     message.channel.send("Preparing for bloodshed.");
-  // }
 
 };
