@@ -65,7 +65,7 @@ exports.run =  (client, message, args, level) => { // eslint-disable-line no-unu
                                 }
                                 //if the channel doesnt exist create one, log the game and log the temp channel
                                 message.guild.createChannel(game.name, 'voice')
-                                    .then(async channel => {
+                                    .then(channel => {
                                         var game = member.user.presence.game;
                                         games.push(game.name);
                                         //games2 = games;
@@ -78,7 +78,7 @@ exports.run =  (client, message, args, level) => { // eslint-disable-line no-unu
                                         // console.log(`TempChannels  ${tempChannels}`)
 
                                         channel.setParent('433786053397184532');
-                                        await member.setVoiceChannel(channel.id)
+                                        member.setVoiceChannel(channel.id)
                                     });
                             }
 
