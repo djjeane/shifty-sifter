@@ -10,16 +10,16 @@ const {promisify} = require("util");
 const readdir = promisify(require("fs").readdir);
 const Enmap = require("enmap");
 
-// var nWordCount = 0;
-// var tempChannels = [];
-// var games = [];
-// var nWordUser = ""
-// module.exports = {
-//     nWordCount: nWordCount,
-//     tempChannels: tempChannels,
-//     games: games,
-//     nWordUser: nWordUser,
-// };
+var nWordCount = 0;
+var tempChannels = [];
+var games = [];
+var nWordUser = ""
+module.exports = {
+    nWordCount: nWordCount,
+    tempChannels: tempChannels,
+    games: games,
+    nWordUser: nWordUser,
+};
 global.nWordCount =0;
 global.tempChannels = [];
 global.games = [];
