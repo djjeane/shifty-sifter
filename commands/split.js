@@ -58,7 +58,8 @@ exports.run = (client, message, args, level) => {
 				
 
 			}
-
+			console.log(redID)
+			console.log(blueID)
 			var channelMems =  [];
 			//Grab all of the members of the voice channel
 			for (const [memberID, member] of splitChan.members){
