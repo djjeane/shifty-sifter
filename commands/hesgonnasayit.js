@@ -10,7 +10,7 @@ exports.run = (client, message, args, level) => { // eslint-disable-line no-unus
     if (nWordCount == 0) 
     {
         nWordUser = taggedUser;
-        message.channel.send(`Dont say it ${nWordUser}: Count-${nwordCount}`);
+        message.channel.send(`Dont say it ${nWordUser}: Count-${nWordCount}`);
         nWordCount = nWordCount + 1;
         return;
     }
@@ -18,13 +18,14 @@ exports.run = (client, message, args, level) => { // eslint-disable-line no-unus
     {
         if (nWordUser == taggedUser) 
         {
-            message.channel.send(`Dont say it ${nWordUser}: Count-${nwordCount}`);
+            message.channel.send(`Dont say it ${nWordUser}: Count-${nWordCount}`);
             nWordCount = nWordCount + 1;
             return;
         } else 
         {
             nWordCount = 0;
             nWordUser = "";
+            return;
 
         }
     }
