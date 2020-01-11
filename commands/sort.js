@@ -1,7 +1,7 @@
-let games = require('../index.js').games;
-let tempChannels = require('../index.js').tempChannels;
+var games = require('../index.js').games;
+var tempChannels = require('../index.js').tempChannels;
 
-exports.run = (client, message, args, level) => { // eslint-disable-line no-unused-vars
+exports.run = async (client, message, args, level) => { // eslint-disable-line no-unused-vars
     const channels = message.guild.channels.filter(c => c.type === 'voice');
 
 
@@ -33,8 +33,6 @@ exports.run = (client, message, args, level) => { // eslint-disable-line no-unus
                             .catch(console.error);
 
                         //If you have already created the channel for the game
-                        console.log(`Games ${games}`)
-                        console.log(`TempChannels ${tempChannels}`)
                         if (games.includes(game.name))
                         {
                             for (const [channelID, channel] of channels)
@@ -59,15 +57,18 @@ exports.run = (client, message, args, level) => { // eslint-disable-line no-unus
                                 }
                                 //if the channel doesnt exist create one, log the game and log the temp channel
                                 message.guild.createChannel(game.name, 'voice')
-                                    .then(channel => {
+                                    .then(async channel => {
                                         var game = member.user.presence.game;
                                         games.push(game.name);
+                                        console.log(`Games ${games}`)
                                         tempChannels.push({
                                             newID: channel.id,
                                             guild: channel.guild
                                         })
+                                        console.log(`TempChannels  ${tempChannels}`)
+
                                         channel.setParent('433786053397184532');
-                                        member.setVoiceChannel(channel.id)
+                                        await member.setVoiceChannel(channel.id)
                                     });
                             }
 
