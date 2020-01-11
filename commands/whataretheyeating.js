@@ -1,12 +1,11 @@
 exports.run = (client, message, args, level) => { // eslint-disable-line no-unused-vars
     if (message.author.id == '504059340890570777')
     {
-        const msg = message.author.send("You are big dumb dumb.");
-
+        message.author.send("You are big dumb dumb.");
     }
-    else{
-        const msg = message.channel.send("Jack's eyes only.");
-
+    else
+    {
+        message.channel.send("Jack's eyes only.");
     }
 };
 exports.conf = {
