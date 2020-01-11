@@ -3,8 +3,10 @@ var tempChannels = require('../index.js').tempChannels;
 
 exports.run = async (client, message, args, level) => { // eslint-disable-line no-unused-vars
     const channels = message.guild.channels.filter(c => c.type === 'voice');
-
-
+    console.log(`Initial games ${games}`)
+    console.log(`Initial channels ${tempChannels}`)
+    var games2=[];
+    var tempChannels2 = [];
     var valid = false
     var user = message.author;
     for (const [channelID, channel] of channels) {
@@ -32,11 +34,11 @@ exports.run = async (client, message, args, level) => { // eslint-disable-line n
                             .then(() => console.log(`Moved ${member.user.tag}.`))
                             .catch(console.error);
  
-                        console.log(`games ${games}`)
-                        console.log(`tempChannels ${tempChannels}`)
+                        console.log(`games ${games2}`)
+                        console.log(`tempChannels ${tempChannels2}`)
 
                         //If you have already created the channel for the game
-                        if (games.includes(game.name))
+                        if (games2.includes(game.name))
                         {
                             for (const [channelID, channel] of channels)
                             {
@@ -63,11 +65,13 @@ exports.run = async (client, message, args, level) => { // eslint-disable-line n
                                     .then(async channel => {
                                         var game = member.user.presence.game;
                                         games.push(game.name);
+                                        games2 = games;
                                         // console.log(`Games ${games}`)
                                         tempChannels.push({
                                             newID: channel.id,
                                             guild: channel.guild
                                         })
+                                        tempChannels2 = tempChannels;
                                         // console.log(`TempChannels  ${tempChannels}`)
 
                                         channel.setParent('433786053397184532');
