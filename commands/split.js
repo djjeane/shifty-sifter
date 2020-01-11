@@ -80,11 +80,11 @@ exports.run =  (client, message, args, level) => {
 		}
 		if (splitChan.name == "Blue Team" || splitChan.name == "Red Team")
 		{
-			var opChannel = message.guild.channels.filter(
+			var opChannel = server.channels.filter(
 				ch =>
 				ch.name != splitChan.name &&
 				(ch.name == "Blue Team" || ch.name == "Red Team")
-			);
+      		);
 			console.log(opChannel.name)
 			for (const [memberID, member] of opChannel.members) {
 				channelMems.push(member);
