@@ -5,6 +5,7 @@ exports.run =  (client, message, args, level) => {
 	const channels = message.guild.channels.filter(c => c.type === 'voice');
 	var user = message.author;
 	var valid = false;
+	
 	for (var [channelID, channel] of channels) {
 		for (var [memberID, member] of channel.members) {
 			if (memberID == user.id) {
@@ -22,7 +23,6 @@ exports.run =  (client, message, args, level) => {
 		var blueID;
 
 		//Check to see if team channels already exist
-		client.logger.log(channels);
 		console.log(channels)
 		for(var [channelID, channel] of channels){
 			if (channel.name == "Red Team")
@@ -74,31 +74,49 @@ exports.run =  (client, message, args, level) => {
 		// }
 
 		//Grab all of the members of the voice channel
-		for (const [memberID, member] of splitChan.members){
+
+		for (const [memberID, member] of splitChan.members) {
 			channelMems.push(member);
 		}
+		if (splitChan.name == "Blue Team" || splitChan.name == "Red Team")
+		{
+			var opChannel = message.guild.channels.filter(
+				ch =>
+				ch.name != splitChan.name &&
+				(ch.name == "Blue Team" || ch.name == "Red Team")
+			);
+			console.log(opChannel.name)
+			for (const [memberID, member] of opChannel.members) {
+				channelMems.push(member);
+			}
+    	}
+
+
 		var numMem = channelMems.length;
 		var redTurn = true;
 		var theChosen;
 		//Randomly assign teams
 		console.log(`Redid ${redID} ||| Blueid ${blueID}`);
-		while(numMem > 0 & (redID != null || blueID != null) )
-		{
+		if(redID != null || blueID != null){
+			message.channel.send('Preparing for bloodshed.')
+			while(numMem > 0)
+			{
 
-			theChosen = Math.floor(Math.random() * Math.floor(numMem));
+				theChosen = Math.floor(Math.random() * Math.floor(numMem));
 
-			if(redTurn){
-				console.log(`Moved ${channelMems[theChosen]} to Red Team`)
-				channelMems[theChosen].setVoiceChannel(redID);
-				redTurn = false;
+				if(redTurn){
+					console.log(`Moved ${channelMems[theChosen]} to Red Team`)
+					channelMems[theChosen].setVoiceChannel(redID);
+					redTurn = false;
+				}
+				else{
+					console.log(`Moved ${channelMems[theChosen]} to Blue Team`);
+					channelMems[theChosen].setVoiceChannel(blueID);
+					redTurn = true;
+				}
+				channelMems.splice(theChosen, 1);
+				numMem = numMem - 1;
 			}
-			else{
-				console.log(`Moved ${channelMems[theChosen]} to Blue Team`);
-				channelMems[theChosen].setVoiceChannel(blueID);
-				redTurn = true;
-			}
-			channelMems.splice(theChosen, 1);
-			numMem = numMem - 1;
 		}
 	}
 	else 
