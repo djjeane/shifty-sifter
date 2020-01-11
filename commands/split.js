@@ -80,12 +80,21 @@ exports.run =  (client, message, args, level) => {
 		}
 		if (splitChan.name == "Blue Team" || splitChan.name == "Red Team")
 		{
-			var opChannel = server.channels.filter(
-				ch =>
-				ch.name != splitChan.name &&
-				(ch.name == "Blue Team" || ch.name == "Red Team")
-      		);
-			console.log(opChannel.name)
+			var opChannel;
+
+			for (var [channelID, channel] of chs)
+			{
+				console.log(channel.name)
+				if (channel.name != splitChan.name)
+				{
+					if(channel.name == "Red Team" || channel.name == "Blue Team")
+					{
+						console.log('Found Opposite channel')
+						opChannel = channel;
+					}
+				}
+			}
+			console.log(opChannel.name);
 			for (const [memberID, member] of opChannel.members) {
 				channelMems.push(member);
 			}
