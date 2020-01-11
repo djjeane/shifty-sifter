@@ -89,9 +89,13 @@ exports.run = (client, message, args, level) => {
 		var redTurn = true;
 		var theChosen;
 		//Randomly assign teams
+
 		while(numMem > 0)
 		{
+			console.log(numMem)
+			console.log(channelMems[theChosen]);
 			theChosen = Math.floor(Math.random() * Math.floor(numMem));
+			console.log(theChosen)
 			if(redTurn){
 				channelMems[theChosen].setVoiceChannel(redID);
 				redTurn = false;
