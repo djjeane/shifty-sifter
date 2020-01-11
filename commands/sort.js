@@ -1,8 +1,11 @@
-let games = require('../index.js').games;
-let tempChannels = require('../index.js').tempChannels;
+let index = require('../index.js')
+//let games = require('../index.js').games;
+//let tempChannels = require('../index.js').tempChannels;
 
 exports.run = (client, message, args, level) => { // eslint-disable-line no-unused-vars
     const channels = message.guild.channels.filter(c => c.type === 'voice');
+    let games = global.games;
+    let tempChannels = global.tempChannels;
 
     var valid = false
     var user = message.author;
@@ -34,7 +37,7 @@ exports.run = (client, message, args, level) => { // eslint-disable-line no-unus
                         //If you have already created the channel for the game
                         console.log(`Games ${games}`)
                         console.log(`TempChannels ${tempChannels}`)
-                        if (games.includes(game.name)) {
+                        if (modulegames.includes(game.name)) {
                             for (const [channelID, channel] of channels) {
                                 console.log(`Game Name: ${game.name} || ChannelName ${channel.name}`)
                                 if (channel.name == game.name) {
