@@ -48,7 +48,6 @@ exports.run =  (client, message, args, level) => {
 			console.log('Blue Created')
 			message.guild.createChannel('Blue Team', 'voice')
 			.then(channel => {
-				channel
 				channel.setParent('433786053397184532');
 			});
 		}
@@ -107,7 +106,6 @@ exports.run =  (client, message, args, level) => {
 		//Randomly assign teams
 		console.log(`Redid ${redID} ||| Blueid ${blueID}`);
 		if(redID != null || blueID != null){
-			message.channel.send('Preparing for bloodshed.')
 			while(numMem > 0)
 			{
 

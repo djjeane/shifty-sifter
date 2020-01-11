@@ -72,5 +72,7 @@ module.exports = async (client, message) => {
   if(cmd.help.name == 'split')
   {
       cmd.run(client, message, args, level);
+      message.channel.send("Preparing for bloodshed.");
+
   }
 };
