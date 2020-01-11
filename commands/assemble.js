@@ -11,12 +11,15 @@ exports.run = (client, message, args, level) => {
         if(redChannel != null && blueChannel != null)
         {    
             message.channel.send('Kissing and making up.')
-            for (const [memberID, member] of redChannel.members) {
+            for (const [memberID, member] of blueChannel.members)
+            {
                 member.setVoiceChannel('433786053397184533');
             }
-            for (const [memberID, member] of blueChannel.members) {
+            for (const [memberID, member] of redChannel.members)
+            {
                 member.setVoiceChannel('433786053397184533');
             }
+            
         }
         else
         {
