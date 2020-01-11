@@ -4,6 +4,10 @@ exports.run = (client, message, args, level) => { // eslint-disable-line no-unus
         const msg = message.author.send("You are big dumb dumb.");
 
     }
+    else{
+        const msg = message.channel.send("Jack's eyes only.");
+
+    }
 };
 exports.conf = {
     enabled: true,
