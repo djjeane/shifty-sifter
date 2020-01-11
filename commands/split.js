@@ -25,51 +25,46 @@ exports.run = (client, message, args, level) => {
 			//Check to see if team channels already exist
 			client.logger.log(channels);
 			for(var [channelID, channel] of channels){
+				console.log(channel.name)
 				if (channel.name == "Red Team") {
 					red = true;
-					redID = channelID;
 				}
 				else if (channel.name == "Blue Team") {
 					blue = true;
-					blueID = channelID;
 				}
 			
 			}
 			//If they don't create them\
 			if(!red){
+				console.log('Red Created')
 				message.guild.createChannel("Red Team", 'voice')
-				.then(async channel => {
+				.then(channel => {
 					tempChannels.push({
 						newID: channel.id,
 						guild: channel.guild
 					})
+					channel.setParent('433786053397184532');
+
 				});
 			}
 			if(!blue){
+				console.log('Blue Created')
 				message.guild.createChannel("Blue Team", 'voice')
-				.then(async channel => {
+				.then(channel => {
 					tempChannels.push({
 						newID: channel.id,
 						guild: channel.guild
 					});
+					channel.setParent('433786053397184532');
 				});
 				
 
 			}
-			const newChannelList = message.guild.channels.filter(c => c.type === 'voice');
 
-			if(!red || !blue)
-			{
-				for (var [channelID, channel] of newChannelList) {
-					if (channel.name == "Red Team") {
-						redID = channelID;
-					} else if (channel.name == "Blue Team") {
-						blueID = channelID;
-					}
+			redId = message.guild.channels.find(c => c.name == "Red Team" && c.type == "voice").id;
+			blueId = message.guild.channels.find(c => c.name == "Blue Team" && c.type == "voice").id;
 
-				}
-			}
-			console.log(redID)
+  			console.log(redID)
 			console.log(blueID)
 			var channelMems =  [];
 			//Grab all of the members of the voice channel
