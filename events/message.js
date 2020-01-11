@@ -32,6 +32,7 @@ module.exports = async (client, message) => {
   if (message.guild && !message.member)  message.guild.fetchMember(message.author);
 
   // Get the user or member's permission level from the elevation
+  console.log(`Message Received: ${message}`)
   const level = client.permlevel(message);
 
   // Check whether the command, or alias, exist in the collections defined
