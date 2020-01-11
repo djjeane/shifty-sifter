@@ -18,21 +18,24 @@ exports.run = (client, message, args, level) => {
 		{
             message.channel.send('Preparing for bloodshed.');
 			var red = false;
-			var blue = true;
+			var blue = false;
+			var redID;
+			var blueID;
+
 			//Check to see if team channels already exist
 			client.logger.log(channels);
 			for(var [channelID, channel] of channels){
- 				if(channel != null || channel != undefined){
-					if (channel.name == "Red Team") {
-						red = true;
-					}
-					else if (channel.name == "Blue Team") {
-						blue = true;
-					}
+				if (channel.name == "Red Team") {
+					red = true;
+					redID = channelID;
 				}
+				else if (channel.name == "Blue Team") {
+					blue = true;
+					blueID = channelID;
+				}
+			
 			}
 			//If they don't create them\
-			var redID;
 			if(!red){
 				message.guild.createChannel("Red Team", 'voice')
 				.then(async channel => {
@@ -43,17 +46,19 @@ exports.run = (client, message, args, level) => {
 					redID = channel.id;
 				});
 			}
-			var blueID;
 			if(!blue){
 				message.guild.createChannel("Blue Team", 'voice')
 				.then(async channel => {
 					tempChannels.push({
 						newID: channel.id,
 						guild: channel.guild
-					})
+					});
 					blueID = channel.id;
 				});
+				
+
 			}
+
 			var channelMems =  [];
 			//Grab all of the members of the voice channel
 			for (const [memberID, member] of splitChan.members){
@@ -68,9 +73,11 @@ exports.run = (client, message, args, level) => {
 				theChosen = Math.floor(Math.random() * Math.floor(numMem));
 				if(redTurn){
 					channelMems[theChosen].setVoiceChannel(redID);
+					redTurn = false;
 				}
 				else{
 					channelMems[theChosen].setVoiceChannel(blueID);
+					redTurn = true;
 				}
 				channelMems.splice(theChosen, 1);
 				numMem = numMem - 1;
