@@ -21,16 +21,16 @@ module.exports = {
     nWordUser: nWordUser,
 };
 module.exports.getGames = function(){
-    return this.games;
+    return games;
 }
 module.exports.getTempChannels = function(){
-    return this.tempChannels;
+    return tempChannels;
 }
 module.exports.addGame = function(gameName){
-    this.games.push(gameName);
+    games.push(gameName);
 }
 module.exports.addTempChannel = function(newID2, guild2){
-    this.tempChannels.push({
+    tempChannels.push({
         newID: newID2,
         guild: guild2
     });
