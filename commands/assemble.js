@@ -2,12 +2,15 @@ let games = require('../index.js').games;
 let tempChannels = require('../index.js').tempChannels;
 
 exports.run = (client, message, args, level) => {
-        var redChannel = message.guild.channels.filter(ch=> ch.name = "Red Team");
-        var blueChannel = message.guild.channels.filter(ch => ch.name = "Blue Team");
+        var redChannel = message.guild.channels.filter(ch=> ch.name == "Red Team");
+        var blueChannel = message.guild.channels.filter(ch => ch.name == "Blue Team");
+
+        console.log(redChannel);
+        console.log(blueChannel);
 
         if(redChannel != null && blueChannel != null)
         {    
-            message.channel.send('Moving members back to Bowl.')
+            message.channel.send('Kissing and making up.')
             for (const [memberID, member] of redChannel.members) {
                 member.setVoiceChannel('433786053397184533');
             }
