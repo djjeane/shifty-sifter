@@ -11,7 +11,7 @@ exports.run = async (client, message, args, level) => { // eslint-disable-line n
 
    
         var killNumber = Math.floor(Math.random() * (max - 1) + 1);
-        if(killNumber == 2)
+        if(killNumber == 1)
         {
             var banMessage= "";
             if (member.tag != undefined) {
@@ -20,7 +20,7 @@ exports.run = async (client, message, args, level) => { // eslint-disable-line n
                 banMessage = `You have been banned ${member.user} you knew the risks. Fucking idiot.`
             }
             message.channel.send()
-            member.ban({
+            member.kick({
                 reason: 'They played the game and lost.',
             }).then(() => {
                 message.channel.send(banMessage);

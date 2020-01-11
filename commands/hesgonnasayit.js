@@ -1,9 +1,8 @@
 
-let nWordCount = require('../index.js').nWordCount;
-let nWordUser = require('../index.js').nWordUser;
+let index = require('../index.js');
 
 exports.run = (client, message, args, level) => { // eslint-disable-line no-unused-vars
-
+    console.log('here')
     let taggedUser = message.mentions.users.first();
     if (message.author.id == '196100655692120064') return;
     if(taggedUser == null)
@@ -11,39 +10,37 @@ exports.run = (client, message, args, level) => { // eslint-disable-line no-unus
         taggedUser = message.author;
         message.reply('Oh you think youre allowed to say it?');
     }
-    if (nWordCount == 0) 
+    console.log(index.getnWordCount())
+    if (index.getnWordCount() == 0) 
     {
-        nWordUser = taggedUser;
-        nWordCount = nWordCount + 1;
-        message.channel.send(`Dont say it ${nWordUser}. Count: ${nWordCount}`);
-        console.log(`nWordCount = ${nWordCount} for ${nWordUser}`)
+        index.setnWordUser(taggedUser);
+        index.setnWordCount(1);
+        message.channel.send(`Dont say it ${index.getnWordUser()}. Count: ${index.getnWordCount()}`);
         return;
     }
-    if (nWordCount == 1) 
+    if (index.getnWordCount() == 1) 
     {
-        if (nWordUser == taggedUser) 
+        if (index.getnWordUser() == taggedUser)
         {
-            nWordCount = nWordCount + 1;
-            message.channel.send(`Dont say it ${nWordUser}: Count-${nWordCount}`);
-            console.log(`nWordCount = ${nWordCount} for ${nWordUser}`)
-
+            index.setnWordCount(2);
+            message.channel.send(`Dont say it ${index.getnWordUser()}. Count: ${index.getnWordCount()}`);
             return;
         } else 
         {
-            nWordCount = 0;
-            nWordUser = "";
+            index.setnWordCount(0);
+            index.setnWordUser("");
             return;
 
         }
     }
     if (nWordCount == 2) 
     {
-        if (nWordUser == taggedUser) 
+        if (index.getnWordUser() == taggedUser)
         {
             const member = message.guild.member(taggedUser);
             if (member) {
 
-                member.ban({
+                member.kick({
                     reason: 'You said it!',
                 }).then(() => {
                     message.reply(`Successfully banned ${user.tag}`);
@@ -57,14 +54,14 @@ exports.run = (client, message, args, level) => { // eslint-disable-line no-unus
                 message.reply('That user isn\'t in this guild!');
             }
             message.channel.send(`${nWordUser} shouldnt have said it.`);
-            nWordCount = 0;
-            nWordUser = "";
+            index.setnWordCount(0);
+            index.setnWordUser("");
             return;
         }
         else 
         {
-            nWordCount = 0;
-            nWordUser = "";
+            index.setnWordCount(0);
+            index.setnWordUser("");
         }
 
     }

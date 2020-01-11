@@ -14,6 +14,21 @@ var nWordCount = 0;
 var tempChannels = [];
 var games = [];
 var nWordUser = "";
+var spunRecently = {};
+module.exports.getnWordUser = function()
+{
+    return nWordUser;
+}
+module.exports.setnWordUser = function (user) {
+    nWordUser = user;
+}
+module.exports.getnWordCount = function () {
+    return nWordCount;
+}
+module.exports.setnWordCount = function (count) {
+    nWordCount = count;
+}
+
 module.exports.getGames = function(){
     return games;
 }
@@ -29,6 +44,20 @@ module.exports.addGame = function(gameName){
 module.exports.addTempChannel = function(newID2){
     tempChannels.push(newID2);
 }
+module.exports.getCooldowns = function () {
+    return spunRecently;
+}
+module.exports.getCooldown = function (authorID) {
+    return spunRecently[authorID];
+}
+module.exports.addCooldown = function (authorID,time)
+{
+    spunRecently[authorID] = time;
+}
+module.exports.deleteCooldown = function (authorID) {
+    delete spunRecently[authorID];
+}
+
 
 const client = new Discord.Client();
 
