@@ -1,4 +1,3 @@
-let index = require('../index.js')
 let games = require('../index.js').games;
 let tempChannels = require('../index.js').tempChannels;
 
@@ -60,7 +59,7 @@ exports.run = (client, message, args, level) => { // eslint-disable-line no-unus
                                 // }
                                 //if the channel doesnt exist create one, log the game and log the temp channel
                                 message.guild.createChannel(game.name, 'voice')
-                                    .then(async channel => {
+                                    .then(channel => {
                                         var game = member.user.presence.game;
                                         games.push(game.name);
                                         tempChannels.push({
@@ -68,7 +67,7 @@ exports.run = (client, message, args, level) => { // eslint-disable-line no-unus
                                             guild: channel.guild
                                         })
                                         channel.setParent('433786053397184532');
-                                        await member.setVoiceChannel(channel.id)
+                                        member.setVoiceChannel(channel.id)
                                     });
                             }
 

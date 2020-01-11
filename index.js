@@ -13,17 +13,14 @@ const Enmap = require("enmap");
 var nWordCount = 0;
 var tempChannels = [];
 var games = [];
-var nWordUser = ""
+var nWordUser = "";
 module.exports = {
     nWordCount: nWordCount,
     tempChannels: tempChannels,
     games: games,
     nWordUser: nWordUser,
 };
-global.nWordCount =0;
-global.tempChannels = [];
-global.games = [];
-global.nWordUser = ""
+
 const client = new Discord.Client();
 
 // Here we load the config file that contains our token and our prefix values.
