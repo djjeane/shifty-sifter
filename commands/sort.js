@@ -19,7 +19,6 @@ exports.run = (client, message, args, level) => { // eslint-disable-line no-unus
         message.channel.send('I have heard your message and will reply shortly my son.');
         const channels = message.guild.channels.filter(c => c.type === 'voice');
         //Loop through each voice channel and then every user in a channel
-        console.log(`Games : ${games}`)
         for (const [channelID, channel] of channels) {
             for (const [memberID, member] of channel.members) {
                 var game = member.user.presence.game;
