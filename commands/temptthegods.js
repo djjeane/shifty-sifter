@@ -1,10 +1,10 @@
-exports.run = (client, message, args, level) => { // eslint-disable-line no-unused-vars
+exports.run = async (client, message, args, level) => { // eslint-disable-line no-unused-vars
     var KeepPlaying = true;
     var member = message.guild.member(message.author.id);
 
     while(KeepPlaying){
 
-    
+   
         var killNumber = Math.random() * (10 - 1) + 1;
         if(killNumber == 5)
         {
