@@ -1,7 +1,7 @@
 var games = require('../index.js').games;
 var tempChannels = require('../index.js').tempChannels;
 
-exports.run = async (client, message, args, level) => { // eslint-disable-line no-unused-vars
+exports.run =  (client, message, args, level) => { // eslint-disable-line no-unused-vars
     const channels = message.guild.channels.filter(c => c.type === 'voice');
     console.log(`Initial games ${games}`)
     console.log(`Initial channels ${tempChannels}`)
@@ -64,7 +64,7 @@ exports.run = async (client, message, args, level) => { // eslint-disable-line n
                                 }
                                 //if the channel doesnt exist create one, log the game and log the temp channel
                                 message.guild.createChannel(game.name, 'voice')
-                                    .then( channel => {
+                                    .then(async channel => {
                                         var game = member.user.presence.game;
                                         games.push(game.name);
                                         //games2 = games;
@@ -77,7 +77,7 @@ exports.run = async (client, message, args, level) => { // eslint-disable-line n
                                         // console.log(`TempChannels  ${tempChannels}`)
 
                                         channel.setParent('433786053397184532');
-                                        member.setVoiceChannel(channel.id)
+                                        await member.setVoiceChannel(channel.id)
                                     });
                             }
 
