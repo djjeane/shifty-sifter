@@ -67,6 +67,7 @@ exports.run = (client, message, args, level) => { // eslint-disable-line no-unus
                                             newID: channel.id,
                                             guild: channel.guild
                                         })
+                                        channel.setParent('433786053397184532');
                                         await member.setVoiceChannel(channel.id)
                                     });
                             }
