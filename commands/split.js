@@ -56,9 +56,11 @@ exports.run = (client, message, args, level) => {
 				
 
 			}
+			const newChannelList = message.guild.channels.filter(c => c.type === 'voice');
+
 			if(!red || !blue)
 			{
-				for (var [channelID, channel] of channels) {
+				for (var [channelID, channel] of newChannelList) {
 					if (channel.name == "Red Team") {
 						redID = channelID;
 					} else if (channel.name == "Blue Team") {
