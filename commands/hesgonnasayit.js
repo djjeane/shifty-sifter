@@ -10,16 +10,17 @@ exports.run = (client, message, args, level) => { // eslint-disable-line no-unus
     if (nWordCount == 0) 
     {
         nWordUser = taggedUser;
+        module.imports.nWordCount = nWordCount + 1;
         message.channel.send(`Dont say it ${nWordUser}: Count-${nWordCount}`);
-        nWordCount = nWordCount + 1;
+
         return;
     }
     if (nWordCount == 1) 
     {
         if (nWordUser == taggedUser) 
         {
-            message.channel.send(`Dont say it ${nWordUser}: Count-${nWordCount}`);
             nWordCount = nWordCount + 1;
+            message.channel.send(`Dont say it ${nWordUser}: Count-${nWordCount}`);
             return;
         } else 
         {
