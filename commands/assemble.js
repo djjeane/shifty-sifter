@@ -19,6 +19,9 @@ exports.run = (client, message, args, level) => {
             {
                 member.setVoiceChannel('433786053397184533');
             }
+            redChannel.delete();
+            blueChannel.delete();
+
             
         }
         else

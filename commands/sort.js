@@ -50,13 +50,13 @@ exports.run = (client, message, args, level) => { // eslint-disable-line no-unus
                         {
                             if (channel.name != game.name) {
                                 //make sure a channel doesnt already exist
-                                // for (const [channelID, channel] of channels) {
-                                //     console.log(channel.name);
-                                //     if (channel.name == game.name) {
-                                //         member.setVoiceChannel(channelID);
-                                //         return;
-                                //     }
-                                // }
+                                for (const [channelID, channel] of channels) {
+                                    console.log(channel.name);
+                                    if (channel.name == game.name) {
+                                        member.setVoiceChannel(channelID);
+                                        break;
+                                    }
+                                }
                                 //if the channel doesnt exist create one, log the game and log the temp channel
                                 message.guild.createChannel(game.name, 'voice')
                                     .then(channel => {
