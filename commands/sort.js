@@ -19,7 +19,7 @@ exports.run = async (client, message, args, level) => { // eslint-disable-line n
     if (valid) 
     {
         message.channel.send('I have heard your message and will reply shortly my son.');
-        const channels = message.guild.channels.filter(c => c.type === 'voice');
+        var channels = message.guild.channels.filter(c => c.type === 'voice');
         //Loop through each voice channel and then every user in a channel
         for (const [channelID, channel] of channels) {
             for (const [memberID, member] of channel.members) {
@@ -39,7 +39,9 @@ exports.run = async (client, message, args, level) => { // eslint-disable-line n
                         //If you have already created the channel for the game
                         if (games.includes(game.name))
                         {
-                            for (const [channelID, channel] of channels)
+                            let channels2 = message.guild.channels.filter(c => c.type === 'voice');
+
+                            for (const [channelID, channel] of channels2)
                             {
                                 console.log(`Game Name: ${game.name} || ChannelName ${channel.name}`)
                                 if (channel.name == game.name)
@@ -52,7 +54,9 @@ exports.run = async (client, message, args, level) => { // eslint-disable-line n
                         {
                             if (channel.name != game.name) {
                                 //make sure a channel doesnt already exist
-                                for (const [channelID, channel] of channels) {
+                                let channels2 = message.guild.channels.filter(c => c.type === 'voice');
+
+                                for (const [channelID, channel] of channels2) {
                                     console.log(channel.name);
                                     if (channel.name == game.name) {
                                         member.setVoiceChannel(channelID);
