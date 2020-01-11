@@ -19,7 +19,6 @@ exports.run = async (client, message, args, level) => { // eslint-disable-line n
     if (valid) 
     {
         message.channel.send('I have heard your message and will reply shortly my son.');
-        var channels = message.guild.channels.filter(c => c.type === 'voice');
         //Loop through each voice channel and then every user in a channel
         for (const [channelID, channel] of channels) {
             for (const [memberID, member] of channel.members) {
