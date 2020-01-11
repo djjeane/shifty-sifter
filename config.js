@@ -48,7 +48,7 @@ const config = {
     },
 
     { level: 3,
-      name: "Toilet Paper", 
+      name: "Ceramic", 
       check: (message) => {
         try {
           const adminRole = message.guild.roles.find(r => r.name.toLowerCase() === message.settings.adminRole.toLowerCase());
@@ -69,7 +69,7 @@ const config = {
     // Bot Support is a special inbetween level that has the equivalent of server owner access
     // to any server they joins, in order to help troubleshoot the bot on behalf of owners.
     { level: 8,
-      name: "Porcelain",
+      name: "Bot Support",
       // The check is by reading if an ID is part of this array. Yes, this means you need to
       // change this and reboot the bot to add a support user. Make it better yourself!
       check: (message) => config.support.includes(message.author.id)
@@ -77,7 +77,7 @@ const config = {
 
     // Bot Admin has some limited access like rebooting the bot or reloading commands.
     { level: 9,
-      name: "Ceramic",
+      name: "Administrator ",
       check: (message) => config.admins.includes(message.author.id)
     },
 

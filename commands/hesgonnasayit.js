@@ -10,7 +10,7 @@ exports.run = (client, message, args, level) => { // eslint-disable-line no-unus
     if (nWordCount == 0) 
     {
         nWordUser = taggedUser;
-        message.channel.send(`Dont say it ${nWordUser}`);
+        message.channel.send(`Dont say it ${nWordUser}: Count-${nwordCount}`);
         nWordCount = nWordCount + 1;
         return;
     }
@@ -18,7 +18,7 @@ exports.run = (client, message, args, level) => { // eslint-disable-line no-unus
     {
         if (nWordUser == taggedUser) 
         {
-            message.channel.send(`Dont say it ${nWordUser}`);
+            message.channel.send(`Dont say it ${nWordUser}: Count-${nwordCount}`);
             nWordCount = nWordCount + 1;
             return;
         } else 
@@ -65,7 +65,7 @@ exports.run = (client, message, args, level) => { // eslint-disable-line no-unus
 exports.conf = {
     enabled: true,
     guildOnly: true,
-    aliases: [],
+    aliases: ['marcoKillThisGuy'],
     permLevel: "Ceramic",
 };
 
