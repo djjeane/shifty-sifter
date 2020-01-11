@@ -2,8 +2,8 @@ let games = require('../index.js').games;
 let tempChannels = require('../index.js').tempChannels;
 
 exports.run = (client, message, args, level) => {
-        var redChannel = message.guild.channels.first(ch=> ch.name == "Red Team");
-        var blueChannel = message.guild.channels.first(ch => ch.name == "Blue Team");
+        var redChannel = message.guild.channels.find(ch=> ch.name == "Red Team");
+        var blueChannel = message.guild.channels.find(ch => ch.name == "Blue Team");
 
         console.log(redChannel);
         console.log(blueChannel);
