@@ -3,8 +3,8 @@ var index = require('../index.js');
 
 exports.run =  (client, message, args, level) => { // eslint-disable-line no-unused-vars
     const channels = message.guild.channels.filter(c => c.type === 'voice');
-    console.log(`Initial games ${games}`)
-    console.log(`Initial channels ${tempChannels}`)
+    //console.log(`Initial games ${games}`)
+    //console.log(`Initial channels ${tempChannels}`)
 
     var valid = false
     var user = message.author;
