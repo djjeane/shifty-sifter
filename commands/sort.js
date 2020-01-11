@@ -34,6 +34,7 @@ exports.run = (client, message, args, level) => { // eslint-disable-line no-unus
 
                         //If you have already created the channel for the game
                         console.log(`Games ${games}`)
+                        onsole.log(`TempChannels ${tempChannels}`)
                         if (games.includes(game.name)) {
                             for (const [channelID, channel] of channels) {
                                 console.log(`Game Name: ${game.name} || ChannelName ${channel.name}`)
@@ -42,7 +43,8 @@ exports.run = (client, message, args, level) => { // eslint-disable-line no-unus
                                     member.setVoiceChannel(channelID);
                                 }
                             }
-                        } else {
+                        }
+                        else {
                             if (channel.name != game.name) {
                                 //make sure a channel doesnt already exist
                                 // for (const [channelID, channel] of channels) {
