@@ -69,10 +69,10 @@ const config = {
     // Bot Support is a special inbetween level that has the equivalent of server owner access
     // to any server they joins, in order to help troubleshoot the bot on behalf of owners.
     { level: 8,
-      name: "Bot Support",
+      name: "Porcelain",
       // The check is by reading if an ID is part of this array. Yes, this means you need to
       // change this and reboot the bot to add a support user. Make it better yourself!
-      check: (porcelain) => config.support.includes(message.author.id)
+      check: (message) => config.support.includes(message.author.id)
     },
 
     // Bot Admin has some limited access like rebooting the bot or reloading commands.
