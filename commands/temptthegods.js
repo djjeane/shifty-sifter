@@ -1,22 +1,37 @@
 exports.run = (client, message, args, level) => { // eslint-disable-line no-unused-vars
-    var killNumber = Math.random() * (10 - 1) + 1;
+    var KeepPlaying = true;
+    var member = message.guild.member(message.author.id);
 
-    if(killNumber == 5)
-    {
-        const member = message.guild.member(message.author.id);
-        member.ban({
-            reason: 'You knew the risks!',
-        }).then(() => {
-            message.reply(`You have tempted the gods ${user.tag} and you will be punished.`);
-        }).catch(err => {
-            message.reply('I was unable to ban the member');
-            // Log the error
-            console.error(err);
-        });
-    }
-    else
-    {
-        message.reply("You won this time, challenge a friends honor.")
+    while(KeepPlaying){
+
+    
+        var killNumber = Math.random() * (10 - 1) + 1;
+        if(killNumber == 5)
+        {
+            // member.ban({
+            //     reason: 'You knew the risks!',
+            // }).then(() => {
+            //     message.reply(`You have tempted the gods ${user.tag} and you will be punished.`);
+            // }).catch(err => {
+            //     message.reply('I was unable to ban the member');
+            //     // Log the error
+            //     console.error(err);
+            // });
+        }
+        else
+        {
+            const response = await client.awaitReply(msg, "You won this time, challenge a friends honor. Usage: !temptthegods @user");
+            if(response != null)
+            {
+                console.log(response)
+                KeepPlaying = false;
+            }
+            else
+            {
+                message.channel.send("Thanks for playing anyway.")
+            }
+
+        }
     }
 };
 exports.conf = {
