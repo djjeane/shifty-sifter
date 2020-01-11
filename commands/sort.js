@@ -33,14 +33,20 @@ exports.run = async (client, message, args, level) => { // eslint-disable-line n
                         //If you have already created the channel for the game
                         if(index.getGames() != undefined)
                         {
-                            if (index.getGames().includes(game.name)) {
-                                for (const [channelID, channel] of channels) {
-                                    if (channel.name == game.name) {
+                            if (index.getGames().includes(game.name))
+                            {
+                                console.log(`found common game`)
+                                var xyz = message.guild.channels.filter(c => c.type === "voice");
+                                for (const [channelID, channel] of xyz)
+                                {
+                                    if (channel.name == game.name)
+                                    {
                                         member.setVoiceChannel(channelID);
                                     }
                                 }
                             }
                             else{
+                                console.log('game not null but game not found')
                                 if (channel.name != game.name) {
                                   var ch2 = await message.guild.createChannel(
                                     game.name,
@@ -61,8 +67,8 @@ exports.run = async (client, message, args, level) => { // eslint-disable-line n
                         {
                             if (channel.name != game.name)
                             {
+
                                 var ch2 = await message.guild.createChannel(game.name, 'voice')
-                                console.log(ch2)
                                 var game = member.user.presence.game;
                                 index.addGame(game.name);
                                 index.addTempChannel({
