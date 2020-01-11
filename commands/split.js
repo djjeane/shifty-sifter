@@ -1,7 +1,7 @@
 let games = require('../index.js').games;
 let tempChannels = require('../index.js').tempChannels;
 
-exports.run = async (client, message, args, level) => { 
+exports.run =  (client, message, args, level) => { 
 	const channels = message.guild.channels.filter(c => c.type === 'voice');
 	var user = message.author;
 	var valid = false;
@@ -16,7 +16,6 @@ exports.run = async (client, message, args, level) => {
 	}
 	if (valid) 
 	{
-		message.channel.send('Preparing for bloodshed.');
 		var red = false;
 		var blue = false;
 		var redID;
@@ -24,6 +23,7 @@ exports.run = async (client, message, args, level) => {
 
 		//Check to see if team channels already exist
 		client.logger.log(channels);
+		console.log(channels)
 		for(var [channelID, channel] of channels){
 			if (channel.name == "Red Team")
 			{
@@ -39,14 +39,14 @@ exports.run = async (client, message, args, level) => {
 		//If they don't create them\
 		if(!red){
 			console.log('Red Created')
-			await message.guild.createChannel('Red Team', 'voice')
+			message.guild.createChannel('Red Team', 'voice')
 			.then(channel => {
 				channel.setParent('433786053397184532');
 			});
 		}
 		if(!blue){
 			console.log('Blue Created')
-			await message.guild.createChannel('Blue Team', 'voice')
+			message.guild.createChannel('Blue Team', 'voice')
 			.then(channel => {
 				channel
 				channel.setParent('433786053397184532');
