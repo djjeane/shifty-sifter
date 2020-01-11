@@ -1,14 +1,18 @@
 exports.run = (client, message, args, level) => { // eslint-disable-line no-unused-vars
 
-    msg.channel.send('Its hard to imagine a life without you all.. oh wait, I just did.');
+    message.channel.send('Its hard to imagine a life without you all.. oh wait, I just did.');
 
-    const authorID = message.guild.author.voiceChannel;
-    console.log(`Flushed by ${message.author}`)
+    const authorID = message.member.voiceChannel;
+    const channels = message.guild.channels.filter(c => c.type === 'voice');
 
     for (const [channelID, channel] of channels) {
         for (const [memberID, member] of channel.members) {
-            if (message.author.voiceChannel == channelID) {
-                if (memberID != message.author.id) {
+
+            if (message.member.voiceChannel.id === channelID) {
+                console.log(memberID)
+                console.log(message.author)
+                if (memberID != message.member.id) {
+                    console.log(`Moved Member`)
                     member.setVoiceChannel(message.guild.afkChannelID);
                 }
             }
