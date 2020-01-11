@@ -4,7 +4,7 @@ let nWordUser = require('../index.js').nWordUser;
 
 exports.run = (client, message, args, level) => { // eslint-disable-line no-unused-vars
 
-    const taggedUser = message.mentions.users.first();
+    let taggedUser = message.mentions.users.first();
     if (message.author.id == '196100655692120064') return;
     if(taggedUser == null)
     {
@@ -15,7 +15,7 @@ exports.run = (client, message, args, level) => { // eslint-disable-line no-unus
     {
         nWordUser = taggedUser;
         nWordCount = nWordCount + 1;
-        message.channel.send(`Dont say it ${nWordUser}: Count-${nWordCount}`);
+        message.channel.send(`Dont say it ${nWordUser}. Count: ${nWordCount}`);
         console.log(`nWordCount = ${nWordCount} for ${nWordUser}`)
         return;
     }
