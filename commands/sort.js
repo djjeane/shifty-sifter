@@ -19,6 +19,7 @@ exports.run = (client, message, args, level) => { // eslint-disable-line no-unus
         message.channel.send('I have heard your message and will reply shortly my son.');
         const channels = message.guild.channels.filter(c => c.type === 'voice');
         //Loop through each voice channel and then every user in a channel
+        console.log(`Games : ${games}`)
         for (const [channelID, channel] of channels) {
             for (const [memberID, member] of channel.members) {
                 var game = member.user.presence.game;
@@ -32,9 +33,12 @@ exports.run = (client, message, args, level) => { // eslint-disable-line no-unus
                             .catch(console.error);
 
                         //If you have already created the channel for the game
+                        console.log(`Games ${games}`)
                         if (games.includes(game.name)) {
                             for (const [channelID, channel] of channels) {
+                                console.log(`Game Name: ${game.name} || ChannelName ${channel.name}`)
                                 if (channel.name == game.name) {
+                                    
                                     member.setVoiceChannel(channelID);
                                 }
                             }

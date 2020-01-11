@@ -1,7 +1,12 @@
 exports.run = async (client, message, args, level) => { // eslint-disable-line no-unused-vars
     var KeepPlaying = true;
-    var member = message.guild.member(message.author.id);
-    var challenger = member;
+    var member = message.author;
+    console.log(args)
+    if(args.length != 0)
+    {
+        message.reply('You must first tempt the gods yourself.');
+        return;
+    } 
     while(KeepPlaying){
 
    
@@ -22,12 +27,20 @@ exports.run = async (client, message, args, level) => { // eslint-disable-line n
         else
         {
             
-            const response = await client.awaitReply(message, "You won this time, challenge a friends honor. Usage: !temptthegods @user");
+            const response = await client.awaitReply(message, `You won this time ${member.tag} , challenge a friends honor. Usage: !temptthegods @user`);
             if(response != null)
             {
                 console.log(response)
-                var taggedUser = response.mentions.users.first();
-                member = taggedUser;
+                var resArray = response.split(" ");
+                if(resArray[0] == '!temptthegods')
+                {
+                    var taggedUser = resArray[1];
+                    taggedUser = taggedUser.replace(/\D/g, '');
+                    console.log(taggedUser)
+                    member = message.guild.members.find(c => c.id == taggedUser);
+                    member = taggedUser;
+                }
+
             }
             else
             {
