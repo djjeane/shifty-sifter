@@ -41,10 +41,6 @@ exports.run = (client, message, args, level) => {
 			console.log('Red Created')
 			message.guild.createChannel('Red Team', 'voice')
 			.then(channel => {
-				tempChannels.push({
-					newID: channel.id,
-					guild: channel.guild
-				})
 				channel.setParent('433786053397184532');
 			});
 		}
@@ -52,10 +48,7 @@ exports.run = (client, message, args, level) => {
 			console.log('Blue Created')
 			message.guild.createChannel('Blue Team', 'voice')
 			.then(channel => {
-				tempChannels.push({
-					newID: channel.id,
-					guild: channel.guild
-				});
+				channel
 				channel.setParent('433786053397184532');
 			});
 		}
@@ -79,8 +72,7 @@ exports.run = (client, message, args, level) => {
 		}
 
 		// }
-		console.log(redID)
-		console.log(blueID)
+
 		//Grab all of the members of the voice channel
 		for (const [memberID, member] of splitChan.members){
 			channelMems.push(member);
@@ -90,17 +82,18 @@ exports.run = (client, message, args, level) => {
 		var theChosen;
 		//Randomly assign teams
 
-		while(numMem > 0)
+		while(numMem > 0 & (redID != null || blueID != null) )
 		{
-			console.log(numMem)
-			console.log(channelMems[theChosen]);
+
 			theChosen = Math.floor(Math.random() * Math.floor(numMem));
-			console.log(theChosen)
+
 			if(redTurn){
+				console.log(`Moved ${channelMems[theChosen]} to Red Team`)
 				channelMems[theChosen].setVoiceChannel(redID);
 				redTurn = false;
 			}
 			else{
+				console.log(`Moved ${channelMems[theChosen]} to Blue Team`);
 				channelMems[theChosen].setVoiceChannel(blueID);
 				redTurn = true;
 			}
