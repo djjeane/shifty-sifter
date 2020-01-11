@@ -1,3 +1,4 @@
+var index = require('../index.js');
 
 
 exports.run =  (client, message, args, level) => { // eslint-disable-line no-unused-vars
@@ -21,8 +22,8 @@ exports.run =  (client, message, args, level) => { // eslint-disable-line no-unu
         //Loop through each voice channel and then every user in a channel
         for (const [channelID, channel] of channels) {
             for (const [memberID, member] of channel.members) {
-                var games = require('../index.js').games;
-                var tempChannels = require('../index.js').tempChannels;
+                //var games = require('../index.js').games;
+                //var tempChannels = require('../index.js').tempChannels;
                 var game = member.user.presence.game;
                 console.log(game)
                 //ensure you dont move someone who isnt playing a game
@@ -33,11 +34,11 @@ exports.run =  (client, message, args, level) => { // eslint-disable-line no-unu
                             .then(() => console.log(`Moved ${member.user.tag}.`))
                             .catch(console.error);
  
-                        console.log(`games ${games}`)
-                        console.log(`tempChannels ${tempChannels}`)
+                        console.log(`games ${index.getGames()}`)
+                        console.log(`tempChannels ${index.getTempChannels()}`)
 
                         //If you have already created the channel for the game
-                        if (games.includes(game.name))
+                        if (games.includes(index.getGames()))
                         {
                             let channels2 = message.guild.channels.filter(c => c.type === 'voice');
 
@@ -67,13 +68,11 @@ exports.run =  (client, message, args, level) => { // eslint-disable-line no-unu
                                 message.guild.createChannel(game.name, 'voice')
                                     .then(channel => {
                                         var game = member.user.presence.game;
-                                        games.push(game.name);
+                                        index.addGame(game.name);
                                         //games2 = games;
                                         // console.log(`Games ${games}`)
-                                        tempChannels.push({
-                                            newID: channel.id,
-                                            guild: channel.guild
-                                        })
+                                        index.addTempChannel(channel.id,channel.guild)
+                   
                                        // tempChannels2 = tempChannels;
                                         // console.log(`TempChannels  ${tempChannels}`)
 

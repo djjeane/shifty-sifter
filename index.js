@@ -20,6 +20,21 @@ module.exports = {
     games: games,
     nWordUser: nWordUser,
 };
+module.exports.getGames = function(){
+    return games;
+}
+module.exports.getTempChannels = function(){
+    return tempChannels;
+}
+module.exports.addGame = function(gameName){
+    games.push(gameName);
+}
+module.exports.addTempChannel = function(newID2, guild2){
+    tempChannels.push({
+        newID: newID2,
+        guild: guild2
+    });
+}
 
 const client = new Discord.Client();
 
