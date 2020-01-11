@@ -1,5 +1,4 @@
-var games = require('../index.js').games;
-var tempChannels = require('../index.js').tempChannels;
+
 
 exports.run =  (client, message, args, level) => { // eslint-disable-line no-unused-vars
     const channels = message.guild.channels.filter(c => c.type === 'voice');
@@ -22,6 +21,8 @@ exports.run =  (client, message, args, level) => { // eslint-disable-line no-unu
         //Loop through each voice channel and then every user in a channel
         for (const [channelID, channel] of channels) {
             for (const [memberID, member] of channel.members) {
+                var games = require('../index.js').games;
+                var tempChannels = require('../index.js').tempChannels;
                 var game = member.user.presence.game;
                 console.log(game)
                 //ensure you dont move someone who isnt playing a game
