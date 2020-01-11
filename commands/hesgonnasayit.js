@@ -6,6 +6,7 @@ exports.run = (client, message, args, level) => { // eslint-disable-line no-unus
 
     const taggedUser = message.mentions.users.first();
     if (message.author.id == '196100655692120064') return;
+    console.log(nWordCount)
     if (nWordCount == 0) 
     {
         nWordUser = taggedUser;
