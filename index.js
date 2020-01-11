@@ -17,20 +17,20 @@ var nWordUser = "";
 module.exports = {
     nWordCount: nWordCount,
     tempChannels: tempChannels,
-    games: games,
+    games: this.games,
     nWordUser: nWordUser,
 };
 module.exports.getGames = function(){
-    return games;
+    return this.games;
 }
 module.exports.getTempChannels = function(){
-    return tempChannels;
+    return this.tempChannels;
 }
 module.exports.addGame = function(gameName){
-    games.push(gameName);
+    this.games.push(gameName);
 }
 module.exports.addTempChannel = function(newID2, guild2){
-    tempChannels.push({
+    this.tempChannels.push({
         newID: newID2,
         guild: guild2
     });
