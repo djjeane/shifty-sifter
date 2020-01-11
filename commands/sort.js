@@ -31,6 +31,9 @@ exports.run = async (client, message, args, level) => { // eslint-disable-line n
                         message.channel.send(`${member.user.tag} is playing ${game.name}`)
                             .then(() => console.log(`Moved ${member.user.tag}.`))
                             .catch(console.error);
+ 
+                        console.log(`games ${games}`)
+                        console.log(`tempChannels ${tempChannels}`)
 
                         //If you have already created the channel for the game
                         if (games.includes(game.name))
@@ -60,12 +63,12 @@ exports.run = async (client, message, args, level) => { // eslint-disable-line n
                                     .then(async channel => {
                                         var game = member.user.presence.game;
                                         games.push(game.name);
-                                        console.log(`Games ${games}`)
+                                        // console.log(`Games ${games}`)
                                         tempChannels.push({
                                             newID: channel.id,
                                             guild: channel.guild
                                         })
-                                        console.log(`TempChannels  ${tempChannels}`)
+                                        // console.log(`TempChannels  ${tempChannels}`)
 
                                         channel.setParent('433786053397184532');
                                         await member.setVoiceChannel(channel.id)
