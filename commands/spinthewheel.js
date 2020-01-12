@@ -4,7 +4,7 @@ let cooldowns = JSON.parse(fs.readFileSync("./pointsCooldowns.json", "utf8"));
 
 exports.run = async(client, message, args, level) => { // eslint-disable-line no-unused-vars
     var canSpin = false;
-    var day = 86400000;
+    var day = 3600000;
     //At command check
     var today = Date.now();
     if (!cooldowns[message.author.id])
