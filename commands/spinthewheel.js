@@ -76,7 +76,7 @@ exports.run = async(client, message, args, level) => { // eslint-disable-line no
             else
             {
                 userData.points = userData.points + gainedPoints + temp;
-                message.reply(`You"ve got to roll twice! Gaining you **${gainedPoints}** and  bringing you to ${userData.points}`);
+                message.reply(`You"ve got to roll twice! Gaining you **${gainedPoints}** and ${temp} bringing you to ${userData.points}`);
             }
         }
         else
