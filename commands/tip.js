@@ -11,7 +11,7 @@ exports.run = async (client, message, args, level) => { // eslint-disable-line n
     }
     var tippingUserData = points[message.author.id];
     var taggedUser = message.mentions.users.first();
-    var amountToTip = parseInt(args[1],10);
+    var amountToTip = parseInt(args[1]);
     if (!points[taggedUser.id])
     {
         points[taggedUser.id] = {
@@ -50,7 +50,7 @@ exports.run = async (client, message, args, level) => { // eslint-disable-line n
 
     message.channel.send(`${message.author} has given ${taggedUser} ${amountToTip} points! Say Thanks.`)
     message.reply(`You now have ${tippingUserData.points} points!`)
-    message.channel.send(`${taggedUser} you now have ${tippingUserData.points} points!`)
+    message.channel.send(`${taggedUser} you now have ${taggedUser.points} points!`)
     // if (gainedPoints == 10 || gainedPoints == 1) {
     //     message.reply(`You hit the jackpot motherfucker by rolling ${gainedPoints}`);
     //     var double = false;
