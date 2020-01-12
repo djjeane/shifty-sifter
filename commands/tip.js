@@ -1,8 +1,7 @@
 const fs = require("fs");
-let points = JSON.parse(fs.readFileSync("./points.json", "utf8"));
 
 exports.run = async (client, message, args, level) => { // eslint-disable-line no-unused-vars
-
+    let points = JSON.parse(fs.readFileSync("./points.json", "utf8"));
     console.log(args)
     if (!points[message.author.id])
     {
