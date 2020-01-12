@@ -87,7 +87,8 @@ exports.run = async(client, message, args, level) => { // eslint-disable-line no
         }
 
         let curLevel = Math.floor(0.1 * Math.sqrt(userData.points));
-        if (curLevel > userData.level) {
+        if (curLevel > userData.level)
+        {
             // Level up!
             userData.level = curLevel;
             message.reply(`You"ve leveled up to level **${curLevel}**! Ain"t that dandy?`);
