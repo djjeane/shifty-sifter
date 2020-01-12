@@ -50,7 +50,7 @@ exports.run = async (client, message, args, level) => { // eslint-disable-line n
 
     message.channel.send(`${message.author} has given ${taggedUser} ${amountToTip} points! Say Thanks.`)
     message.reply(`You now have ${tippingUserData.points} points!`)
-    message.channel.send(`${taggedUser} you now have ${taggedUser.points} points!`)
+    message.channel.send(`${taggedUser} you now have ${taggedUserData.points} points!`)
     // if (gainedPoints == 10 || gainedPoints == 1) {
     //     message.reply(`You hit the jackpot motherfucker by rolling ${gainedPoints}`);
     //     var double = false;
