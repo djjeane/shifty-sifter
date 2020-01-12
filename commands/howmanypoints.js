@@ -7,7 +7,7 @@ exports.run = async(client, message, args, level) => { // eslint-disable-line no
         return;
     }
     var userData = points[message.author.id];
-    message.reply(`You have ${userdata.points} points!`)
+    message.reply(`You have ${userData.points} points!`)
     return;
     
 };
