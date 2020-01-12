@@ -33,7 +33,7 @@ exports.run = (client, message, args, level) => { // eslint-disable-line no-unus
 
         }
     }
-    if (nWordCount == 2) 
+    if (index.getnWordCount() == 2) 
     {
         if (index.getnWordUser() == taggedUser)
         {
