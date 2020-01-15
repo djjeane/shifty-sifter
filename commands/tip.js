@@ -5,7 +5,7 @@ exports.run = async (client, message, args, level) => { // eslint-disable-line n
     console.log(args)
     // var tippingUserP = await client.GetPoints(message.author.id);
     // var tippedUserP = await client.GetPoints(taggedUserID);
-    
+    if(args.length == 0) return;
     if (args[1] == "null" || args[1] == "undefined" || args[1] == "NaN")
     {
         return;
