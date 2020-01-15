@@ -1,66 +1,91 @@
 const mongoose = require('mongoose');
 const Points = require('../models/Points.js');
 
-module.exports = (client) => {
+module.exports =  (client) => {
+    client.GetPoints = async (userID2) => {
 
-    client.GetPoints =  (userID) => {
-        // let data = await Points.findOne({id: userID});
-        // if(data) return data;
-        // else return 0;
-
-        var pointNew = Points({
-          userID: 'dawson',
-          points: '10',
-        });
-
-        // save the user
-        pointNew.save(function (err) {
-          if (err) throw err;
-          console.log('User created!');
-        });
-
-        Points.find({}, function (err, teds) {
-          if (err) console.log(err) ;
-          console.log(`POints ALl: ${teds}`);
-        });
-      }
-    client.UpdatePoints = async (userID, pointsAdded) => {
-      let data = await client.GetPoints(userID);
-        console.log(`Points Query: ${data}`);
-        if (! data instanceof Points)
+      let pointsVal = 0;
+        await Points.findOne({userID: userID2}).then(function(doc)
         {
-        const newPoints = new Points({
-          userID : userID,
-          points : 0
+          if(doc == null){
+            client.CreatePointRecord(userID2);
+            return 0;
+          }
+          pointsVal = doc.points;
+          console.log(pointsVal);
+          
         });
-        newPoints
-        .save()
-        .then(item => console.log(item))
-        .catch(err => console.log(err));
-
-        return await data.updateOne({
-          userID: userID,
-          points: pointsAdded
-        });
+      return pointsVal;
       }
-      else
-      {
-        var points = data;
-
-        const res =  await data.updateOne({
-          userID: userID,
-        },
-        {
-          points: points
-        });
-        console.log(`Number of documents : ${res.n}`);
-        console.log(`Number of documents modified ${res.nModified}`)
-      }
+    client.GetAllPoints = async () => {
+      var pointsList = [];
       
-    }
-  
+      await Points.find({}).then(function (docs) {
+        if (docs == null) {
+          console.log('doc was null')
+        }
+        docs.forEach(doc => {
+          console.log(doc.points);
+          pointsList.push({'points': doc.points, 'userID':doc.userID});
+        });
 
+      });
+      return pointsList;
+    }
     
+    client.UpdatePoints = async (userID2, pointsAdded) =>
+    {
+        let pointsVal = -1;
+        await Points.findOne({
+          userID: userID2
+        }).then(function (doc)
+        {
+          if(!doc)
+          {
+            client.CreatePointRecordAndUpdate(userID2, pointsAdded)
+            return;
+          }
+          var newTotal = doc.points + pointsAdded;
+          if(newTotal < 0) newTotal = 0;
+          doc.points = newTotal;
+          // console.log(doc.points)
+          // console.log(pointsRecord)
+          doc.save(function (err)
+          {
+            if (err) throw err;;
+          });
+          
+
+          console.log('Point record successfully updated!');
+        });}
+
+
+    client.CreatePointRecord = async(userID2) =>
+    {
+      var newPoints = Points({
+        userID: userID2,
+        points: 0
+      });
+
+      newPoints.save(function (err) {
+        if (err) throw err;
+
+        console.log('Point Record created!');
+      });
+    }
+
+    client.CreatePointRecordAndUpdate = async (userID2,AmountToSet) => {
+      var newPoints = Points({
+        userID: userID2,
+        points: Math.abs(AmountToSet)
+      });
+
+      newPoints.save(function (err) {
+        if (err) throw err;
+
+        console.log('Point Record created and updated!');
+      });
+    }
   /*
   PERMISSION LEVEL FUNCTION
 

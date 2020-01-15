@@ -8,47 +8,18 @@ const Discord = require('discord.js')
 //     //console.log(mongoose);
 // });
 exports.run = async(client, message, args, level) => { // eslint-disable-line no-unused-vars
-    console.log(require('../models/Points.js'))
-    const doc = await Points.findOne();
+    
+    var foundPointRecord = await client.GetPoints(message.author.id);
+    if(foundPointRecord.length == 0){
+        await client.CreatePointRecord(message.author.id)
+        message.reply(`You have 0 points.`)
+    }
+    else
+    {
+        console.log(foundPointRecord)
+         message.reply(`You have ${foundPointRecord} points.`)
+    }
 
-    console.log(Points instanceof Points)
-    console.log(Points instanceof mongoose.Model)
-    console.log(Points instanceof mongoose.Document)
-
-    var temp = client.GetPoints('212993630233690113');
-    console.log(temp);
-    // let embed = new Discord.RichEmbed()
-    //     .setTitle("Points")
-    //     .setThumbnail(message.author.displayAvatarURL);
-
-    // let data = client.GetPoints(message.author.id);
-    // if(data)
-    // {
-    //     console.log(require("../models/PointRecord.js").points)
-    //     console.log(data)
-    // }
-    // else
-    // {
-    //     console.log('here oh no')
-    // }
-    // console.log(data);
-
-    // PointRecord.find({
-    //     id: message.author.id,
-    // }, (err, res) => {
-    //     if (err) console.log(err);
-
-    //     if (!res) {
-    //         embed.setColor("RED");
-    //         embed.addField("Error", "Sorry, you don't have any points.");
-    //     } else {
-    //         embed.setColor("GREEN");
-    //         embed.addField(res.username, res.coins + " points.");
-    //     }
-
-    //     message.channel.send(embed)
-
-    // })
     
     
 };
