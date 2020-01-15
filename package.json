@@ -5,7 +5,6 @@
   "main": "index.js",
   "scripts": {
     "postinstall": "node setup.js"
-    
   },
   "engines": {
     "node": ">=8"
@@ -31,6 +30,9 @@
     "enmap": "^5.0.0",
     "inquirer": "^6.3.1",
     "moment": "^2.24.0",
-    "moment-duration-format": "^2.3.2"
+    "moment-duration-format": "^2.3.2",
+    "mongo": "^0.1.0",
+    "mongodb": "^3.4.1",
+    "mongoose": "^5.8.7"
   }
 }

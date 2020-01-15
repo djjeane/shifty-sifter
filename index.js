@@ -10,6 +10,7 @@ const {promisify} = require("util");
 const readdir = promisify(require("fs").readdir);
 const Enmap = require("enmap");
 
+
 var nWordCount = 0;
 var tempChannels = [];
 var games = [];
@@ -58,9 +59,10 @@ module.exports.deleteCooldown = function (authorID) {
     delete spunRecently[authorID];
 }
 
-
 const client = new Discord.Client();
 
+client.mongoose = require('./utils/mongoose.js')
+client.mongoose.init();
 // Here we load the config file that contains our token and our prefix values.
 client.config = require("./config.js");
 // client.config.token contains the bot's token

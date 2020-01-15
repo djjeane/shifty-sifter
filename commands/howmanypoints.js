@@ -1,14 +1,48 @@
-const fs = require("fs");
+const { PointRec } = require("../models/PointRecord.js");
+const mongoose = require("mongoose")
+const Discord = require('discord.js')
+// mongoose.connect('mongodb+srv://djjeane:CleanCode123@siftydb-6b84b.mongodb.net/test?retryWrites=true&w=majority', {
+//     useNewUrlParser: true
+// }, err => {
+//     if (err) console.error(err);
+//     //console.log(mongoose);
+// });
 exports.run = async(client, message, args, level) => { // eslint-disable-line no-unused-vars
-    let points = JSON.parse(fs.readFileSync("./points.json", "utf8"));
-    if(!points[message.author.id])
+    console.log(require('../models/PointRecord.js'))
+
+    let embed = new Discord.RichEmbed()
+        .setTitle("Points")
+        .setThumbnail(message.author.displayAvatarURL);
+
+    let data = client.GetPoints(message.author.id);
+    if(data)
     {
-        message.reply(`You have 0 points.`);
-        return;
+        console.log(require("../models/PointRecord.js").points)
+        console.log(data)
     }
-    var userData = points[message.author.id];
-    message.reply(`You have ${userData.points} points!`)
-    return;
+    else
+    {
+        console.log('here oh no')
+    }
+    console.log(data);
+
+    // PointRecord.find({
+    //     id: message.author.id,
+    // }, (err, res) => {
+    //     if (err) console.log(err);
+
+    //     if (!res) {
+    //         embed.setColor("RED");
+    //         embed.addField("Error", "Sorry, you don't have any points.");
+    //     } else {
+    //         embed.setColor("GREEN");
+    //         embed.addField(res.username, res.coins + " points.");
+    //     }
+
+    //     message.channel.send(embed)
+
+    // })
+    
     
 };
 

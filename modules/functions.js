@@ -1,5 +1,33 @@
+const mongoose = require('mongoose');
+const PointRecord = require('../models/PointRecord.js');
+
 module.exports = (client) => {
 
+    client.GetPoints = async (userID) => {
+        let data = await PointRecord.findOne({id: userID});
+        if(data) return data.points;
+        else return 0;
+    }
+    client.UpdatePoints = async (userID, pointsAdded) => {
+      let data = await client.GetPoints(userID);
+      if(typeof data != 'object')
+      {
+        return await data.updateOne({
+          userID: userID,
+          points: pointsAdded
+        });
+      }
+      else{
+        var points = data.points;
+        return await data.updateOne({
+          userID: userID,
+          points: points + pointsAdded
+        });
+      }
+    }
+  
+
+    
   /*
   PERMISSION LEVEL FUNCTION
 
