@@ -1,3 +1,3 @@
 module.exports = {
-    PointRecord: require('./PointRecord.js')
+    PointRecord: require('./Points.js')
 };

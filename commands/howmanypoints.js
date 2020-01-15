@@ -9,10 +9,14 @@ const Discord = require('discord.js')
 // });
 exports.run = async(client, message, args, level) => { // eslint-disable-line no-unused-vars
     console.log(require('../models/Points.js'))
-    const doc = await Points.find();
-    console.log(doc instanceof Points)
-    console.log(doc instanceof mongoose.Model)
-    console.log(doc instanceof mongoose.Document)
+    const doc = await Points.findOne();
+
+    console.log(Points instanceof Points)
+    console.log(Points instanceof mongoose.Model)
+    console.log(Points instanceof mongoose.Document)
+
+    var temp = client.GetPoints('212993630233690113');
+    console.log(temp);
     // let embed = new Discord.RichEmbed()
     //     .setTitle("Points")
     //     .setThumbnail(message.author.displayAvatarURL);

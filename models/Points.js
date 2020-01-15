@@ -1,8 +1,8 @@
 const mongoose = require('mongoose');
 
-const PointsSchema = mongoose.Schema({
+const Points = mongoose.Schema({
     id: String,
     points: Number,
 });
 
-module.exports = mongoose.model("Points", PointsSchema);
+module.exports = mongoose.model("Points", Points);

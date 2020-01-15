@@ -1,29 +1,46 @@
 const mongoose = require('mongoose');
-const PointRecord = require('../models/Points.js');
+const Points = require('../models/Points.js');
 
 module.exports = (client) => {
 
     client.GetPoints = async (userID) => {
-        let data = await PointRecord.findOne({id: userID});
+        let data = await Points.findOne({id: userID});
         if(data) return data.points;
         else return 0;
     }
     client.UpdatePoints = async (userID, pointsAdded) => {
       let data = await client.GetPoints(userID);
-      if(typeof data != 'object')
+      console.log(`Points Query: ${data}`);
+      if (! data instanceof Points)
       {
+        const newPoints = new Points({
+          userID : userID,
+          points : 0
+        });
+        newPoint
+        .save()
+        .then(item => console.log(item))
+        .catch(err => console.log(err));
+
         return await data.updateOne({
           userID: userID,
           points: pointsAdded
         });
       }
-      else{
-        var points = data.points;
-        return await data.updateOne({
+      else
+      {
+        var points = data;
+
+        const res =  await data.updateOne({
           userID: userID,
-          points: points + pointsAdded
+        },
+        {
+          points: points
         });
+        console.log(`Number of documents : ${res.n}`);
+        console.log(`Number of documents modified ${res.nModified}`)
       }
+      
     }
   
 
