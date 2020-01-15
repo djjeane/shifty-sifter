@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const PointRecord = require('../models/PointRecord.js');
+const PointRecord = require('../models/Points.js');
 
 module.exports = (client) => {
 

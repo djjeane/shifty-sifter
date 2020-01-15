@@ -1,4 +1,4 @@
-const { PointRec } = require("../models/PointRecord.js");
+const Points  = require("../models/Points.js");
 const mongoose = require("mongoose")
 const Discord = require('discord.js')
 // mongoose.connect('mongodb+srv://djjeane:CleanCode123@siftydb-6b84b.mongodb.net/test?retryWrites=true&w=majority', {
@@ -8,23 +8,26 @@ const Discord = require('discord.js')
 //     //console.log(mongoose);
 // });
 exports.run = async(client, message, args, level) => { // eslint-disable-line no-unused-vars
-    console.log(require('../models/PointRecord.js'))
+    console.log(require('../models/Points.js'))
+    const doc = await Points.find();
+    console.log(doc instanceof Points)
+    console.log(doc instanceof mongoose.Model)
+    console.log(doc instanceof mongoose.Document)
+    // let embed = new Discord.RichEmbed()
+    //     .setTitle("Points")
+    //     .setThumbnail(message.author.displayAvatarURL);
 
-    let embed = new Discord.RichEmbed()
-        .setTitle("Points")
-        .setThumbnail(message.author.displayAvatarURL);
-
-    let data = client.GetPoints(message.author.id);
-    if(data)
-    {
-        console.log(require("../models/PointRecord.js").points)
-        console.log(data)
-    }
-    else
-    {
-        console.log('here oh no')
-    }
-    console.log(data);
+    // let data = client.GetPoints(message.author.id);
+    // if(data)
+    // {
+    //     console.log(require("../models/PointRecord.js").points)
+    //     console.log(data)
+    // }
+    // else
+    // {
+    //     console.log('here oh no')
+    // }
+    // console.log(data);
 
     // PointRecord.find({
     //     id: message.author.id,
