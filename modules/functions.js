@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 const Points = require('../models/Points.js');
-
+const WheelCooldowns = require('../models/WheelCooldown.js')
 module.exports =  (client) => {
     client.GetPoints = async (userID2) => {
 
@@ -86,6 +86,57 @@ module.exports =  (client) => {
         console.log('Point Record created and updated!');
       });
     }
+    client.GetWheelCooldown = async(userID2) => {
+      let canSpinTime = Date.now();
+        await WheelCooldowns.findOne({userID: userID2}).then(function(doc)
+        {
+          if(doc == null){
+            client.CreateCooldownRecord(userID2);
+            return canSpinTime;
+          }
+          canSpinTime = doc.canSpinTime;
+          console.log(canSpinTime);
+          
+        });
+      return canSpinTime;
+    }
+    client.CreateCooldownRecord = async(userID2) =>
+    {
+      var newcooldown = WheelCooldowns({
+        userID: userID2,
+        canSpinTime: Date.now() + 3600000
+      });
+
+      newcooldown.save(function (err) {
+        if (err) throw err;
+
+        console.log('New Cooldown Added created!');
+      });
+    }
+    client.UpdateCooldown = async (userID2) =>
+    {
+        await WheelCooldowns.findOne({
+          userID: userID2
+        }).then(function (doc)
+        {
+          if(!doc)
+          {
+            client.CreateCooldownRecord(userID2)
+            return;
+          }
+          var newCooldown = Date.now() + 3600000;
+  
+          doc.canSpinTime = newCooldown;
+          // console.log(doc.points)
+          // console.log(pointsRecord)
+          doc.save(function (err)
+          {
+            if (err) throw err;;
+          });
+          
+
+          console.log('Cooldown record successfully updated!');
+        });}
   /*
   PERMISSION LEVEL FUNCTION
 

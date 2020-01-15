@@ -1,3 +1,4 @@
 module.exports = {
-    PointRecord: require('./Points.js')
+    PointRecord: require('./Points.js'),
+    WheelCooldown : require('./WheelCooldown.js')
 };
