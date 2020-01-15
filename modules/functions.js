@@ -17,7 +17,7 @@ module.exports = (client) => {
           userID : userID,
           points : 0
         });
-        newPoint
+        newPoints
         .save()
         .then(item => console.log(item))
         .catch(err => console.log(err));
