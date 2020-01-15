@@ -3,16 +3,32 @@ const Points = require('../models/Points.js');
 
 module.exports = (client) => {
 
-    client.GetPoints = async (userID) => {
-        let data = await Points.findOne({id: userID});
-        if(data) return data.points;
-        else return 0;
-    }
+    client.GetPoints =  (userID) => {
+        // let data = await Points.findOne({id: userID});
+        // if(data) return data;
+        // else return 0;
+
+        var pointNew = Points({
+          userID: 'dawson',
+          points: '10',
+        });
+
+        // save the user
+        pointNew.save(function (err) {
+          if (err) throw err;
+          console.log('User created!');
+        });
+
+        Points.find({}, function (err, teds) {
+          if (err) console.log(err) ;
+          console.log(`POints ALl: ${teds}`);
+        });
+      }
     client.UpdatePoints = async (userID, pointsAdded) => {
       let data = await client.GetPoints(userID);
-      console.log(`Points Query: ${data}`);
-      if (! data instanceof Points)
-      {
+        console.log(`Points Query: ${data}`);
+        if (! data instanceof Points)
+        {
         const newPoints = new Points({
           userID : userID,
           points : 0
