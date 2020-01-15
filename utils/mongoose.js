@@ -12,7 +12,9 @@ module.exports = {
             connectTimeoutMS: 10000,
             family: 4
         };
-        mongoose.connect('mongodb+srv://djjeane:CleanCode123@siftydb-6b84b.mongodb.net/siftydb?retryWrites=true&w=majority', dbOptions);
+        var env = require('dotenv').config();
+
+        mongoose.connect(process.env.DB_URI, dbOptions);
         
         mongoose.set('useFindAndModify', false);
         mongoose.promise = global.promise;
