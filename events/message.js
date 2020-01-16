@@ -36,7 +36,7 @@ module.exports = async (client, message) => {
   console.log(`Message Received: ${message}`)
   const level = client.permlevel(message);
   const cmd = client.commands.get(command) || client.commands.get(client.aliases.get(command));
-  
+
   var pointsReq = cmd.conf.pointRec;
 
   if (pointsReq != 0)
@@ -47,8 +47,12 @@ module.exports = async (client, message) => {
         message.reply(`This command costs ${pointsReq} points and you only have ${userPoints}.Make sure to SPIN THE WHEEL!!!!`)
         return;
       }
+      console.log(client.user.id)
+      var points = await client.GetPoints(client.user.id);
+
       await client.UpdatePoints(message.author.id,-1 * pointsReq);
-      message.reply(`You have paid ${pointsReq} points in order to use the ${cmd.help.name} command.`);
+      await client.UpdatePoints(client.user.id, pointsReq);
+      message.reply(`You have paid ${pointsReq} points in order to use the ${cmd.help.name} command. Sifty now has ${points + pointsReq} points!`);
   }
   // Check whether the command, or alias, exist in the collections defined
   // in app.js.
