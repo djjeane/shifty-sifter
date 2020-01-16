@@ -1,3 +1,3 @@
 module.exports = async (oldMember, newMember) =>{
-   console.log(`newMember.presence: ${newMember.presence}` )
+   console.log(`Is ${newMember} ${newMember.presence.game.streaming}` )
   };
