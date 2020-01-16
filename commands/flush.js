@@ -26,7 +26,7 @@ exports.conf = {
     guildOnly: false,
     aliases: ['byebye', 'latergaybois','latergayboys'],
     permLevel: "User",
-    pointRec: 0
+    pointRec: 50
 
 };
 
