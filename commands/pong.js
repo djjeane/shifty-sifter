@@ -6,7 +6,8 @@ exports.conf = {
     enabled: true,
     guildOnly: false,
     aliases: [],
-    permLevel: "User"
+    permLevel: "User",
+    pointRec: 0
 };
 
 exports.help = {

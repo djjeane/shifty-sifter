@@ -35,7 +35,8 @@ exports.run = async(client, message, args, level) => {
         enabled: true,
         guildOnly: true,
         aliases: ['avengers','unsplit','undosplit'],
-        permLevel: "User"
+        permLevel: "User",
+        pointRec: 0
     };
 
 exports.help = {

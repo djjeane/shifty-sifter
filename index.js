@@ -16,6 +16,21 @@ var tempChannels = [];
 var games = [];
 var nWordUser = "";
 var spunRecently = {};
+var flushedChannel = "";
+let loadedSounds = [];
+module.exports = {
+    loadedSounds : loadedSounds
+}
+module.exports.getFlushedChannel = function () {
+    return flushedChannel;
+}
+module.exports.setFlushedChannel = function (flushedChannel2) {
+    flushedChannel =  flushedChannel2;
+}
+module.exports.setnWordUser = function (user) {
+    nWordUser = user;
+}
+
 module.exports.getnWordUser = function()
 {
     return nWordUser;
@@ -59,7 +74,9 @@ module.exports.deleteCooldown = function (authorID) {
     delete spunRecently[authorID];
 }
 
-const client = new Discord.Client();
+const client = new Discord.Client({
+    autoReconnect: true
+});
 
 client.mongoose = require('./utils/mongoose.js')
 client.mongoose.init();
@@ -100,6 +117,12 @@ const init = async () => {
         if (!f.endsWith(".js")) return;
         const response = client.loadCommand(f);
         if (response) console.log(response);
+    });
+    const soundFiles = await readdir("./sounds/");
+    client.logger.log(`Loading a total of ${soundFiles.length} sound commands.`);
+    soundFiles.forEach(f => {
+        if (!f.endsWith(".mp3")) return;
+        loadedSounds.push(f.replace(/\.[^.]+$/, ''))
     });
 
     // Then we load events, which will include our message and ready event.

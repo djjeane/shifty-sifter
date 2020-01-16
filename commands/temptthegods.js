@@ -35,7 +35,8 @@ exports.run = async (client, message, args, level) => { // eslint-disable-line n
         {
             message.channel.send(`Kill number this round: ${killNumber}`)
             var resMess ="";
-            if(member.tag != undefined){
+            if(member.tag != undefined)
+            {
                 resMess = `Odds of ban: 1/${max}. You won this time ${member} , challenge a friends honor. Usage: ${client.user.tag} !temptthegods @user`
             }
             else
@@ -81,7 +82,8 @@ exports.conf = {
     enabled: true,
     guildOnly: false,
     aliases: ['tempt','ihatethissever','letmedie'],
-    permLevel: "User"
+    permLevel: "User",
+    pointRec: 0
 };
 
 exports.help = {

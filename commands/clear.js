@@ -48,8 +48,10 @@ exports.run = async (client, message, args, level) => { // eslint-disable-line n
 exports.conf = {
     enabled: true,
     guildOnly: true,
-    aliases: [],
-    permLevel: "User"
+    aliases: ['fuckthosechannels',''],
+    permLevel: "User",
+    pointRec: 0
+
 };
 
 exports.help = {

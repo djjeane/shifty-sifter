@@ -35,10 +35,23 @@ module.exports = async (client, message) => {
   // Get the user or member's permission level from the elevation
   console.log(`Message Received: ${message}`)
   const level = client.permlevel(message);
+  const cmd = client.commands.get(command) || client.commands.get(client.aliases.get(command));
+  
+  var pointsReq = cmd.conf.pointRec;
 
+  if (pointsReq != 0)
+  {
+      var userPoints = await client.GetPoints(message.author.id);
+      if(userPoints - pointsReq < 0)
+      {
+        message.reply(`This command costs ${pointsReq} points and you only have ${userPoints}.Make sure to SPIN THE WHEEL!!!!`)
+        return;
+      }
+      await client.UpdatePoints(message.author.id,-1 * pointsReq);
+      message.reply(`You have paid ${pointsReq} points in order to use the ${cmd.help.name} command.`);
+  }
   // Check whether the command, or alias, exist in the collections defined
   // in app.js.
-  const cmd = client.commands.get(command) || client.commands.get(client.aliases.get(command));
   // using this const varName = thing OR otherthign; is a pretty efficient
   // and clean way to grab one of 2 values!
   if (!cmd) return;

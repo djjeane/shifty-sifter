@@ -138,7 +138,7 @@ module.exports =  (client) => {
           console.log('Cooldown record successfully updated!');
         });}
 
-    client.getOrd(i)
+    client.getOrd = async(i) =>
     {
       var j = i % 10,
         k = i % 100;
@@ -318,6 +318,8 @@ module.exports =  (client) => {
       return `Unable to load command ${commandName}: ${e}`;
     }
   };
+
+
 
   client.unloadCommand = async (commandName) => {
     let command;

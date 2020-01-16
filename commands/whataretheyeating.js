@@ -12,7 +12,8 @@ exports.conf = {
     enabled: true,
     guildOnly: false,
     aliases: ['isjackdumbdumb'],
-    permLevel: "User"
+    permLevel: "User",
+    pointRec: 5
 };
 
 exports.help = {

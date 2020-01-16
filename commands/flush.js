@@ -1,16 +1,16 @@
+let index = require('../index.js')
 exports.run = (client, message, args, level) => { // eslint-disable-line no-unused-vars
 
     message.channel.send('Its hard to imagine a life without you all.. oh wait, I just did.');
 
     const authorID = message.member.voiceChannel;
     const channels = message.guild.channels.filter(c => c.type === 'voice');
+    var flushedChannel = index.setFlushedChannel(message.member.voiceChannel.id);
 
     for (const [channelID, channel] of channels) {
         for (const [memberID, member] of channel.members) {
 
             if (message.member.voiceChannel.id === channelID) {
-                console.log(memberID)
-                console.log(message.author)
                 if (memberID != message.member.id) {
                     console.log(`Moved Member`)
                     member.setVoiceChannel(message.guild.afkChannelID);
@@ -24,8 +24,10 @@ exports.run = (client, message, args, level) => { // eslint-disable-line no-unus
 exports.conf = {
     enabled: true,
     guildOnly: false,
-    aliases: [],
-    permLevel: "User"
+    aliases: ['byebye', 'latergaybois','latergayboys'],
+    permLevel: "User",
+    pointRec: 0
+
 };
 
 exports.help = {

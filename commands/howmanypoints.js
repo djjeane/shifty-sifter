@@ -27,8 +27,9 @@ exports.run = async(client, message, args, level) => { // eslint-disable-line no
 exports.conf = {
     enabled: true,
     guildOnly: false,
-    aliases: ['spin'],
-    permLevel: "User"
+    aliases: ['howmanypoints','amirich'],
+    permLevel: "User",
+    pointRec: 0
 };
 
 exports.help = {

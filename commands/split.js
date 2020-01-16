@@ -132,8 +132,9 @@ exports.run = async (client, message, args, level) => {
 exports.conf = {
 	enabled: true,
 	guildOnly: false,
-	aliases: [],
-	permLevel: "User"
+	aliases: ['letsfight','2groups'],
+	permLevel: "User",
+	pointRec: 0
 };
 
 exports.help = {

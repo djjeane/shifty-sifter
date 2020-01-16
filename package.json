@@ -28,12 +28,14 @@
     "discord.js": "^11.5.1",
     "dotenv": "^8.2.0",
     "enmap": "^5.0.0",
+    "ffmpeg": "0.0.4",
     "heroku": "^7.35.1",
     "inquirer": "^6.3.1",
     "moment": "^2.24.0",
     "moment-duration-format": "^2.3.2",
     "mongo": "^0.1.0",
     "mongodb": "^3.4.1",
-    "mongoose": "^5.8.7"
+    "mongoose": "^5.8.7",
+    "node-opus": "^0.3.3"
   }
 }

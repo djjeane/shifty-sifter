@@ -9,10 +9,11 @@ exports.run = async (client, message, args, level) => { // eslint-disable-line n
     for(var  i = 0; i < 5 ; i++){
         var element = pointsList[i];
         var points = element.points;
+        if(points == 0) break;
         console.log(element.userID)
         var user = message.guild.members.get(element.userID);
         console.log(user)
-        embed.addField(`${client.getOrd(i+1)} Place:`, `${user} : ${points}`);
+        embed.addField(`${await client.getOrd(i+1)} Place:`, `${user} : ${points}`);
     }
     message.channel.send(embed)
     console.log(typeof pointsList);
@@ -22,7 +23,8 @@ exports.conf = {
     enabled: true,
     guildOnly: false,
     aliases: ['whoswinning'],
-    permLevel: "User"
+    permLevel: "User",
+    pointRec: 0
 };
 
 exports.help = {

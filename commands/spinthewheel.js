@@ -16,8 +16,38 @@ exports.run = async(client, message, args, level) => { // eslint-disable-line no
         var points = await client.GetPoints(message.author.id);
 
         var gainedPoints = Math.floor(Math.random() * (10 - 1) + 1);
+        var outMessage = `You gained ${gainedPoints} points, bringing you to ${gainedPoints + points} points.`;
+
+        if(gainedPoints == 10 || gainedPoints == 1)
+        {
+            var resMess = `You have hit a ${gainedPoints} , you have the option to reroll. Respond @Sifty !spinthewheel to roll again.`
+            const response = await client.awaitReply(message, resMess, message.author.id);
+            if (response != null)
+            {
+                var resArray = response.split(" ");
+                if (resArray[1] == '!spinthewheel') {
+                    var temp = Math.floor(Math.random() * (10 - 1) + 1);
+                    if(temp == 10 && gainedPoints == 10)
+                    {
+                        gainedPoints = points;
+                        outMessage = `You rolled another 10 which DOUBLES YOUR FUCKING POINTS, bringing you to ${points + points} points.`;
+                    }
+                    else if(temp == 1 && gainedPoints == 1){
+                        gainedPoints = -points;
+                        outMessage = `You rolled another 1 which loses you all your points. Watch all your gold wash down the drain.`;
+                    }
+                    else{
+                        gainedPoints = gainedPoints + temp;
+                        outMessage = `You rolled a ${temp}. You gained ${gainedPoints+temp} points, bringing you to ${gainedPoints + points+temp} points.`;
+                    }
+
+                } else {
+
+                }
+            }
+        }
         client.UpdatePoints(message.author.id,gainedPoints)
-        message.reply(`You gained ${gainedPoints} points, bringing you to ${gainedPoints + points} points.`)
+        message.reply(outMessage)
     }
 };
 
@@ -25,7 +55,8 @@ exports.conf = {
     enabled: true,
     guildOnly: false,
     aliases: ['spin'],
-    permLevel: "User"
+    permLevel: "User",
+    pointRec: 0
 };
 
 exports.help = {

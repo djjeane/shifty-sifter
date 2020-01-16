@@ -5,9 +5,11 @@ exports.run = async (client, message, args, level) => { // eslint-disable-line n
     console.log(args)
     // var tippingUserP = await client.GetPoints(message.author.id);
     // var tippedUserP = await client.GetPoints(taggedUserID);
-    if(args.length == 0) return;
+    if(args.length == 0 || args.length ==1) return;
     if (args[1] == "null" || args[1] == "undefined" || args[1] == "NaN")
     {
+        message.reply('You can only tip integer values.')
+
         return;
     }
     var taggedUser = message.mentions.users.first();
@@ -22,12 +24,13 @@ exports.run = async (client, message, args, level) => { // eslint-disable-line n
     }
     var amountToTip = Math.abs(parseInt(args[1]));
     
-    console.log(typeof amountToTip)
-    console.log(amountToTip)
-    if (typeof amountToTip != 'number')
+    if (typeof amountToTip != 'number' || isNaN(amountToTip))
     {
         message.reply('You can only tip integer values.')
         return;
+    }
+    if(amountToTip == 0){
+        message.reply(`You cannot tip 0 points`)
     }
     var tippingUserPoints = await client.GetPoints(message.author.id);
 
@@ -53,8 +56,9 @@ exports.run = async (client, message, args, level) => { // eslint-disable-line n
 exports.conf = {
     enabled: true,
     guildOnly: false,
-    aliases: ['give'],
-    permLevel: "User"
+    aliases: ['give','donate','reward'],
+    permLevel: "User",
+    pointRec: 0
 };
 
 exports.help = {

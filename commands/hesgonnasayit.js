@@ -70,8 +70,9 @@ exports.run = (client, message, args, level) => { // eslint-disable-line no-unus
 exports.conf = {
     enabled: true,
     guildOnly: true,
-    aliases: ['marcoKillThisGuy'],
+    aliases: ['marcoKillThisGuy','banthem'],
     permLevel: "Ceramic",
+    pointRec: 0
 };
 
 exports.help = {
