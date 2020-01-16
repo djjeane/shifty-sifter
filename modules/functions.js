@@ -12,7 +12,6 @@ module.exports =  (client) => {
             return 0;
           }
           pointsVal = doc.points;
-          console.log(pointsVal);
           
         });
       return pointsVal;
@@ -25,7 +24,6 @@ module.exports =  (client) => {
           console.log('doc was null')
         }
         docs.forEach(doc => {
-          console.log(doc.points);
           pointsList.push({'points': doc.points, 'userID':doc.userID});
         });
 
