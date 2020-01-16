@@ -12,7 +12,7 @@ exports.run = async (client, message, args, level) => { // eslint-disable-line n
         console.log(element.userID)
         var user = message.guild.members.get(element.userID);
         console.log(user)
-        embed.addField(`${i+1}:`, `${user} : ${points}`);
+        embed.addField(`${client.getOrd(i+1)} Place:`, `${user} : ${points}`);
     }
     message.channel.send(embed)
     console.log(typeof pointsList);
