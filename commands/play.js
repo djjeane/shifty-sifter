@@ -11,7 +11,7 @@ exports.run = async (client, message, args, level) => { // eslint-disable-line n
             message.reply(`This is not a valid sound. Valid sounds are ${loadedSounds}`)
             return;
         }
-        var sound = args[0].ToLowerCase();
+        var sound = args[0];
         sound = sound.concat('.mp3');
         var soundPath = "../sounds/" + sound;
         console.log(soundPath)
