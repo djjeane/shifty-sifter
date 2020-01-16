@@ -54,7 +54,7 @@ exports.conf = {
 
 exports.help = {
     name: "clear",
-    category: "Sort Misc",
+    category: "VoiceChannels",
     description: "Deletes all the empty channels created from the sort command.",
     usage: "clear"
 };

@@ -59,7 +59,7 @@ exports.conf = {
 
 exports.help = {
     name: "tip",
-    category: "Miscellaneous",
+    category: "Points",
     description: "Gives this guy some amount of your points.",
     usage: "tip @user x",
 };

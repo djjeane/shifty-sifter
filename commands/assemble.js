@@ -40,7 +40,7 @@ exports.run = async(client, message, args, level) => {
 
 exports.help = {
     name: "assemble",
-    category: "Miscellaneous",
+    category: "VoiceChannels",
     description: "Moves all the teams back to bowl.",
     usage: "assemble"
 };

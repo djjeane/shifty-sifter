@@ -27,7 +27,7 @@ exports.conf = {
 
 exports.help = {
     name: "leaderboard",
-    category: "Miscellaneous",
+    category: "Points",
     description: "See who has the most points",
     usage: "leaderboard"
 };

@@ -138,7 +138,7 @@ exports.conf = {
 
 exports.help = {
 	name: "split",
-	category: "Miscellaneous",
+	category: "VoiceChannels",
 	description: "Moves all the turds to the U bend.",
 	usage: "split"
 };

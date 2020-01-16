@@ -3,7 +3,6 @@ let points = JSON.parse(fs.readFileSync("./points.json", "utf8"));
 let cooldowns = JSON.parse(fs.readFileSync("./pointsCooldowns.json", "utf8"));
 var WheelCooldowns = require('../models/WheelCooldown.js');
 exports.run = async(client, message, args, level) => { // eslint-disable-line no-unused-vars
-    var canSpin = false;
     var today = Date.now();
     var userCooldown = await client.GetWheelCooldown(message.author.id);
     if(userCooldown.getTime() > today)
@@ -13,7 +12,6 @@ exports.run = async(client, message, args, level) => { // eslint-disable-line no
         message.reply(`You can spin again in ${time}`);
     }
     else{
-        console.log(`${userCooldown.getTime()} <= ${today}`)
         client.UpdateCooldown(message.author.id)
         var points = await client.GetPoints(message.author.id);
 
@@ -32,7 +30,7 @@ exports.conf = {
 
 exports.help = {
     name: "spinthewheel",
-    category: "Miscellaneous",
+    category: "Points",
     description: "Moves all the turds to the U bend.",
     usage: "spinthewheel",
 };

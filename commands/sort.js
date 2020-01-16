@@ -102,7 +102,7 @@ exports.conf = {
 
 exports.help = {
     name: "sort",
-    category: "Miscellaneous",
+    category: "VoiceChannels",
     description: "Take away all those loud pee sounds when the toilets are too close together.",
     usage: "sort"
 };

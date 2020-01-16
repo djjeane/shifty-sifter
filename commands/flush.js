@@ -30,7 +30,7 @@ exports.conf = {
 
 exports.help = {
     name: "flush",
-    category: "Miscellaneous",
+    category: "VoiceChannels",
     description: "Moves all the turds to the U bend.",
     usage: "flush"
 };
