@@ -38,7 +38,7 @@ exports.run = async(client, message, args, level) => { // eslint-disable-line no
                     }
                     else{
                         gainedPoints = gainedPoints + temp;
-                        outMessage = `You rolled a ${temp}. You gained ${gainedPoints+temp} points, bringing you to ${gainedPoints + points+temp} points.`;
+                        outMessage = `You rolled a ${temp}. You gained ${gainedPoints} points, bringing you to ${gainedPoints + points} points.`;
                     }
 
                 } else {
