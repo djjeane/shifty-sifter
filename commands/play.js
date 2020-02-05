@@ -43,7 +43,7 @@ exports.run = async (client, message, args, level) => { // eslint-disable-line n
     }
     else
     {
-        message.reply(`You must denote a sound. Options {dylan , airhorn}`)
+        message.reply(`You must denote a sound. Options {dylan , airhorn, liar}`)
         return;
     }
 
@@ -59,6 +59,6 @@ exports.conf = {
 exports.help = {
   name: "play",
   category: "Sounds",
-  description: `It plays the passed sound. Options: {dylan , airhorn}`,
+  description: `It plays the passed sound. Options: {dylan , airhorn, liar}`,
   usage: "play"
 };

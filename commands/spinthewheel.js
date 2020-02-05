@@ -15,7 +15,7 @@ exports.run = async(client, message, args, level) => { // eslint-disable-line no
         client.UpdateCooldown(message.author.id)
         var points = await client.GetPoints(message.author.id);
 
-        var gainedPoints = Math.floor(Math.random() * (10 - 1) + 1);
+        var gainedPoints = Math.floor(Math.random() * (11 - 1) + 1);
         var outMessage = `You gained ${gainedPoints} points, bringing you to ${gainedPoints + points} points.`;
 
         if(gainedPoints == 10 || gainedPoints == 1)
@@ -26,7 +26,7 @@ exports.run = async(client, message, args, level) => { // eslint-disable-line no
             {
                 var resArray = response.split(" ");
                 if (resArray[1] == '!spinthewheel') {
-                    var temp = Math.floor(Math.random() * (10 - 1) + 1);
+                    var temp = Math.floor(Math.random() * (11 - 1) + 1);
                     if(temp == 10 && gainedPoints == 10)
                     {
                         gainedPoints = points;
