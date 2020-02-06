@@ -59,6 +59,6 @@ exports.conf = {
 exports.help = {
   name: "play",
   category: "Sounds",
-  description: `It plays the passed sound. Options: {dylan , airhorn, liar}`,
+  description: `It plays the passed sound. Options: {dylan, airhorn, liar, iridocyclitis, tacos}`,
   usage: "play"
 };
