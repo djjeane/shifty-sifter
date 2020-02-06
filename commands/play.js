@@ -43,7 +43,7 @@ exports.run = async (client, message, args, level) => { // eslint-disable-line n
     }
     else
     {
-        message.reply(`You must denote a sound. Options {dylan , airhorn, liar}`)
+      message.reply(`You must denote a sound. Options {dylan , airhorn, liar, iridocyclitis, tacos}`)
         return;
     }
 
