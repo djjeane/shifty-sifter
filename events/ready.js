@@ -7,7 +7,7 @@ module.exports = async client => {
 
   // Make the bot "play the game" which is the help command with default prefix.
   client.user.setActivity(
-    `Points: ${await client.GetPoints(`663955324654321674`)}`,
+    `Points: ${await client.GetPoints('663955324654321674')}`,
     { type: "PLAYING" }
   );
   await mongoose.connect('mongodb+srv://djjeane:CleanCode123@siftydb-6b84b.mongodb.net/test?retryWrites=true&w=majority', {
