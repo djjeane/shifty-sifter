@@ -17,7 +17,11 @@ module.exports = async (client, message) => {
     //return message.reply(`My prefix is \`${settings.prefix}\`. Please gamble responsibly. Also Flush. Please Flush.`);
     return;
   }
-
+  if (message.content.includes('tiktok')) { //if it contains an invite link
+    message.delete() //delete the message
+      .then(message.channel.send('Link Deleted:\n**TikTok is porn for Tweens**'))
+      return;
+  }
   // Also good practice to ignore any message that does not start with our prefix,
   // which is set in the configuration file.
   if (message.content.indexOf(settings.prefix) !== 0) return;
