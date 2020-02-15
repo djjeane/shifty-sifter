@@ -5,7 +5,7 @@ exports.run = (client, message, args, level) => { // eslint-disable-line no-unus
     console.log('here')
     let taggedUser = message.mentions.users.first();
     if (message.author.id == '196100655692120064') return;
-    if(taggedUser == null)
+    if(taggedUser == null) // yeet
     {
         taggedUser = message.author;
         message.reply('Oh you think youre allowed to say it?');
