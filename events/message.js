@@ -17,6 +17,7 @@ module.exports = async (client, message) => {
     //return message.reply(`My prefix is \`${settings.prefix}\`. Please gamble responsibly. Also Flush. Please Flush.`);
     return;
   }
+  // Bans tiktok links
   if (message.content.includes('tiktok')) { //if it contains an invite link
     message.delete() //delete the message
       .then(message.channel.send('Link Deleted:\n**TikTok is porn for Tweens**'))
