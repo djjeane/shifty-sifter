@@ -29,7 +29,7 @@ exports.conf = {
     guildOnly: false,
     aliases: ['iseekpower',''],
     permLevel: "User",
-    pointRec: 0
+    pointRec: 1000
 };
 
 exports.help = {
