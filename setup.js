@@ -6,7 +6,7 @@ let baseConfig = fs.readFileSync("./config_base.txt", "utf8");
 
 const defaultSettings = {
   "prefix": "!",
-  "modLogChannel": "lvaatory",
+  "modLogChannel": "lavatory",
   "modRole": "Porcelain",
   "adminRole": "Ceramic",
   "systemNotice": "true",

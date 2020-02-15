@@ -3,7 +3,6 @@ exports.moveMembers = (message) => {
     const channels = message.guild.channels.filter(c => c.type === 'voice');
     console.log(`Games: ${index.getGames()}`)
     console.log(`TempChannels: ${index.getTempChannels()}`)
-
     for (const [channelID, channel] of channels) {
         for (const [memberID, member] of channel.members) {
             //var games = require('../index.js').games;

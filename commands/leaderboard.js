@@ -6,14 +6,38 @@ exports.run = async (client, message, args, level) => { // eslint-disable-line n
         .setColor(0x00AE86);
     var pointsList = await client.GetAllPoints();
     pointsList.sort((a,b) => b.points -a.points);
-    for(var  i = 0; i < 5 ; i++){
+    
+    if (args.length == 0)
+    {
+        var numPlayers = 5;
+    }
+    else
+    {
+        if (args[0].toLowerCase() =='all')
+        {
+            var numPlayers = pointsList.length
+        }
+        else{
+            var numPlayers = Math.abs(parseInt(args[0]));
+            if (typeof numPlayers != 'number' || isNaN(numPlayers)) {
+                message.reply('You can only view an integer value of players')
+                return;
+            }
+        }
+    }
+    if (pointsList.length - numPlayers < 0)
+    {
+        numPlayers = pointsList.length
+    }
+    for (var i = 0; i < numPlayers; i++)
+    {
+        console.log(i)
         var element = pointsList[i];
         var points = element.points;
-        if(points == 0) break;
-        console.log(element.userID)
+        if (points == 0) break;
         var user = message.guild.members.get(element.userID);
-        console.log(user)
         embed.addField(`${await client.getOrd(i+1)} Place:`, `${user} : ${points}`);
+        
     }
     message.channel.send(embed)
     console.log(typeof pointsList);
@@ -31,5 +55,5 @@ exports.help = {
     name: "leaderboard",
     category: "Points",
     description: "See who has the most points",
-    usage: "leaderboard"
+    usage: "leaderboard {number of players to view}"
 };

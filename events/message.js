@@ -37,23 +37,26 @@ module.exports = async (client, message) => {
   const level = client.permlevel(message);
   const cmd = client.commands.get(command) || client.commands.get(client.aliases.get(command));
 
-  var pointsReq = cmd.conf.pointRec;
-
-  if (pointsReq != 0)
+  if(cmd != null)
   {
-      var userPoints = await client.GetPoints(message.author.id);
-      if(userPoints - pointsReq < 0)
-      {
-        message.reply(`This command costs ${pointsReq} points and you only have ${userPoints}.Make sure to SPIN THE WHEEL!!!!`)
-        return;
-      }
-      console.log(client.user.id)
-      var points = await client.GetPoints(client.user.id);
+    var pointsReq = cmd.conf.pointRec;
 
-      await client.UpdatePoints(message.author.id,-1 * pointsReq);
-      await client.UpdatePoints(client.user.id, pointsReq);
-      message.reply(`You have paid ${pointsReq} points in order to use the ${cmd.help.name} command. Sifty now has ${points + pointsReq} points!`);
-  }
+    if (pointsReq != 0)
+    {
+        var userPoints = await client.GetPoints(message.author.id);
+        if(userPoints - pointsReq < 0)
+        {
+          message.reply(`This command costs ${pointsReq} points and you only have ${userPoints}.Make sure to SPIN THE WHEEL!!!!`)
+          return;
+        }
+        console.log(client.user.id)
+        var points = await client.GetPoints(client.user.id);
+
+        await client.UpdatePoints(message.author.id,-1 * pointsReq);
+        await client.UpdatePoints(client.user.id, pointsReq);
+        message.reply(`You have paid ${pointsReq} points in order to use the ${cmd.help.name} command. Sifty now has ${points + pointsReq} points!`);
+    }
+}
   // Check whether the command, or alias, exist in the collections defined
   // in app.js.
   // using this const varName = thing OR otherthign; is a pretty efficient
