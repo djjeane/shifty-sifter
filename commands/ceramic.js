@@ -22,7 +22,7 @@ exports.run = (client, message, args, level) => { // eslint-disable-line no-unus
     };
     message.channel.send("Ceramic Generation Code has begun.", {
         embed
-    });
+    });he
 };
 exports.conf = {
     enabled: true,

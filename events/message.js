@@ -18,11 +18,36 @@ module.exports = async (client, message) => {
     return;
   }
   // Bans tiktok links
-  if (message.content.includes('tiktok')) { //if it contains an invite link
-    message.delete() //delete the message
-      .then(message.channel.send('Link Deleted:\n**TikTok is porn for Tweens**'))
-      return;
-  }
+  const bannedWords = [ 
+    "bitly", 
+    "goo.gl",
+    "tinyurl",
+    "ow.ly",
+    "is.gd",
+    "buff.ly",
+    "adf.ly",
+    "bit.do",
+    "Mcaf.ee",
+    "rebrandly",
+    "su.pr",
+    "polar",
+    "tiktok"
+  ]
+  var start = Date.now()
+  bannedWords.forEach(word => {
+
+      if (message.content.toLowerCase().includes(word))
+      {
+        console.log(bannedWords.indexOf(message.content.toLowerCase()))
+        message.delete()
+          .then(message.channel.send('Link Deleted:\n**TikTok is porn for Tweens**'))
+        var end = Date.now()
+        message.channel.send(end - start + " miliseconds")
+        return;
+      }
+
+    })
+  
   // Also good practice to ignore any message that does not start with our prefix,
   // which is set in the configuration file.
   if (message.content.indexOf(settings.prefix) !== 0) return;
