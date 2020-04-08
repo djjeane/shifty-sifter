@@ -33,6 +33,6 @@ exports.conf = {
 exports.help = {
     name: "timeout",
     category: "Miscellaneous",
-    description: "Server mutes a member for x minutes",
+    description: "Server mutes a member for x minutes, no more than 5 minutes",
     usage: "timeout @user x"
 };
