@@ -1,6 +1,6 @@
 exports.run = (client, message, args, level) => { // eslint-disable-line no-unused-vars
     
-    message.author.send('No Bitch.');
+    message.author.send('Okay, sure.');
     message.channel.send('I have answered the call.');
 
 };

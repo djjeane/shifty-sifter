@@ -18,6 +18,9 @@ var nWordUser = "";
 var spunRecently = {};
 var flushedChannel = "";
 let loadedSounds = [];
+let dickPics = [];
+
+
 module.exports = {
     loadedSounds : loadedSounds
 }
@@ -73,6 +76,10 @@ module.exports.addCooldown = function (authorID,time)
 module.exports.deleteCooldown = function (authorID) {
     delete spunRecently[authorID];
 }
+module.exports.getDickPics = function () {
+    return dickPics;
+}
+
 
 const client = new Discord.Client({
     autoReconnect: true
@@ -123,6 +130,14 @@ const init = async () => {
     soundFiles.forEach(f => {
         if (!f.endsWith(".mp3")) return;
         loadedSounds.push(f.replace(/\.[^.]+$/, ''))
+    });
+
+    const dickFiles = await readdir("./Dicks/");
+    client.logger.log(`Loading a total of ${dickFiles.length} dicks.`);
+
+    dickFiles.forEach(f => {
+        if (!f.endsWith(".jpg")) return;
+        dickPics.push(f.replace(/\.[^.]+$/, ''))
     });
 
     // Then we load events, which will include our message and ready event.
