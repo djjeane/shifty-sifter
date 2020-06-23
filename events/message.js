@@ -31,7 +31,14 @@ module.exports = async (client, message) => {
     "rebrandly",
     "su.pr",
     "polar",
-    "tiktok"
+    "tiktok",
+    "nigger",
+    "nigga",
+    "niggog",
+    "nigg3r",
+    "n1gger",
+    "n1gg3r",
+    "Dawson"
   ]
   var start = Date.now()
   bannedWords.forEach(word => {
@@ -40,7 +47,7 @@ module.exports = async (client, message) => {
       {
         console.log(bannedWords.indexOf(message.content.toLowerCase()))
         message.delete()
-          .then(message.channel.send('Link Deleted:\n**TikTok is porn for Tweens**'))
+          .then(message.channel.send('Link Deleted:\n**TikTok is porn for Tweens** or you said the nword you racist fuck.'))
         var end = Date.now()
         message.channel.send(end - start + " miliseconds")
         return;

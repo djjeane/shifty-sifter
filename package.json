@@ -31,7 +31,7 @@
     "ffmpeg": "0.0.4",
     "heroku": "^7.38.1",
     "inquirer": "^6.5.2",
-    "moment": "^2.24.0",
+    "moment": "^2.27.0",
     "moment-duration-format": "^2.3.2",
     "mongo": "^0.1.0",
     "mongodb": "^3.5.3",

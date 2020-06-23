@@ -7,7 +7,7 @@ exports.run = async (client, message, args, level) => { // eslint-disable-line n
     if (amount < 1) return msg.reply('You have to delete at least 1 message!'); // Checks if the `amount` integer is smaller than 1
 
     message.channel.fetchMessages({
-        limit: (amount + 1)
+        limit: (amount + 1) 
     }).then(messages => {
         const fuckingWorkMessages = messages.array().slice(0,amount + 1);
         message.channel.bulkDelete(fuckingWorkMessages.length, true).then(mess => console.log(`Bulk deleted ${mess.size} messages`));
