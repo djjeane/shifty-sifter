@@ -8,7 +8,7 @@ exports.run = (client, message, args, level) => { // eslint-disable-line no-unus
 exports.conf = {
     enabled: true,
     guildOnly: false,
-    aliases: ['saynotome'],
+    aliases: ['saynotime'],
     permLevel: "User",
     pointRec: 0
 };
