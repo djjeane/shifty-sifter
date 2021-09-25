@@ -1,64 +1,91 @@
-let loadedSounds = require('../index.js').loadedSounds
-exports.run = async (client, message, args, level) => { // eslint-disable-line no-unused-vars
-    //  client.playSound = async (authorChannel,authorViceChannel,command,sound) =>{
-    if(args.length !=0)
-    {
-        var authorChannel = message.channel;
-        var authorVoiceChannel = message.member.voiceChannel;
+const YouTube = require("discord-youtube-api");
+const ytdl = require('ytdl-core');
+const youtube = new YouTube("AIzaSyD7z4gWrOvx5zkoNJkCUsC6vcHg5_cv3F4");
+// const { generateDependencyReport } = require('@discordjs/voice');
+exports.run = async (client, message, args, level) => {
+  if (args.length != 0) {
 
-        if(!loadedSounds.includes(args[0]))
+    if (isValidHttpUrl(args[0])) {
+      var url = args[0];
+    }
+    else {
+      var url = await SearchYoutube(args);
+    }
+    try {
+
+
+      const voiceChannel = message.member.voiceChannel;
+
+      if (voiceChannel) {
+        if (client.voice.connections.some(conn => conn.channel.id == voiceChannel.id)) 
         {
-            message.reply(`This is not a valid sound. Valid sounds are ${loadedSounds}`)
-            return;
+            const connection = message.guild.voiceConnection;
+            connection.channel.leave();
+            voiceChannel.join().then(connection => {
+              console.log('joined channel');
+              connection.playStream(ytdl(url).on('end', () => {
+                console.log(`Disconnecting from the voice channel.`);
+                connection.channel.leave();
+              }));
+            }).catch(e => {
+              console.error(e);
+            });
+
         }
-        var sound = args[0];
-        sound = sound.concat('.mp3');
-        var soundPath = "../sounds/" + sound;
-        console.log(soundPath)
-        authorVoiceChannel.join().then( async function (connection, joinError) {
-            if (joinError) {
-                var joinErrorMessage = 'Error joining voice channel: ';
-                console.log(joinErrorMessage, joinError);
-                bot.sendMessage(authorChannel, joinErrorMessage + joinError);
-            }
-            const dispatcher = await connection.playFile(
-              require("path").join(__dirname, soundPath)
-            );
-            dispatcher.on("start", () => {
-              //not working
-              dispatcher.setVolume(0.7);
-              console.log("Playing");
-            });
-
-            dispatcher.on("error", err => console.log(err)); //no errors
-
-            dispatcher.on("end", end => {
-              //working fine
-              console.log("Finished");
-              console.log("End: " + end);
-              message.member.voiceChannel.leave();
-            });
-            
+        voiceChannel.join().then(connection => {
+          console.log('joined channel');
+          connection.playStream(ytdl(url).on('end', () => {
+            console.log(`Disconnecting from the voice channel.`);
+            connection.channel.leave();
+            connection.destroy();
+          }));
+        }).catch(e => {
+          console.error(e);
         });
+      }
     }
-    else
+    catch(error)
     {
-      message.reply(`You must denote a sound. Options {dylan , airhorn, liar, iridocyclitis, tacos, arf, hush, whatdoilikedoing, driveby}`)
-        return;
+      console.error(error);
     }
-
+  }
+  else 
+  {
+    message.reply('Invalid link or search.');
+  }
 };
+
+async function SearchYoutube(args) {
+  var search = args.join(' ');
+  console.log(`Searching youtube video with search param: ${search}`);
+  var video = await youtube.searchVideos(search);
+  console.log(`Found video with id: ${String(video.id)}`);
+  return `https://www.youtube.com/watch?v=${video.id}`;
+}
+
+function isValidHttpUrl(testURl) {
+  let url;
+
+  try {
+    url = new URL(testURl);
+  } catch (_) {
+    return false;
+  }
+
+  return url.protocol === "http:" || url.protocol === "https:";
+}
+
 exports.conf = {
-    enabled: true,
-    guildOnly: false,
-    aliases: [],
-    permLevel: "User",
-    pointRec: 15
+  enabled: true,
+  guildOnly: false,
+  aliases: [],
+  permLevel: "User",
+  pointRec: 0
 };
 
 exports.help = {
   name: "play",
   category: "Sounds",
-  description: `It plays the passed sound. Options: {dylan, airhorn, liar, iridocyclitis, tacos, arf, hush, whatdoilikedoing, driveby}`,
+  description: `Plays a stream of the youtube video linked.`,
   usage: "play"
 };

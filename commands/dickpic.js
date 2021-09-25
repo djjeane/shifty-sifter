@@ -1,11 +1,10 @@
 let index = require('../index.js');
 const Discord = require('discord.js');
-exports.run = async (client, message, args, level) => {
-    var dickPics = index.getDickPics();
+exports.run = async (client, message, args, level) => 
+{
 
-    console.log(dickPics);
+    var dickPics = index.getDickPics();
     var dick = dickPics[Math.floor(Math.random() * dickPics.length)];
-    console.log(dick);
     dick = dick.concat('.jpg');
     const imagePath = "./Dicks/" + dick;
 
