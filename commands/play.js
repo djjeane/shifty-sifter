@@ -1,7 +1,8 @@
 const YouTube = require("discord-youtube-api");
 const ytdl = require('ytdl-core');
-const youtube = new YouTube("AIzaSyD7z4gWrOvx5zkoNJkCUsC6vcHg5_cv3F4");
-// const { generateDependencyReport } = require('@discordjs/voice');
+var env = require('dotenv').config();
+const youtube = new YouTube(process.env.GOOGLE_API_KEY);
+
 exports.run = async (client, message, args, level) => {
   if (args.length != 0) {
 
