@@ -40,6 +40,7 @@ module.exports = async (client, message) => {
     "n1gg3r",
     "Dawson"
   ]
+  
   var start = Date.now()
   bannedWords.forEach(word => {
 

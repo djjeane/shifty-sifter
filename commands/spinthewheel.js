@@ -1,6 +1,4 @@
 const fs = require("fs");
-let points = JSON.parse(fs.readFileSync("./points.json", "utf8"));
-let cooldowns = JSON.parse(fs.readFileSync("./pointsCooldowns.json", "utf8"));
 var WheelCooldowns = require('../models/WheelCooldown.js');
 exports.run = async(client, message, args, level) => { // eslint-disable-line no-unused-vars
     var today = Date.now();
@@ -23,6 +21,7 @@ exports.run = async(client, message, args, level) => { // eslint-disable-line no
         if(gainedPoints == 10 || gainedPoints == 1)
         {
             var resMess = `You have hit a ${gainedPoints} , you have the option to reroll. Respond @Sifty !spinthewheel to roll again.`
+            
             const response = await client.awaitReply(message, resMess, message.author.id);
             if (response != null)
             {

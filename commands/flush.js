@@ -1,6 +1,7 @@
 let index = require('../index.js')
 exports.run = (client, message, args, level) => { // eslint-disable-line no-unused-vars
 
+    
     message.channel.send('Its hard to imagine a life without you all.. oh wait, I just did.');
 
     const authorID = message.member.voiceChannel;

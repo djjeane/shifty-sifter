@@ -17,13 +17,9 @@ var games = [];
 var nWordUser = "";
 var spunRecently = {};
 var flushedChannel = "";
-let loadedSounds = [];
 let dickPics = [];
 
 
-module.exports = {
-    loadedSounds : loadedSounds
-}
 module.exports.getFlushedChannel = function () {
     return flushedChannel;
 }
@@ -124,12 +120,6 @@ const init = async () => {
         if (!f.endsWith(".js")) return;
         const response = client.loadCommand(f);
         if (response) console.log(response);
-    });
-    const soundFiles = await readdir("./sounds/");
-    client.logger.log(`Loading a total of ${soundFiles.length} sound commands.`);
-    soundFiles.forEach(f => {
-        if (!f.endsWith(".mp3")) return;
-        loadedSounds.push(f.replace(/\.[^.]+$/, ''))
     });
 
     const dickFiles = await readdir("./Dicks/");
