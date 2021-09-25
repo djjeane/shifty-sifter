@@ -63,3 +63,5 @@ typings/
 .points.json
 
 .pointsCooldowns.json
+
+.vscode/launch.json
