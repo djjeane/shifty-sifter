@@ -90,10 +90,10 @@ module.exports =  (client) => {
         {
           if(doc == null){
             client.CreateCooldownRecord(userID2);
-            return canSpinTime;
+            return new Date(canSpinTime);
           }
           canSpinTime = doc.canSpinTime;
-          console.log(canSpinTime);
+          
           
         });
       return canSpinTime;
