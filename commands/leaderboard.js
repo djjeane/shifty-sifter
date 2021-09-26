@@ -33,10 +33,8 @@ exports.run = async (client, message, args, level) => { // eslint-disable-line n
         var placestring = await client.getOrd(i + 1);
         var user = await client.fetchUser(element.userID);
         embed.addField(`${placestring} Place:`, `${user} : ${points}`);
-        console.log(user.username);
     }
     message.channel.send(embed)
-    console.log(pointsList);
 };
 exports.conf = {
     enabled: true,
