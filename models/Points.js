@@ -10,6 +10,10 @@ const Points = mongoose.Schema({
         type: Number,
         min: 0
     }
-});
+},
+{
+    Collection: 'Points'
+}
+);
 
 module.exports = mongoose.model("Points", Points);
