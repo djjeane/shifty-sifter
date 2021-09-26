@@ -1,8 +1,13 @@
 
 let index = require('../index.js');
+const { SlashCommandBuilder } = require('@discordjs/builders');
 
-exports.run = (client, message, args, level) => { // eslint-disable-line no-unused-vars
-    console.log('here')
+module.exports = {
+	data: new SlashCommandBuilder()
+		.setName('hesgonnasayit')
+		.setDescription('Replies with Pong!'),
+	async execute(interaction) {
+		console.log('here')
     let taggedUser = message.mentions.users.first();
     if (message.author.id == '196100655692120064') return;
     if(taggedUser == null) // yeet
@@ -65,6 +70,7 @@ exports.run = (client, message, args, level) => { // eslint-disable-line no-unus
         }
 
     }
+	},
 };
 
 exports.conf = {

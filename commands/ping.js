@@ -1,6 +1,14 @@
-exports.run = (client, message, args, level) => { // eslint-disable-line no-unused-vars
-	const msg =  message.channel.send("Pong?");
+const { SlashCommandBuilder } = require('@discordjs/builders');
+
+module.exports = {
+	data: new SlashCommandBuilder()
+		.setName('ping')
+		.setDescription('Replies with Pong!'),
+	async execute(interaction) {
+		await interaction.reply('Pong!');
+	},
 };
+
 exports.conf = {
 	enabled: true,
 	guildOnly: false,

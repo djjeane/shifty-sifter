@@ -1,41 +1,44 @@
-const Discord = require("discord.js");
+const { MessageEmbed } = require('discord.js');
+const { SlashCommandBuilder } = require('@discordjs/builders');
+const Helper = require('../modules/MongoHelper.js');
 
-exports.run = async (client, message, args, level) => { // eslint-disable-line no-unused-vars
-    const embed = new Discord.RichEmbed()
-        .setTitle("Points Leaderboard")
-        .setColor(0x00AE86);
-    var pointsList = await client.GetAllPoints();
-    pointsList.sort((a, b) => b.points - a.points);
+module.exports = {
+	data: new SlashCommandBuilder()
+		.setName('leaderboard')
+		.setDescription('Shows the leaderboard of the current point holders.')
+        .addIntegerOption(option => option.setName('numusers').setDescription('Enter a number of users to display.')),
+	async execute(interaction) {
+        await interaction.deferReply();
+        let numPlayers = interaction.options.getInteger('numusers');
+        if(!numPlayers)
+        {
+            numPlayers = 5;
+        }
+		const embed = new MessageEmbed()
+            .setTitle("Points Leaderboard")
+            .setColor(0x00AE86);
+        var pointsList = await Helper.GetAllPoints();
+        pointsList.sort((a, b) => b.points - a.points);        
+        
+        if (pointsList.length - numPlayers < 0) {
+            numPlayers = pointsList.length
+        }
 
-    if (args.length == 0) {
-        var numPlayers = 5;
-    }
-    else {
-        if (args[0].toLowerCase() == 'all') {
-            var numPlayers = pointsList.length;
+        for (var i = 0; i < numPlayers; i++) {
+            var element = pointsList[i];
+            var points = element.points;
+
+            if (points == 0) break;
+            var placestring = await client.getOrd(i + 1);
+            var user = await client.fetchUser(element.userID);
+            embed.addField(`${placestring} Place:`, `${user} : ${points}`);
+            console.log(user.username);
         }
-        else {
-            var numPlayers = Math.abs(parseInt(args[0]));
-            
-            if (typeof numPlayers != 'number' || isNaN(numPlayers)) {
-                message.reply('You can only view an integer value of players');
-                return;
-            }
-        }
-    }
-    if (pointsList.length - numPlayers < 0) {
-        numPlayers = pointsList.length;
-    }
-    for (var i = 0; i < numPlayers; i++) {
-        var element = pointsList[i];
-        var points = element.points;
-        if (points == 0) break;
-        var placestring = await client.getOrd(i + 1);
-        var user = await client.fetchUser(element.userID);
-        embed.addField(`${placestring} Place:`, `${user} : ${points}`);
-    }
-    message.channel.send(embed)
+        await interaction.editReply({ embeds: [embed] })
+        console.info(`Displayed a leaderboard!`);
+	},
 };
+
 exports.conf = {
     enabled: true,
     guildOnly: false,

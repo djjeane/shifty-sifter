@@ -1,5 +1,11 @@
-exports.run = (client, message, args, level) => { // eslint-disable-line no-unused-vars
-    let role = message.guild.roles.find(r => r.name === "Ceramic");
+const { SlashCommandBuilder } = require('@discordjs/builders');
+
+module.exports = {
+	data: new SlashCommandBuilder()
+		.setName('ceramic')
+		.setDescription('Gives ceramic to the user!'),
+	async execute(interaction) {
+		let role = message.guild.roles.find(r => r.name === "Ceramic");
     message.member.addRole(role).catch(console.error);
 
     const embed = {
@@ -23,6 +29,7 @@ exports.run = (client, message, args, level) => { // eslint-disable-line no-unus
     message.channel.send("Ceramic Generation Code has begun.", {
         embed
     });
+	},
 };
 exports.conf = {
     enabled: true,

@@ -1,7 +1,11 @@
-// const fs = require("fs");
+const { SlashCommandBuilder } = require('@discordjs/builders');
 
-exports.run = async (client, message, args, level) => { // eslint-disable-line no-unused-vars
-    // let points = JSON.parse(fs.readFileSync("./points.json", "utf8"));
+module.exports = {
+	data: new SlashCommandBuilder()
+		.setName('tip')
+		.setDescription('Replies with Pong!'),
+	async execute(interaction) {
+		    // let points = JSON.parse(fs.readFileSync("./points.json", "utf8"));
     console.log(args)
     // var tippingUserP = await client.GetPoints(message.author.id);
     // var tippedUserP = await client.GetPoints(taggedUserID);
@@ -50,7 +54,7 @@ exports.run = async (client, message, args, level) => { // eslint-disable-line n
     message.channel.send(`${message.author} has given ${taggedUser} ${amountToTip} points! Say Thanks.`)
     message.reply(`You now have ${tippingUserP - amountToTip} points!`)
     message.channel.send(`${taggedUser} you now have ${tippedUserP + amountToTip}  points!`)
-    
+	},
 };
 
 exports.conf = {

@@ -1,6 +1,12 @@
 let index = require('../index.js');
-exports.run = async (client, message, args, level) => { // eslint-disable-line no-unused-vars
-    if (index.getTempChannels().length >= 0) {
+const { SlashCommandBuilder } = require('@discordjs/builders');
+
+module.exports = {
+	data: new SlashCommandBuilder()
+		.setName('clear')
+		.setDescription('Replies with Pong!'),
+	async execute(interaction) {
+		if (index.getTempChannels().length >= 0) {
       for (let i = 0; i < index.getTempChannels().length; i++) {
         // console.log(`List of Channels is ${index.getTempChannels()}`);
         // console.log(`${i} out of ${index.getTempChannels().length}`);
@@ -44,7 +50,9 @@ exports.run = async (client, message, args, level) => { // eslint-disable-line n
         }
       }
     }
+	},
 };
+
 exports.conf = {
     enabled: true,
     guildOnly: true,

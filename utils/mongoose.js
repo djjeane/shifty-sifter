@@ -13,7 +13,6 @@ module.exports = {
             family: 4
         };
         var env = require('dotenv').config();
-
         mongoose.connect(process.env.DB_URI, dbOptions);
         
         mongoose.set('useFindAndModify', false);

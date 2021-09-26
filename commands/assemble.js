@@ -1,8 +1,13 @@
 let games = require('../index.js').games;
 let tempChannels = require('../index.js').tempChannels;
+const { SlashCommandBuilder } = require('@discordjs/builders');
 
-exports.run = async(client, message, args, level) => {
-        var redChannel = message.guild.channels.find(ch=> ch.name == "Red Team");
+module.exports = {
+	data: new SlashCommandBuilder()
+		.setName('assemble')
+		.setDescription('Brings back togethers teams that were split.'),
+	async execute(interaction) {
+		var redChannel = message.guild.channels.find(ch=> ch.name == "Red Team");
         var blueChannel = message.guild.channels.find(ch => ch.name == "Blue Team");
 
         console.log(redChannel);
@@ -26,18 +31,20 @@ exports.run = async(client, message, args, level) => {
         }
         else
         {
-            message.channel.send('There is nothing to flush away...')
+            message.channel.send('There is nothing to flush away...');
         }
+	},
+};
 
-    },
 
-    exports.conf = {
-        enabled: true,
-        guildOnly: true,
-        aliases: ['avengers','unsplit','undosplit'],
-        permLevel: "User",
-        pointRec: 0
-    };
+
+exports.conf = {
+    enabled: true,
+    guildOnly: true,
+    aliases: ['avengers','unsplit','undosplit'],
+    permLevel: "User",
+    pointRec: 0
+};
 
 exports.help = {
     name: "assemble",

@@ -1,22 +1,25 @@
 let index = require('../index.js');
 const Discord = require('discord.js');
-exports.run = async (client, message, args, level) => 
-{
+const { SlashCommandBuilder } = require('@discordjs/builders');
 
-    var dickPics = index.getDickPics();
-    var dick = dickPics[Math.floor(Math.random() * dickPics.length)];
-    dick = dick.concat('.jpg');
-    const imagePath = "./Dicks/" + dick;
+module.exports = {
+	data: new SlashCommandBuilder()
+		.setName('dickpic')
+		.setDescription('Replies with Pong!'),
+	async execute(interaction) {
+		var dickPics = index.getDickPics();
+        var dick = dickPics[Math.floor(Math.random() * dickPics.length)];
+        dick = dick.concat('.jpg');
+        const imagePath = "./Dicks/" + dick;
 
-    message.author.send("This is a dick pic.", {
-        files: [
-        `${imagePath}`,
-            ]
-        });
-    message.channel.send('Ask and Receive');
-
+        message.author.send("This is a dick pic.", {
+            files: [
+            `${imagePath}`,
+                ]
+            });
+        message.channel.send('Ask and Receive');
+        },
 };
-
 
 exports.conf = {
     enabled: true,

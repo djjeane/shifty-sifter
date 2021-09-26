@@ -1,7 +1,7 @@
 // The MESSAGE event runs anytime a message is received
 // Note that due to the binding of client to every event, every event
 // goes `client, other, args` when this function is run.
-var helper = require('../modules/sorthelper.js');
+var helper = require('./sorthelper.js');
 module.exports = async (client, message) => {
   // It's good practice to ignore other bots. This also makes your bot ignore itself
   // and not get into a spam loop (we call that "botception").
