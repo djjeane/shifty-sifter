@@ -95,6 +95,8 @@ client.logger = require("./modules/Logger");
 // the bot, like logs and elevation features.
 require("./modules/functions.js")(client);
 
+
+
 // Aliases and commands are put in collections where they can be read from,
 // catalogued, listed, etc.
 client.commands = new Enmap();
@@ -109,6 +111,7 @@ client.settings = new Enmap({
 
 // We're doing real fancy node 8 async/await stuff here, and to do that
 // we need to wrap stuff in an anonymous function. It's annoying but it works.
+const EventsNotifier = require("./modules/EventsNotifier.js");
 
 const init = async () => {
 
@@ -151,6 +154,7 @@ const init = async () => {
 
     client.login();
 
+    EventsNotifier.CheckEvents(client);
 };
 
 init();
