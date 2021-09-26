@@ -9,6 +9,9 @@ const WheelCooldown = mongoose.Schema({
     canSpinTime: {
         type: Date,
     }
+},
+{
+    Collection: 'WheelCooldowns'
 });
 
 module.exports = mongoose.model("WheelCooldown", WheelCooldown);

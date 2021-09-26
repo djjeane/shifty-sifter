@@ -16,19 +16,19 @@ exports.run = async (client, message, args, level) => { // eslint-disable-line n
         }
         else {
             var numPlayers = Math.abs(parseInt(args[0]));
+            
             if (typeof numPlayers != 'number' || isNaN(numPlayers)) {
-                message.reply('You can only view an integer value of players')
+                message.reply('You can only view an integer value of players');
                 return;
             }
         }
     }
     if (pointsList.length - numPlayers < 0) {
-        numPlayers = pointsList.length
+        numPlayers = pointsList.length;
     }
     for (var i = 0; i < numPlayers; i++) {
         var element = pointsList[i];
         var points = element.points;
-
         if (points == 0) break;
         var placestring = await client.getOrd(i + 1);
         var user = await client.fetchUser(element.userID);

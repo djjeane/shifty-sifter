@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 //const MongoClient = require('mongodb').MongoClient;
+var env = require('dotenv').config();
 
 module.exports = async client => {
   // Log that the bot is online.
@@ -10,7 +11,7 @@ module.exports = async client => {
     `Points: ${await client.GetPoints('663955324654321674')}`,
     { type: "PLAYING" }
   );
-  await mongoose.connect('mongodb+srv://djjeane:CleanCode123@siftydb-6b84b.mongodb.net/test?retryWrites=true&w=majority', {
+  await mongoose.connect(process.env.DB_URI, {
     useNewUrlParser: true,
     useFindAndModify: false
   });
