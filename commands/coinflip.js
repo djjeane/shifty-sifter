@@ -1,60 +1,49 @@
-exports.run = async (client, message, args, level) => { // eslint-disable-line no-unused-vars
-	// ags[x] can pull different words from user message and we can access them by using arg[0,1,2,3] each arg is separated by a space in user message
-	// client.getPoints -> get clients points
-	// client.updatePoints -> updates clients points
-	if (args.len > 0)//check if they entered heads or tails
-	{	
-	// function that generates a random number, ceiling is specified as the arguement
-	function getRandomInt(max) {
-		return Math.floor((Math.random() * max)+1);
-	  }
-theNumResult = getRandomInt(2);
-theResult = ''
-	// translates theNumResult number to coinflip result
-	if (theNumResult == 1) {
-		theResult = 'Heads' 
-	} else {
-		theResult = 'Tails'
-	} 
-	// determines win or loss of user
-	if (theNumResult == 1 && client.message === 'H'){
-		msg = (`Congratulations! You guessed correctly! ${theResult}`)
-		outcome = 
-	} else {
-		msg = (`Better luck next time! The result was... ${theResult}!`)
-	}
-	if (theNumResult == 2 && client.message === 'T'){
-		msg = (`Congratulations! You guessed correctly! ${theResult}`)
-	} else {
-		msg = (`Better luck next time! The result was... ${theResult}!`)
-	}
-	}
+exports.run = (client, message, args, level) => { // eslint-disable-line no-unused-vars
+    if(args.length < 2){
+        message.reply(`Not enought arguments proveded, please refer to the help file.`);
+        return;
+    }
+    //Grab the needed paramaters from the argu from the message
+    // const immutable - let mutable
+	let wager = args[0];
+    let prediction = args[1].lowercase;
+    let winnings = 0;
 
-	else //Prompt for heads or tails and await response
-	{
-		message.channel.send('Please use the command properly.')
-	}
-	}
-
-
-    
-    //sends message to the channel
-    const msg =  message.channel.send();
+    //if any of the provided args are not present, stop here
+    if(!wager || !prediction){
+            return;
+    }
+    let flip = Round(Math.random(),1)+1 // stores 1 or 2 in flip variable;
+    let result = '';
+        if (flip === 1){ //converts number to heads or tails stores in result
+            result = 'Heads';
+        } else {
+            result = 'Tails';
+        }
+        if (arg[1] === 'heads' && result === 'Heads') {//begin win/loss logic
+            winnings += args[0] * 2;
+            msg = `Congratulations, you won ${winnings.toString}! You have doubled you bet!`;
+        } else if (arg[1] === 'heads' && result === 'Tails') {
+            msg = `Dang it! You lost ${wager.toString}. Better luck next time.`;
+        } else if (arg[1] === 'tails' && result === 'Tails') {
+            winnings += args[0] * 2;
+            msg = `Congratulations, you won ${winnings.toString}! You have doubled you bet!`;
+        } else if (arg[1] === 'tails' && result === 'Heads') {
+            msg = `Dang it! You lost ${wager.toString}. Better luck next time.`;
+        } else {
+            msg = 'error?';
+        }//end of win/loss logic
+    let gainedPoints = winnings;//for my sanity, keeps format of spin the wheel UpdatePoints
 
 
+    client.UpdatePoints(message.author.id,gainedPoints);
+    message.reply(msg);
 
+
+   
 };
-exports.conf = {
-	enabled: true,
-	guildOnly: false,
-	aliases: [],
-	permLevel: "User",
-	pointRec: 0
-};
+    function coinflip(guess, bet) {
 
-exports.help = {
-	name: "gamble",
-	category: "Vice",
-	description: "It like... Pings. Then Pongs. And it's not Ping Pong.",
-	usage: "Light your points on fire!"
-};
+
+    }
+            message.reply(`Your bet could not be placed. Please reference the help file!`);
