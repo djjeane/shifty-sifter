@@ -15,7 +15,7 @@
   },
   "author": "Dawson Jeane",
   "contributors": [
-    "Dylan "
+    "Dylan"
   ],
   "license": "MIT",
   "bugs": {
@@ -25,7 +25,7 @@
   "dependencies": {
     "@discordjs/opus": "github:discordjs/opus",
     "@discordjs/rest": "^0.1.0-canary.0",
-    "@discordjs/voice": "github:discordjs/voice",
+    "@discordjs/voice": "^0.6.0",
     "chalk": "^2.4.2",
     "discord-api-types": "^0.23.1",
     "discord-youtube-api": "^0.1.0",
@@ -36,6 +36,7 @@
     "ffmpeg-static": "^4.4.0",
     "heroku": "^7.38.1",
     "inquirer": "^6.5.2",
+    "libsodium-wrappers": "^0.7.9",
     "moment": "^2.27.0",
     "moment-duration-format": "^2.3.2",
     "mongo": "^0.1.0",
@@ -45,5 +46,6 @@
     "node-opus": "^0.3.3",
     "tweetnacl": "^1.0.3",
     "ytdl-core": "^4.9.1"
-  }
+  },
+  "keywords": []
 }

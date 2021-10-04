@@ -1,14 +1,40 @@
 const mongoose = require('mongoose');
-//const MongoClient = require('mongodb').MongoClient;
+const Helper = require('../modules/MongoHelper.js');
 var env = require('dotenv').config();
 
-  // Make the bot "play the game" which is the help command with default prefix.
-  client.user.setActivity(
-    `Points: ${await client.GetPoints('663955324654321674')}`,
-    { type: "PLAYING" }
-  );
-  await mongoose.connect(process.env.DB_URI, {
-    useNewUrlParser: true,
-    useFindAndModify: false
-  });
+
+module.exports = {
+	name: 'ready',
+	once: true,
+	async execute(client) {
+		const dbOptions = {
+			useNewUrlParser: true,
+			autoIndex: false,
+			reconnectTries: Number.MAX_VALUE,
+			reconnectInterval: 500,
+			poolSize: 5,
+			connectTimeoutMS: 10000,
+			family: 4
+		};
+		mongoose.connect(process.env.DB_URI, dbOptions);
+		mongoose.set('useFindAndModify', false);
+		mongoose.promise = global.promise;
+		mongoose.connection.on('connected', () => {
+			console.log('Mongoose connection initiated.');
+		});
+		mongoose.connection.on('err', err => {
+			console.log(`Mongoose connection error: \n ${err.stack}`);
+		});
+		mongoose.connection.on('disconnected', () => {
+			console.log('Mongoose connection disconnected.');
+		});
+		var points = await Helper.GetPoints('663955324654321674');
+
+		client.user.setActivity(
+			`Points: ${points}`,
+			{ type: "PLAYING" }
+		);
+
+	},
 };
+

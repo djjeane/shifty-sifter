@@ -1,58 +1,61 @@
 var Events = require('../models/Event.js');
+const { SlashCommandBuilder } = require('@discordjs/builders');
 
-exports.run = (client, message, args, level) => 
-{
-    if(args.length < 5)
+module.exports = {
+	data: new SlashCommandBuilder()
+		.setName('event')
+		.setDescription('Schedules an event.')
+        .addStringOption(option =>
+            option.setName('eventname')
+            .setDescription('The name of the event.')
+            .setRequired(true))
+        .addStringOption(option =>
+            option.setName('eventts')
+            .setDescription('The timestamp of the event: MM/DD/YYYY HH:MM:SS TZShort')
+            .setRequired(true))
+        .addIntegerOption(option =>
+            option.setName('remindmins')
+            .setDescription('The minutes before the event that users should be reminded')
+            .setRequired(true)),
+	async execute(interaction) 
     {
-        message.reply(`Not enought arguments proveded, please refer to the help file.`);
-        return;
-    }
-    //Grab the needed paramaters from the argu from the message
-	let nameOfEvent = args[0];
-    let dateOfEvent = args[1];
-    let timeOfEvent = args[2];
-    let tzOfEvent = args[3];
-    let remindMinutesBefore = args[4];
-
-    //if any of the provided args are not present, stop here
-    if(!nameOfEvent || !dateOfEvent || !timeOfEvent || !tzOfEvent || !remindMinutesBefore)
-    {
-        message.reply(`Event could not be registered. Please reference the help file!`);
-        return;
-    }
-
-    //Get all the members that were mentioned, and if none were provided; stop here
-    let membersInvited = message.mentions.users.array() || new Array();
-    if(membersInvited.length = 0)
-    {
-        message.reply('Please mention users after providing all arguments.');
-        return;
-    }
-
-    //Build an array of the ids of the mentioned members, we need to store these ids in the database
-    let userIdArray = [];
-    membersInvited.forEach(element => {
-        userIdArray.push(element.id);
-    });
+        //Grab the needed paramaters from the argu from the message
+        let nameOfEvent = interaction.options.getString('eventname');
+        var timestampStr = interaction.options.getString('eventts');
+        let remindMinutesBefore = interaction.options.getInteger('remindmins');
+    
+        //Get all the members that were mentioned, and if none were provided; stop here
+        let membersInvited = interaction.mentions.users.array() || new Array();
+        if(membersInvited.length = 0)
+        {
+            message.reply('Please mention users after providing all arguments.');
+            return;
+        }
+    
+        //Build an array of the ids of the mentioned members, we need to store these ids in the database
+        let userIdArray = [];
+        membersInvited.forEach(element => {
+            userIdArray.push(element.id);
+        });
 
 
-    var timestampStr = `${dateOfEvent} ${timeOfEvent} ${tzOfEvent}`
-    try{
-        //Get the ts from the arguments and calculate the time that the bot should remind the attendies
-        let tsOfEvent = new Date(Date.parse(timestampStr));
-        let remindTime = new Date(tsOfEvent - remindMinutesBefore * 60000).getTime();
-
-        //Save the event to the database
-        SaveEvent(nameOfEvent,timestampStr,remindTime,userIdArray,message.author.id)
-    }
-    catch(err)
-    {
-        message.reply(`Could not parse timestamp to date. Accepted format is MM/DD/YYYY HH:MM:SS TZShort.`);
-        return;
-    }
-
-    message.reply(`Event: ${nameOfEvent} has been registered.`);
-
+        try
+        {
+            //Get the ts from the arguments and calculate the time that the bot should remind the attendies
+            let tsOfEvent = new Date(Date.parse(timestampStr));
+            let remindTime = new Date(tsOfEvent - remindMinutesBefore * 60000).getTime();
+    
+            //Save the event to the database
+            SaveEvent(nameOfEvent,timestampStr,remindTime,userIdArray,message.author.id)
+        }
+        catch(err)
+        {
+            message.reply(`Could not parse timestamp to date. Accepted format is MM/DD/YYYY HH:MM:SS TZShort.`);
+            return;
+        }
+    
+        message.reply(`Event: ${nameOfEvent} has been registered.`);
+	},
 };
 
 //Saves the event to the Database

@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
+const { Collection } = require('mongoose');
 
-const Points = mongoose.Schema({
+const Point = mongoose.Schema({
     userID: {
         type: String,
         required: true,
@@ -12,8 +13,8 @@ const Points = mongoose.Schema({
     }
 },
 {
-    Collection: 'Points'
+    Collection: 'points'
 }
 );
 
-module.exports = mongoose.model("Points", Points);
+module.exports = mongoose.model("Points", Point,'points');

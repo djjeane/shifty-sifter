@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const { Collection } = require('mongoose');
 
 const WheelCooldown = mongoose.Schema({
     userID: {
@@ -11,7 +12,7 @@ const WheelCooldown = mongoose.Schema({
     }
 },
 {
-    Collection: 'WheelCooldowns'
+    Collection: 'wheelcooldowns'
 });
 
-module.exports = mongoose.model("WheelCooldown", WheelCooldown);
+module.exports = mongoose.model("WheelCooldown", WheelCooldown,'wheelcooldowns');
