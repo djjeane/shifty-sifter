@@ -1,66 +1,57 @@
 const { SlashCommandBuilder } = require('@discordjs/builders');
+const Helper = require('../../modules/MongoHelper.js');
 
 module.exports = {
-	data: new SlashCommandBuilder()
-		.setName('tip')
-		.setDescription('Replies with Pong!'),
-	async execute(interaction) {
-		    // let points = JSON.parse(fs.readFileSync("./points.json", "utf8"));
-    console.log(args)
-    // var tippingUserP = await client.GetPoints(message.author.id);
-    // var tippedUserP = await client.GetPoints(taggedUserID);
-    if(args.length == 0 || args.length ==1) return;
-    if (args[1] == "null" || args[1] == "undefined" || args[1] == "NaN")
-    {
-        message.reply('You can only tip integer values.')
+    data: new SlashCommandBuilder()
+        .setName('tip')
+        .setDescription('Replies with Pong!')
+        .addIntegerOption(option => option.setName('amounttotip').setDescription('Enter a number of points to give.'))
+        .addUserOption(option => option.setName('user').setDescription('The user')),
+    async execute(interaction) {
 
-        return;
-    }
-    var taggedUser = message.mentions.users.first();
-    var taggedUserID = message.mentions.users.first().id;
-
-    var tippingUserP = await client.GetPoints(message.author.id);
-    var tippedUserP = await client.GetPoints(taggedUserID);
-    if(taggedUserID == message.author.id){
-        message.reply(`You cant give yourself points. You think your shit dont stink huh? -5 points.`)
-        await client.UpdatePoints(message.author.id, -1 * 5);
-        return;
-    }
-    var amountToTip = Math.abs(parseInt(args[1]));
-    
-    if (typeof amountToTip != 'number' || isNaN(amountToTip))
-    {
-        message.reply('You can only tip integer values.')
-        return;
-    }
-    if(amountToTip == 0){
-        message.reply(`You cannot tip 0 points`)
-    }
-    var tippingUserPoints = await client.GetPoints(message.author.id);
-
-
-    if (tippingUserPoints - amountToTip < 0)
-    {
-        message.reply(`You only have ${tippingUserPoints} points. You cannot give ${amountToTip} points.`)
-        return;
-    }
-
-    await client.UpdatePoints(message.author.id, -1 * amountToTip);
-
-    await client.UpdatePoints(taggedUserID, amountToTip);
+        await interaction.deferReply();
+        let amountToTip = interaction.options.getInteger('amounttotip');
+        let toUser = interaction.options.getUser('user');
 
 
 
-    message.channel.send(`${message.author} has given ${taggedUser} ${amountToTip} points! Say Thanks.`)
-    message.reply(`You now have ${tippingUserP - amountToTip} points!`)
-    message.channel.send(`${taggedUser} you now have ${tippedUserP + amountToTip}  points!`)
-	},
+        var tippingUserP = await Helper.GetPoints(interaction.member.user.id);
+        var tippedUserP = await Helper.GetPoints(toUser.id);
+
+        if (toUser.id == interaction.member.user.id) {
+            interaction.editReply(`You cant give yourself points. You think your shit dont stink huh? -5 points.`);
+            await Helper.UpdatePoints(interaction.member.user.id, -5);
+            return;
+        }
+
+        if (amountToTip == 0) {
+            interaction.editReply(`You cannot tip 0 points`);
+            return;
+        }
+
+        if (tippingUserP - amountToTip < 0) {
+            amountToTip = tippingUserP;
+            return;
+        }
+
+        await Helper.UpdatePoints(interaction.member.user.id, -1 * amountToTip);
+
+        await Helper.UpdatePoints(toUser.id, amountToTip);
+ 
+        let message = `${interaction.member.user} has given ${toUser} ${amountToTip} points! Say Thanks.
+            You now have ${tippingUserP - amountToTip} points!
+            ${toUser} you now have ${tippedUserP + amountToTip}  points!`;
+
+        interaction.editReply(message);
+
+        
+    },
 };
 
 exports.conf = {
     enabled: true,
     guildOnly: false,
-    aliases: ['give','donate','reward'],
+    aliases: ['give', 'donate', 'reward'],
     permLevel: "User",
     pointRec: 0
 };

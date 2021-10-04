@@ -6,11 +6,10 @@ const { Interaction } = require("discord.js");
 const { MessageActionRow, MessageButton } = require('discord.js');
 
 module.exports = {
-	data: new SlashCommandBuilder()
-		.setName('spinthewheel')
-		.setDescription('Replies with Pong!'),
-	async execute(interaction) 
-    {
+    data: new SlashCommandBuilder()
+        .setName('spinthewheel')
+        .setDescription('Replies with Pong!'),
+    async execute(interaction) {
         await interaction.deferReply();
 
         var now = Date.now();
@@ -23,23 +22,28 @@ module.exports = {
         //     return;
         // }
 
-            
+
         Helper.UpdateCooldown(interaction.member.user.id)
         var points = await Helper.GetPoints(interaction.member.user.id);
-        
-        var gainedPoints = 10;//Math.floor(Math.random() * (11 - 1) + 1);
 
-        if(gainedPoints == 10 || gainedPoints == 1)
-        {
-            var resMess = `You have hit a ${gainedPoints} , you have the option to reroll. Click the button to roll again!`
-            const row = new MessageActionRow()
+        var gainedPoints = Math.floor(Math.random() * (11 - 1) + 1);
+
+        if (gainedPoints == 10 || gainedPoints == 1) {
+
+            let style = 'PRIMARY';
+            let message = 'Spin Again?'
+            if (gainedPoints == 1) {
+                style = 'DANGER';
+                message += ` Beware, another 1 will cost you all your points!`
+            }
+
+            let row = new MessageActionRow()
                 .addComponents(
                     new MessageButton()
                         .setCustomId('primary')
-                        .setLabel('Primary')
-                        .setStyle('PRIMARY'),
+                        .setLabel(message)
+                        .setStyle(style),
                 );
-
             await interaction.editReply({ content: `You rolled a ${gainedPoints}! Click the button below to spin again!`, components: [row] });
 
 
@@ -48,21 +52,19 @@ module.exports = {
             const collector = interaction.channel.createMessageComponentCollector({ filter, time: 15000 });
 
             collector.on('collect', async i => {
-                if (i.customId === 'primary') 
-                {
+                if (i.customId === 'primary') {
                     var secondRollPoints = Math.floor(Math.random() * (11 - 1) + 1);
                     var total = secondRollPoints + gainedPoints;
 
-                    if(total == 20)
-                    {
+                    if (total == 20) {
                         gainedPoints = points;
                         outMessage = `You rolled another 10 which DOUBLES YOUR FUCKING POINTS, bringing you to ${points + points} points.`;
                     }
-                    else if(total == 2){
+                    else if (total == 2) {
                         gainedPoints = -points;
                         outMessage = `You rolled another 1 which loses you all your points. Watch all your gold wash down the drain.`;
                     }
-                    else{
+                    else {
                         outMessage = `You rolled a ${secondRollPoints}. ${gainedPoints} + ${secondRollPoints} = ${total} gained points, which  brings you to ${points + total} points!`;
                         gainedPoints = total;
                     }
@@ -73,20 +75,19 @@ module.exports = {
 
             collector.on('end', collected => console.log(`Collected ${collected.size} items`));
         }
-        else
-        {
+        else {
             await interaction.editReply(`You gained ${gainedPoints} points, bringing you to ${gainedPoints + points} points.`);
         }
 
         Helper.UpdatePoints(interaction.member.user.id, gainedPoints)
-        
-	},
+
+    },
 };
 
 exports.conf = {
     enabled: true,
     guildOnly: false,
-    aliases: ['spin','gimmethempoints'],
+    aliases: ['spin', 'gimmethempoints'],
     permLevel: "User",
     pointRec: 0
 };
