@@ -3,6 +3,7 @@ var WheelCooldowns = require('../../models/WheelCooldown.js');
 const { SlashCommandBuilder } = require('@discordjs/builders');
 const Helper = require('../../modules/MongoHelper.js');
 const { Interaction } = require("discord.js");
+const { MessageActionRow, MessageButton } = require('discord.js');
 
 module.exports = {
 	data: new SlashCommandBuilder()
@@ -10,59 +11,75 @@ module.exports = {
 		.setDescription('Replies with Pong!'),
 	async execute(interaction) 
     {
-        var today = Date.now();
-        var userCooldown = new Date(await Helper.GetWheelCooldown(message.author.id));
+        await interaction.deferReply();
 
-        if(userCooldown.getTime() > today)
+        var now = Date.now();
+        var userCooldown = new Date(await Helper.GetWheelCooldown(interaction.member.user.id));
+
+        // if(userCooldown.getTime() > now)
+        // {
+        //     var time = client.msToTime(userCooldown.getTime() - now);
+        //     interaction.editReply(`You can spin again in ${time}`);
+        //     return;
+        // }
+
+            
+        Helper.UpdateCooldown(interaction.member.user.id)
+        var points = await Helper.GetPoints(interaction.member.user.id);
+        
+        var gainedPoints = 10;//Math.floor(Math.random() * (11 - 1) + 1);
+
+        if(gainedPoints == 10 || gainedPoints == 1)
         {
-            var time = client.msToTime(userCooldown.getTime() - today);
-            message.reply(`You can spin again in ${time}`);
+            var resMess = `You have hit a ${gainedPoints} , you have the option to reroll. Click the button to roll again!`
+            const row = new MessageActionRow()
+                .addComponents(
+                    new MessageButton()
+                        .setCustomId('primary')
+                        .setLabel('Primary')
+                        .setStyle('PRIMARY'),
+                );
+
+            await interaction.editReply({ content: `You rolled a ${gainedPoints}! Click the button below to spin again!`, components: [row] });
+
+
+            const filter = i => i.customId === 'primary' && i.user.id === interaction.member.user.id;
+
+            const collector = interaction.channel.createMessageComponentCollector({ filter, time: 15000 });
+
+            collector.on('collect', async i => {
+                if (i.customId === 'primary') 
+                {
+                    var secondRollPoints = Math.floor(Math.random() * (11 - 1) + 1);
+                    var total = secondRollPoints + gainedPoints;
+
+                    if(total == 20)
+                    {
+                        gainedPoints = points;
+                        outMessage = `You rolled another 10 which DOUBLES YOUR FUCKING POINTS, bringing you to ${points + points} points.`;
+                    }
+                    else if(total == 2){
+                        gainedPoints = -points;
+                        outMessage = `You rolled another 1 which loses you all your points. Watch all your gold wash down the drain.`;
+                    }
+                    else{
+                        outMessage = `You rolled a ${secondRollPoints}. ${gainedPoints} + ${secondRollPoints} = ${total} gained points, which  brings you to ${points + total} points!`;
+                        gainedPoints = total;
+                    }
+
+                    await i.update({ content: outMessage, components: [] });
+                }
+            });
+
+            collector.on('end', collected => console.log(`Collected ${collected.size} items`));
         }
         else
         {
-            
-            Helper.UpdateCooldown(message.author.id)
-            var points = await Helper.GetPoints(message.author.id);
-            
-            var gainedPoints = Math.floor(Math.random() * (11 - 1) + 1);
-            var outMessage = `You gained ${gainedPoints} points, bringing you to ${gainedPoints + points} points.`;
-    
-            if(gainedPoints == 10 || gainedPoints == 1)
-            {
-                var resMess = `You have hit a ${gainedPoints} , you have the option to reroll. Respond @Sifty !spinthewheel to roll again.`
-                
-
-                //Do clever response handling here
-                const response = await client.awaitReply(message, resMess, message.author.id);
-
-
-                if (response != null)
-                {
-                    if (resArray[1] == '!spinthewheel') 
-                    {
-                        var secondRollPoints = Math.floor(Math.random() * (11 - 1) + 1);
-                        var total = secondRollPoints + gainedPoints;
-
-                        if(total == 20)
-                        {
-                            gainedPoints = points;
-                            outMessage = `You rolled another 10 which DOUBLES YOUR FUCKING POINTS, bringing you to ${points + points} points.`;
-                        }
-                        else if(total == 2){
-                            gainedPoints = -points;
-                            outMessage = `You rolled another 1 which loses you all your points. Watch all your gold wash down the drain.`;
-                        }
-                        else{
-                            gainedPoints = total;
-                            outMessage = `You rolled a ${temp}. You gained ${gainedPoints} points, bringing you to ${total} points.`;
-                        }
-    
-                    } 
-                }
-            }
-            client.UpdatePoints(message.author.id,gainedPoints)
-            message.reply(outMessage)
+            await interaction.editReply(`You gained ${gainedPoints} points, bringing you to ${gainedPoints + points} points.`);
         }
+
+        Helper.UpdatePoints(interaction.member.user.id, gainedPoints)
+        
 	},
 };
 
