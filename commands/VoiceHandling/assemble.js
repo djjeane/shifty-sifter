@@ -1,5 +1,5 @@
-let games = require('../index.js').games;
-let tempChannels = require('../index.js').tempChannels;
+let games = require('../../index.js').games;
+let tempChannels = require('../../index.js').tempChannels;
 const { SlashCommandBuilder } = require('@discordjs/builders');
 
 module.exports = {

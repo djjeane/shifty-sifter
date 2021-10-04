@@ -4,10 +4,7 @@
 	
 	module.exports = class
 	{
-		items =[
-			['💵', '💍', '💯','🍒','7️⃣','🍀'],
-			['💵', '💍', '💯','🍒','7️⃣','🍀'],
-			['💵', '💍', '💯','🍒','7️⃣','🍀']];
+		items;
 		constructor()
 		{
 			this.items = [
@@ -28,7 +25,7 @@
 				FinalBoard : res.FinalBoard,
 			}
 
-			var horizontalWinSymbols = this.HasHorizontalMatch(res.FinalBoard);
+			var horiimzontalWinSymbols = this.HasHorizontalMatch(res.FinalBoard);
 			var diagWinSymbols = this.HasDiagnalMatch(res.FinalBoard);
 			
 			Results.WinningSymbols = horizontalWinSymbols.concat(diagWinSymbols);
@@ -103,10 +100,12 @@
 			let winners = [];
 			var topToBottomMatch = results[0][0] == results[1][1] && results[0][0] == results[2][2];
             var bottomToTopMatch = results[2][0] == results[1][1] && results[2][0] == results[0][2];
+			
 			if(topToBottomMatch)
 			{
 				winners.push(results[0][0]);
 			}
+
 			if(bottomToTopMatch)
 			{
 				winners.push(results[2][0]);

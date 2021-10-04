@@ -1,5 +1,5 @@
 
-let index = require('../index.js');
+let index = require('../../index.js');
 const { SlashCommandBuilder } = require('@discordjs/builders');
 
 module.exports = {

@@ -1,4 +1,4 @@
-var Events = require('../models/Event.js');
+var Events = require('../../models/Event.js');
 const { SlashCommandBuilder } = require('@discordjs/builders');
 
 module.exports = {

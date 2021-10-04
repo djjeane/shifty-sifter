@@ -1,4 +1,4 @@
-let index = require('../index.js');
+let index = require('../../index.js');
 const Discord = require('discord.js');
 const { SlashCommandBuilder } = require('@discordjs/builders');
 
