@@ -49,7 +49,7 @@ module.exports = {
 
             const filter = i => i.customId === 'primary' && i.user.id === interaction.member.user.id;
 
-            const collector = interaction.channel.createMessageComponentCollector({ filter, time: 15000 });
+            const collector = interaction.channel.createMessageComponentCollector({ filter, time: 30000 });
 
             collector.on('collect', async i => {
                 if (i.customId === 'primary') {

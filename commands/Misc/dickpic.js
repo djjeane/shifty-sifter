@@ -1,25 +1,28 @@
-let index = require('../../index.js');
-const Discord = require('discord.js');
 const { SlashCommandBuilder } = require('@discordjs/builders');
-
+const glob = require('glob');
+var fs = require('fs');
+const { MessageAttachment, MessageEmbed } = require('discord.js');
 module.exports = {
-	data: new SlashCommandBuilder()
-		.setName('dickpic')
-		.setDescription('Replies with Pong!'),
-	async execute(interaction) {
-		var dickPics = index.getDickPics();
-        var dick = dickPics[Math.floor(Math.random() * dickPics.length)];
-        dick = dick.concat('.jpg');
-        const imagePath = "./Dicks/" + dick;
+    data: new SlashCommandBuilder()
+        .setName('dickpic')
+        .setDescription('Replies with Pong!'),
+    async execute(interaction) {
+        var dick = random_pic();
+        const imagePath = "../../Dicks/" + dick;
 
-        message.author.send("This is a dick pic.", {
-            files: [
-            `${imagePath}`,
-                ]
-            });
-        message.channel.send('Ask and Receive');
-        },
+        const file = new MessageAttachment(imagePath);
+        const exampleEmbed = new MessageEmbed()
+            .setTitle('This is a dick pick.')
+            .setImage('attachment://' + dick);
+
+        interaction.reply({ embeds: [exampleEmbed], files: [file] });
+    }
 };
+
+function random_pic() {
+    var files = fs.readdirSync('././Dicks/')
+    return files[Math.floor(Math.random() * files.length)]
+}
 
 exports.conf = {
     enabled: true,
