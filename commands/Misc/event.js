@@ -75,6 +75,9 @@ module.exports = {
 
     message.reply(`Event: ${nameOfEvent} has been registered.`);
   },
+  settings: {
+    cost: 0,
+  },
 };
 
 //Saves the event to the Database
@@ -101,20 +104,3 @@ async function SaveEvent(
     console.error(`Error saving event: ${nameOfEvent} : ${err}`);
   }
 }
-
-exports.conf = {
-  enabled: true,
-  guildOnly: false,
-  aliases: [],
-  permLevel: "User",
-  pointRec: 0,
-};
-
-exports.help = {
-  name: "event",
-  category: "Miscellaneous",
-  description:
-    "Allows users to plan an event and remind other users of that event",
-  usage:
-    "event [Name of Event] [Time of Event] [Remind minutes before] [@mentions]",
-};

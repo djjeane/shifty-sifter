@@ -1,9 +1,9 @@
-
 ## Sifty 2.0.7
 
 ## Mercy flush bot that runs the server and allows users to execute commands.
 
 ## Commands:
+
               !assemble "avengers, unsplit. undosplit"
               !cermaic
               !clear "fuckthosechannels"
@@ -14,7 +14,7 @@
               !hesgonnasatit "macroKillThisGuy, banthem"
               !howmanypoints "howmanypoints, amirich"
               !leaderboard "whoswinning"
-              !ping 
+              !ping
               !play
               !plzdawson "saynotime"
               !pong
@@ -28,8 +28,9 @@
               !tip "give, donate, reward
               !unflush "unflush"
               !whataretheyeating "isjackdumbdumb"
-              
+
 ## Contributers
+
                 Dawson,Roane,Dillan,Trent
 
 Please make sure to update tests as appropriate.

@@ -42,6 +42,9 @@ module.exports = {
 
     await interaction.reply(`Deleted ${amount} messages.`);
   },
+  settings: {
+    cost: 0,
+  },
 };
 
 exports.conf = {

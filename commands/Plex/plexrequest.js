@@ -14,7 +14,6 @@ module.exports = {
         .setRequired(true)
     ),
   async execute(interaction) {
-    await interaction.deferReply();
     Ombi.Search(interaction.options.getString("searchterm")).then(
       async (data) => {
         if (data.length > 0) {
@@ -47,5 +46,8 @@ module.exports = {
         }
       }
     );
+  },
+  settings: {
+    cost: 10,
   },
 };

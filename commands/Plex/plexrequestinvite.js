@@ -13,7 +13,6 @@ module.exports = {
     ),
   async execute(interaction) {
     //Grab the needed paramaters from the argu from the message
-    await interaction.deferReply();
     try {
       let plexemail = interaction.options.getString("plexemail");
       if (!plexemail) {
@@ -57,5 +56,8 @@ module.exports = {
       interaction.editReply("There was an error while executing this command!");
       console.error(error);
     }
+  },
+  settings: {
+    cost: 100,
   },
 };

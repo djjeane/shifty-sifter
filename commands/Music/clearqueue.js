@@ -9,7 +9,12 @@ module.exports = {
   async execute(interaction) {
     let len = MusicQueue.Songs.length;
     MusicQueue.Songs = [];
-    await interaction.reply(`Cleared Music Queue, ${len} songs were removed!`);
+    await interaction.editReply(
+      `Cleared Music Queue, ${len} songs were removed!`
+    );
+  },
+  settings: {
+    cost: 10,
   },
 };
 
