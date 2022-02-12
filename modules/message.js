@@ -50,7 +50,7 @@ module.exports = async (client, message) => {
         message.delete()
           .then(message.channel.send('Link Deleted:\n**TikTok is porn for Tweens** or you said the nword you racist fuck.'))
         var end = Date.now()
-        message.channel.send(end - start + " miliseconds")
+        message.channel.send(end - start + " milliseconds")
         return;
       }
 
