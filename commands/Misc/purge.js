@@ -1,44 +1,60 @@
-const { SlashCommandBuilder } = require('@discordjs/builders');
+const { SlashCommandBuilder } = require("@discordjs/builders");
+const { channel } = require("diagnostics_channel");
 
 module.exports = {
-	data: new SlashCommandBuilder()
-		.setName('purge')
-		.setDescription('Replies with Pong!'),
-	async execute(interaction) {
-        var amount = parseInt(args[0]);
-        if (!amount) return msg.reply('You haven\'t given an amount of messages which should be deleted!'); // Checks if the `amount` parameter is given
-        if (isNaN(amount)) return msg.reply('The amount parameter isn`t a number!'); // Checks if the `amount` parameter is a number. If not, the command throws an error
-    
-        if (amount > 100) return msg.reply('You can`t delete more than 100 messages at once!'); // Checks if the `amount` integer is bigger than 100
-        if (amount < 1) return msg.reply('You have to delete at least 1 message!'); // Checks if the `amount` integer is smaller than 1
-    
-        message.channel.fetchMessages({
-            limit: (amount + 1) 
-        }).then(messages => {
-            const fuckingWorkMessages = messages.array().slice(0,amount + 1);
-            message.channel.bulkDelete(fuckingWorkMessages.length, true).then(mess => console.log(`Bulk deleted ${mess.size} messages`));
-    
-            client.flag = true;
-            console.log(amount + ' message(s) deleted!');
-        }).catch(error => {
-            console.log('Error while doing Bulk Delete', client.day);
-            console.log(error, client.day);
-            message.delete();
-        });
-	},
+  data: new SlashCommandBuilder()
+    .setName("purge")
+    .setDescription("Replies with Pong!")
+    .addIntegerOption((option) =>
+      option
+        .setName("number")
+        .setDescription("Enter the number of messages to delete.")
+    )
+    .addBooleanOption((option) =>
+      option
+        .setName("recentonly")
+        .setDescription("Delete Only recent Messages.")
+    ),
+
+  async execute(interaction) {
+    let amount = interaction.options.getInteger("number");
+    let recentOnly = interaction.options.getBoolean("recentonly");
+    if (!amount || isNaN(amount)) {
+      await interaction.reply(`You must enter a number of messages to delete.`);
+    }
+    if (recentOnly) {
+      interaction.channel.bulkDelete(amount + 1);
+    } else {
+      const messages = await interaction.channel.messages.fetch({
+        limit: amount,
+      });
+
+      const { size } = messages;
+      var first = true;
+      messages.forEach(async (message) => {
+        if (first) {
+          first = false;
+        } else {
+          await message.delete();
+        }
+      });
+    }
+
+    await interaction.reply(`Deleted ${amount} messages.`);
+  },
 };
 
 exports.conf = {
-    enabled: true,
-    guildOnly: false,
-    aliases: [],
-    permLevel: "User",
-    pointRec: 0
+  enabled: true,
+  guildOnly: false,
+  aliases: [],
+  permLevel: "User",
+  pointRec: 0,
 };
 
 exports.help = {
-    name: "purge",
-    category: "Miscellaneous",
-    description: "Deletes messages from the given channel",
-    usage: "purge x"
+  name: "purge",
+  category: "Miscellaneous",
+  description: "Deletes messages from the given channel",
+  usage: "purge x",
 };
