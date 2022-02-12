@@ -1,7 +1,7 @@
 const { Collection } = require('mongoose');
 const mongoose = require('mongoose');
 
-const Events = mongoose.Schema({
+const Event = mongoose.Schema({
     EventName: {
         type: String,
         required: true,
@@ -24,6 +24,6 @@ const Events = mongoose.Schema({
         type:String
     }
 },
-{collection : 'Events'});
+{collection : 'events'});
 
-module.exports = mongoose.model("Events", Events);
+module.exports = mongoose.model("Events", Event,'events');

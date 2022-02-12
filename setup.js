@@ -1,7 +1,6 @@
 const inquirer = require("inquirer");
-const Enmap = require("enmap");
 const fs = require("fs");
-
+const Enmap = require("enmap");
 let baseConfig = fs.readFileSync("./config_base.txt", "utf8");
 
 const defaultSettings = {
@@ -11,7 +10,7 @@ const defaultSettings = {
   "adminRole": "Ceramic",
   "systemNotice": "true",
   "welcomeChannel": "welcome",
-  "welcomeMessage": "Flush after using.",
+  "welcomeMessage": "Flush after using.",~
   "welcomeEnabled": "True"
 };
 
