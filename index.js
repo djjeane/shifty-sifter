@@ -1,17 +1,13 @@
 // This will check if the node version you are running is the required
 // Node version, if it isn't it will throw the following error to inform
 // you.
-if (Number(process.version.slice(1).split(".")[0]) < 8)
+if (Number(process.version.slice(1).split(".")[0]) < 16)
   throw new Error(
     "Node 8.0.0 or higher is required. Update Node on your system."
   );
 
-const Discord = require("discord.js");
 const { Client, Collection, Intents } = require("discord.js");
 const fs = require("fs");
-const { promisify } = require("util");
-const readdir = promisify(require("fs").readdir);
-const Enmap = require("enmap");
 const env = require("dotenv").config();
 const Path = require("path");
 
@@ -25,7 +21,6 @@ const client = new Client({
   allowedMentions: { parse: ["users", "roles"], repliedUser: true },
 });
 
-const { SlashCommandBuilder } = require("@discordjs/builders");
 const { REST } = require("@discordjs/rest");
 const { Routes } = require("discord-api-types/v9");
 
@@ -43,15 +38,6 @@ require("./modules/functions.js")(client);
 
 // Aliases and commands are put in collections where they can be read from,
 // catalogued, listed, etc.
-
-client.aliases = new Enmap();
-
-// Now we integrate the use of Evie's awesome EnMap module, which
-// essentially saves a collection to disk. This is great for per-server configs,
-// and makes things extremely easy for this purpose.
-client.settings = new Enmap({
-  name: "settings",
-});
 
 const init = async () => {
   const commands = [];
@@ -75,6 +61,19 @@ const init = async () => {
     client.selectMenuListeners.set(listener.Name, listener);
   }
 
+  const eventFiles = fs
+    .readdirSync("./events")
+    .filter((file) => file.endsWith(".js"));
+  client.logger.log(`Loading a total of ${eventFiles.length} events.`);
+  for (const file of eventFiles) {
+    const event = require(`./events/${file}`);
+    if (event.once) {
+      client.once(event.name, (...args) => event.execute(...args));
+    } else {
+      client.on(event.name, (...args) => event.execute(...args));
+    }
+  }
+
   //pushes out the commands to the restful discord api
   const rest = new REST({ version: "9" }).setToken(process.env.CLIENT_TOKEN);
 
@@ -89,25 +88,6 @@ const init = async () => {
     .then(() => console.log("Successfully registered application commands."))
     .catch(console.error);
 
-  const eventFiles = fs
-    .readdirSync("./events")
-    .filter((file) => file.endsWith(".js"));
-  client.logger.log(`Loading a total of ${eventFiles.length} events.`);
-  for (const file of eventFiles) {
-    const event = require(`./events/${file}`);
-    if (event.once) {
-      client.once(event.name, (...args) => event.execute(...args));
-    } else {
-      client.on(event.name, (...args) => event.execute(...args));
-    }
-  }
-
-  // Generate a cache of client permissions for pretty perm names in commands.
-  // client.levelCache = {};
-  // for (let i = 0; i < client.config.permLevels.length; i++) {
-  //     const thisLevel = client.config.permLevels[i];
-  //     client.levelCache[thisLevel.name] = thisLevel.level;
-  // }
   client.login(process.env.CLIENT_TOKEN);
 };
 

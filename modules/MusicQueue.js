@@ -1,47 +1,39 @@
-let Queue = class
-{
-	Songs = [];
-	VoiceConnection;
-    Guild;
-	constructor(connection,guild)
-	{
-		this.VoiceConnection = connection;
-        this.Guild = guild;
-	}
-    
-    AddSong = async (song,guild) => 
-    {
-        exports.MusicQueue.Songs.push(song);
-        exports.MusicQueue.Guild = guild;
-    }
+let Queue = class {
+  Songs = [];
+  VoiceConnection;
+  Guild;
+  constructor(connection, guild) {
+    this.VoiceConnection = connection;
+    this.Guild = guild;
+  }
 
-    NextSong = async() =>
-    {
-        exports.MusicQueue.Songs.shift();
-    }
-}
+  AddSong = async (song, guild) => {
+    exports.MusicQueue.Songs.push(song);
+    exports.MusicQueue.Guild = guild;
+  };
 
-let SongInfo = class
-{
-	constructor(url,title)
-	{
-		this.URL = url;
-		this.Title = title;
-	}
-}
+  NextSong = async () => {
+    exports.MusicQueue.Songs.shift();
+  };
+};
 
-exports.Song = class
-{
-	TextChannel;
-	SongInfo;
-	VoiceChannel;
+let SongInfo = class {
+  constructor(url, title) {
+    this.URL = url;
+    this.Title = title;
+  }
+};
 
-	constructor(vc,tc,url,title)
-	{
-		this.TextChannel = tc;
-		this.SongInfo = new SongInfo(url,title);
-		this.VoiceChannel = vc;
-	}
-}
+exports.Song = class {
+  TextChannel;
+  SongInfo;
+  VoiceChannel;
+
+  constructor(vc, tc, url, title) {
+    this.TextChannel = tc;
+    this.SongInfo = new SongInfo(url, title);
+    this.VoiceChannel = vc;
+  }
+};
 
 exports.MusicQueue = new Queue();

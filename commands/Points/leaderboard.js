@@ -12,7 +12,6 @@ module.exports = {
         .setDescription("Enter a number of users to display.")
     ),
   async execute(interaction) {
-    await interaction.deferReply();
     let numPlayers = interaction.options.getInteger("numusers");
 
     if (!numPlayers) {
