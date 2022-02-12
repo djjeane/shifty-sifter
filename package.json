@@ -7,7 +7,7 @@
     "postinstall": "node setup.js"
   },
   "engines": {
-    "node": ">=8"
+    "node": "=16.6.0"
   },
   "repository": {
     "type": "git",
