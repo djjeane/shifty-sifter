@@ -10,7 +10,7 @@ const defaultSettings = {
   "adminRole": "Ceramic",
   "systemNotice": "true",
   "welcomeChannel": "welcome",
-  "welcomeMessage": "Flush after using.",~
+  "welcomeMessage": "Flush after using.",
   "welcomeEnabled": "True"
 };
 
