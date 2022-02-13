@@ -1,17 +1,14 @@
 {
-  "name": "guidebot",
-  "version": "2.3.6",
-  "description": "A boilerplate example bot with command handler and reloadable commands. Updated and Maintained by the Idiot's Guide Community",
+  "name": "shifty",
+  "version": "2.0.0",
+  "description": "The shifty discord bot for the server",
   "main": "index.js",
-  "scripts": {
-    "postinstall": "node setup.js"
-  },
   "engines": {
     "node": "=16.6.0"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/An-Idiots-Guide/guidebot.git"
+    "url": "git+https://github.com/djjeane/shifty-sifter"
   },
   "author": "Dawson Jeane",
   "contributors": [
@@ -19,9 +16,9 @@
   ],
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/An-Idiots-Guide/guidebot/issues"
+    "url": "https://github.com/djjeane/shifty-sifter/issues"
   },
-  "homepage": "https://github.com/An-Idiots-Guide/guidebot#readme",
+  "homepage": "https://github.com/djjeane/shifty-sifter#readme",
   "dependencies": {
     "@discordjs/rest": "^0.1.0-canary.0",
     "@discordjs/voice": "^0.6.0",
