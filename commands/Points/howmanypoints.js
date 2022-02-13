@@ -7,7 +7,7 @@ module.exports = {
     .setDescription("Displays how much wealth has been accrued!"),
   async execute(interaction) {
     var foundPointRecord = await Helper.GetPoints(interaction.member.user.id);
-    interaction.reply(`You have ${foundPointRecord} points.`);
+    interaction.editReply(`You have ${foundPointRecord} points.`);
   },
 };
 
