@@ -11,7 +11,7 @@ async function PayCost(command, interaction) {
         });
         return false;
       } else {
-        await Helper.AddPoints(
+        await Helper.UpdatePoints(
           interaction.member.user.id,
           -command.settings.cost
         );
