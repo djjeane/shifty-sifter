@@ -9,9 +9,7 @@ module.exports = {
     .addIntegerOption((option) =>
       option
         .setName("wager")
-        .setDescription(
-          "The minutes before the event that users should be reminded"
-        )
+        .setDescription("Plays a 1v1 game of blackjack")
         .setRequired(true)
     ),
   async execute(interaction) {
@@ -36,7 +34,7 @@ module.exports = {
     var initEmbed = new MessageEmbed()
       .setTitle("Cards!")
       .setDescription(
-        `Player hand: ${playerHand.toString()} \n Dealer hand: ${dealerHand.toString()}`
+        `Player hand:\n ${playerHand.toString()} \n Dealer hand: \n${dealerHand.toString()}`
       )
       .setColor("RANDOM")
       .setFooter("are you lucky bitch?");
@@ -62,7 +60,7 @@ module.exports = {
         initEmbed = new MessageEmbed()
           .setTitle("Cards!")
           .setDescription(
-            `Player hand: ${playerHand.toString()} \n Dealer hand: ${dealerHand.toString()}`
+            `Player hand:  \n ${playerHand.toString()} \n Dealer hand: \n ${dealerHand.toString()}`
           )
           .setColor("RANDOM")
           .setFooter("are you lucky bitch?");
@@ -84,7 +82,7 @@ module.exports = {
           initEmbed = new MessageEmbed()
             .setTitle("Dealer Hits!")
             .setDescription(
-              `Player hand: ${playerHand.toString()} \n Dealer hand: ${dealerHand.toString()}`
+              `Player hand: \n ${playerHand.toString()} \n Dealer hand: \n ${dealerHand.toString()}`
             )
             .setColor("RANDOM")
             .setFooter("are you lucky bitch?");
@@ -94,9 +92,11 @@ module.exports = {
       }
 
       var playerwon =
-        playerHandValue > dealerHandValue && playerHandValue <= 21;
+        (playerHandValue > dealerHandValue || dealerHandValue > 21) &&
+        playerHandValue <= 21;
       var dealerwon =
-        dealerHandValue > playerHandValue && dealerHandValue <= 21;
+        (dealerHandValue > playerHandValue || playerHandValue > 21) &&
+        dealerHandValue <= 21;
       var push =
         playerHandValue === dealerHandValue ||
         (playerHandValue > 21 && dealerHandValue > 21);
@@ -106,14 +106,16 @@ module.exports = {
       if (push) {
         resultEmmbed
           .setTitle("Push")
-          .setDescription("It's a push!")
+          .setDescription(
+            `Player hand: \n ${playerHand.toString()} \n Dealer hand: \n ${dealerHand.toString()}`
+          )
           .setColor("RANDOM")
           .setFooter(`You keep your bet!`);
       } else if (playerwon) {
         resultEmmbed
           .setTitle("You won!")
           .setDescription(
-            `Player hand: ${playerHand.toString()} \n Dealer hand: ${dealerHand.toString()}`
+            `Player hand: \n ${playerHand.toString()} \n Dealer hand: \n ${dealerHand.toString()}`
           )
           .setColor("RANDOM")
           .setFooter(`You won ${wager * 2} points!`);
@@ -122,7 +124,7 @@ module.exports = {
         resultEmmbed
           .setTitle("Dealer won!")
           .setDescription(
-            `Player hand: ${playerHand.toString()} \n Dealer hand: ${dealerHand.toString()}`
+            `Player hand:\n ${playerHand.toString()} \n Dealer hand:\n ${dealerHand.toString()}`
           )
           .setColor("RANDOM")
           .setFooter(`You lost ${wager} points!`);
