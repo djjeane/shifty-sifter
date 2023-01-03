@@ -143,7 +143,7 @@ module.exports = {
 class Deck {
   cards;
   suits = ["Spades", "Hearts", "Diamonds", "Clubs"];
-  values = ["2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K", "A"];
+  values = ["A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K"];
 
   constructor() {
     this.cards = this.createDeck();
@@ -192,7 +192,8 @@ class Deck {
 
 class Hand {
   cards;
-
+  suits = ["Spades", "Hearts", "Diamonds", "Clubs"];
+  values = ["A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K"];
   constructor() {
     this.cards = new Array();
   }
@@ -217,7 +218,7 @@ class Hand {
   toString() {
     var str = "";
     for (var i = 0; i < this.cards.length; i++) {
-      str += this.cards[i].Value + " " + this.cards[i].Suit + "\n";
+      str += this.getCardArt(this.cards[i]) + "\n";
     }
     return str;
   }
@@ -232,5 +233,38 @@ class Hand {
 
   clear() {
     this.cards = new Array();
+  }
+
+  getEmoji(card) {
+    var base = 0x1f0a1;
+    var suitInddex = this.suits.indexOf(card.Suit);
+    var valueIndex = this.values.indexOf(card.Value);
+    var unicode = base + suitInddex * 16 + valueIndex;
+    return String.fromCodePoint(unicode);
+  }
+
+  //get ascii art card
+  getCardArt(card) {
+    var lines = new Array();
+
+    if (card.Value === "10") {
+      lines.push("┌─────────┐");
+      lines.push("│\ \ \ \ \ \ \ \ \ │");
+      lines.push("│         │");
+      lines.push("│    10   │");
+      lines.push("│         │");
+      lines.push("│         │");
+      lines.push("└─────────┘");
+    } else {
+      lines.push("┌─────────┐");
+      lines.push("│         │");
+      lines.push("│         │");
+      lines.push("│    " + card.Value + "    │");
+      lines.push("│         │");
+      lines.push("│         │");
+      lines.push("└─────────┘");
+    }
+
+    return lines.join("\n");
   }
 }

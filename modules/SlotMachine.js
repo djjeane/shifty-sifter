@@ -10,18 +10,18 @@ module.exports = class {
 
   Play() {
     let res = this.GetResults();
+    var horizontalWinSymbols = this.HasHorizontalMatch(res.FinalBoard);
+    var diagWinSymbols = this.HasDiagnalMatch(res.FinalBoard);
+
+    var winningSymbols = horizontalWinSymbols.concat(diagWinSymbols);
 
     var Results = {
       SlotsSlideShow: res.SlideShow,
-      Won: this.WinningSymbols ? this.WinningSymbols.length > 0 : false,
-      WinningSymbols: [],
+      WinningSymbols: winningSymbols,
+      Won: winningSymbols ? winningSymbols.length > 0 : false,
       FinalBoard: res.FinalBoard,
     };
 
-    var horiimzontalWinSymbols = this.HasHorizontalMatch(res.FinalBoard);
-    var diagWinSymbols = this.HasDiagnalMatch(res.FinalBoard);
-
-    Results.WinningSymbols = horizontalWinSymbols.concat(diagWinSymbols);
 
     return Results;
   }
