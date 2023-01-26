@@ -207,9 +207,12 @@ class Hand {
     for (var i = 0; i < this.cards.length; i++) {
       total += this.cards[i].Weight;
     }
-    var containsAce = this.cards.some((card) => card.Value === "A");
+    var numAces = 0;
+    for (var i = 0; i < this.cards.length; i++) {
+      numAces += this.cards[i].Weight;
+    }
 
-    if (containsAce && total > 21) {
+    while (numAces > 0 && total > 21) {
       total -= 10;
     }
     return total;
